@@ -1,7 +1,7 @@
 # vue-gutter-resize
 言語 : [en](./README.md)
 
-> vue-gutter-resizeは、gutterをドラッグすると両隣のdomのサイズを変更できます。
+> vue-gutter-resizeは、gutterをドラッグすると両隣のdomのサイズを変更できます。
 
 [デモ](https://tomatoaiu.github.io/vue-gutter-resize/)
 
