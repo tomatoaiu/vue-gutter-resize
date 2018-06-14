@@ -1,0 +1,33 @@
+{
+  "name": "vue-gutter-resize",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomatoaiu/vue-gutter-resize.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomatoaiu/vue-gutter-resize/issues"
+  },
+  "homepage": "https://github.com/tomatoaiu/vue-gutter-resize#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "parcel-bundler": "^1.7.0",
+    "parcel-plugin-vue": "^1.5.0",
+    "vue": "^2.5.16",
+    "vue-template-compiler": "^2.5.16"
+  }
+}
