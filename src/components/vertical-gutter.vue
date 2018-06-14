@@ -20,6 +20,7 @@
 import gutter from '../mixins/gutter.vue'
 
 export default {
+  name: 'verticalGutter',
   mixins: [ gutter ],
   props: ['left', 'right', 'width', 'height'],
   data () {
