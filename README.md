@@ -3,7 +3,7 @@ language : [jp](./README.md)
 
 > For vue-gutter-resize, you can change the size of both neighbor dom by dragging gutter.
 
-[demo](https://tomatoaiu.github.io/vue-gutter-resize/docs/index.html)
+[demo](https://tomatoaiu.github.io/vue-gutter-resize/)
 
 ## Usage
 ### install
