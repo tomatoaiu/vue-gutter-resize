@@ -1,5 +1,5 @@
 # vue-gutter-resize
-language : [jp](./README.md)
+language : [jp](./README.jp.md)
 
 > For vue-gutter-resize, you can change the size of both neighbor dom by dragging gutter.
 
