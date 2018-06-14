@@ -40,3 +40,6 @@ export default {
 }
 </script>
 ```
+
+## ライセンス
+[MIT](./LICENSE.md)
