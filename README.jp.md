@@ -1,7 +1,11 @@
 # vue-gutter-resize
 言語 : [en](./README.md)
 
-## 使い方(以下になる予定)
+> vue-gutter-resizeは、gutterをドラッグすると両隣のdomのサイズを変更できます。
+
+[デモ](./demo/index.html)
+
+## 使い方
 ### インストール
 ```sh
 yarn add vue-gutter-resize
@@ -38,6 +42,49 @@ export default {
     'vertical-gutter': verticalGutter
   }
 }
+</script>
+```
+
+## vertical-gutterとhorizontal-gutterの組み合わせsample
+```html
+<template>
+  <div>
+    <vertical-gutter
+      :left="left" 
+      :right="right"
+      :width="800"
+      :height="600">
+      <horizontal-gutter slot="left-content"
+        :top="top" 
+        :bottom="bottom"
+        :width="800"
+        :height="600">
+        <div slot="top-content">top</div>
+        <div slot="bottom-content">bottom</div>  
+      </horizontal-gutter>
+      <div slot="right-content">right</div>
+    </vertical-gutter>
+  </div>
+</template>
+
+<script>
+import { verticalGutter, horizontalGutter } from "vue-gutter-resize"
+
+export default {
+  name: "app",
+  data () {
+    return {
+      left: 50,
+      right: 50,
+      top: 50,
+      bottom: 50
+    }
+  },
+  components: {
+    "vertical-gutter": verticalGutter,
+    "horizontal-gutter": horizontalGutter
+  }
+};
 </script>
 ```
 
