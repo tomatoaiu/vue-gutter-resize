@@ -124,8 +124,7 @@ export default {
 </template>
 
 <script>
-import verticalGutter from './components/vertical-gutter.vue'
-import horizontalGutter from './components/horizontal-gutter.vue'
+import { verticalGutter, horizontalGutter } from "vue-gutter-resize"
 
 export default {
   data(){
