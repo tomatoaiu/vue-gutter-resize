@@ -9968,7 +9968,7 @@ function getOuterHTML(el) {
 Vue.compile = compileToFunctions;
 
 exports.default = Vue;
-},{}],15:[function(require,module,exports) {
+},{}],16:[function(require,module,exports) {
 var inserted = exports.cache = {}
 
 function noop () {}
@@ -9993,7 +9993,7 @@ exports.insert = function (css) {
   }
 }
 
-},{}],13:[function(require,module,exports) {
+},{}],11:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -17516,7 +17516,7 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-},{}],14:[function(require,module,exports) {
+},{}],15:[function(require,module,exports) {
 var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("div section[data-v-64c76e56] {\n  margin: 0;\n  padding: 0;\n}\n\nsection[data-v-64c76e56] {\n  width: 100%;\n  height: 100vh;\n}\n\n.content[data-v-64c76e56] {\n  height: 100%;\n}\n\n.pane[data-v-64c76e56] {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview[data-v-64c76e56] {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v[data-v-64c76e56] {\n  float: left;\n}\n\n.gutter[data-v-64c76e56] {\n  background: #ccc;\n  overflow: hidden;\n}\n\n.gutter-v[data-v-64c76e56] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n\n.gutter-h[data-v-64c76e56] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}");(function () {
   'use strict';
 
@@ -17575,12 +17575,10 @@ if (module.hot) {
     module.hot.dispose(__vueify_style_dispose__);
     if (!module.hot.data) {
       hotAPI.createRecord("data-v-64c76e56", __vue__options__);
-    } else {
-      hotAPI.reload("data-v-64c76e56", __vue__options__);
-    }
+    } else {}
   })();
 }
-},{"vueify/lib/insert-css":15,"vue-hot-reload-api":13,"vue":10}],8:[function(require,module,exports) {
+},{"vueify/lib/insert-css":16,"vue-hot-reload-api":11,"vue":10}],8:[function(require,module,exports) {
 ;(function () {
   'use strict';
 
@@ -17599,7 +17597,7 @@ if (module.hot) {
   exports.default = {
     name: 'verticalGutter',
     mixins: [_gutter2.default],
-    props: ['left', 'right', 'width', 'height'],
+    props: ['left', 'right', 'width', 'height', 'gutterSize', 'color'],
     data: function data() {
       return {
         resize: {
@@ -17632,7 +17630,7 @@ if (__vue__options__.functional) {
   console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.");
 }
 __vue__options__.render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('section', { ref: "gutter", style: "width: " + _vm.width + "px; height: " + _vm.height + "px;" }, [_c('div', { staticClass: "pane pane-v left", style: "width: calc(" + _vm.resize.left + "% - 2px);" }, [_c('section', { staticClass: "content" }, [_vm._t("left-content")], 2)]), _vm._v(" "), _c('div', { staticClass: "gutter gutter-v", attrs: { "draggable": "true" }, on: { "drag": _vm.drag } }), _vm._v(" "), _c('div', { staticClass: "pane pane-v right", style: "width: calc(" + _vm.resize.right + "% - 2px);" }, [_c('section', { staticClass: "content" }, [_vm._t("right-content")], 2)])]);
+  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('section', { ref: "gutter", style: "width: " + _vm.width + "px; height: " + _vm.height + "px;" }, [_c('div', { staticClass: "pane pane-v left", style: "width: calc(" + _vm.resize.left + "% - " + _vm.gutterSize / 2 + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("left-content")], 2)]), _vm._v(" "), _c('div', { staticClass: "gutter gutter-v", style: "width: " + _vm.gutterSize + "px; background-color: " + _vm.color + ";", attrs: { "draggable": "true" }, on: { "drag": _vm.drag } }), _vm._v(" "), _c('div', { staticClass: "pane pane-v right", style: "width: calc(" + _vm.resize.right + "% - " + _vm.gutterSize / 2 + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("right-content")], 2)])]);
 };
 __vue__options__.staticRenderFns = [];
 if (module.hot) {
@@ -17644,11 +17642,11 @@ if (module.hot) {
     if (!module.hot.data) {
       hotAPI.createRecord("data-v-8cfc27aa", __vue__options__);
     } else {
-      hotAPI.reload("data-v-8cfc27aa", __vue__options__);
+      hotAPI.rerender("data-v-8cfc27aa", __vue__options__);
     }
   })();
 }
-},{"../mixins/gutter.vue":14,"vue-hot-reload-api":13,"vue":10}],9:[function(require,module,exports) {
+},{"../mixins/gutter.vue":15,"vue-hot-reload-api":11,"vue":10}],9:[function(require,module,exports) {
 ;(function () {
   'use strict';
 
@@ -17667,7 +17665,7 @@ if (module.hot) {
   exports.default = {
     name: 'horizontalGutter',
     mixins: [_gutter2.default],
-    props: ['top', 'bottom', 'width', 'height'],
+    props: ['top', 'bottom', 'width', 'height', 'gutterSize', 'color'],
     data: function data() {
       return {
         resize: {
@@ -17700,7 +17698,7 @@ if (__vue__options__.functional) {
   console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.");
 }
 __vue__options__.render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('section', { ref: "gutter", style: "width: " + _vm.width + "px; height: " + _vm.height + "px;" }, [_c('div', { staticClass: "pane pane-h top", style: "height: calc(" + _vm.resize.top + "% - 2px);" }, [_c('section', { staticClass: "content" }, [_vm._t("top-content")], 2)]), _vm._v(" "), _c('div', { staticClass: "gutter gutter-h", attrs: { "draggable": "true" }, on: { "drag": _vm.drag } }), _vm._v(" "), _c('div', { staticClass: "pane pane-h bottom", style: "height: calc(" + _vm.resize.bottom + "% - 2px);" }, [_c('section', { staticClass: "content" }, [_vm._t("bottom-content")], 2)])]);
+  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('section', { ref: "gutter", style: "width: " + _vm.width + "px; height: " + _vm.height + "px;" }, [_c('div', { staticClass: "pane pane-h top", style: "height: calc(" + _vm.resize.top + "% - " + _vm.gutterSize / 2 + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("top-content")], 2)]), _vm._v(" "), _c('div', { staticClass: "gutter gutter-h", style: "height: " + _vm.gutterSize + "px; background-color: " + _vm.color + ";", attrs: { "draggable": "true" }, on: { "drag": _vm.drag } }), _vm._v(" "), _c('div', { staticClass: "pane pane-h bottom", style: "height: calc(" + _vm.resize.bottom + "% - " + _vm.gutterSize / 2 + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("bottom-content")], 2)])]);
 };
 __vue__options__.staticRenderFns = [];
 if (module.hot) {
@@ -17712,11 +17710,11 @@ if (module.hot) {
     if (!module.hot.data) {
       hotAPI.createRecord("data-v-cb343b06", __vue__options__);
     } else {
-      hotAPI.reload("data-v-cb343b06", __vue__options__);
+      hotAPI.rerender("data-v-cb343b06", __vue__options__);
     }
   })();
 }
-},{"../mixins/gutter.vue":14,"vue-hot-reload-api":13,"vue":10}],4:[function(require,module,exports) {
+},{"../mixins/gutter.vue":15,"vue-hot-reload-api":11,"vue":10}],4:[function(require,module,exports) {
 ;(function () {
   'use strict';
 
@@ -17742,14 +17740,30 @@ if (module.hot) {
         left: 50,
         right: 50,
         top: 50,
-        bottom: 50
+        bottom: 50,
+        result: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
       };
     },
 
     methods: {
-      resize: function resize(_ref) {
+      resizeVertical: function resizeVertical(_ref) {
         var left = _ref.left,
             right = _ref.right;
+
+        this.result.left = left;
+        this.result.right = right;
+      },
+      resizeHorizontal: function resizeHorizontal(_ref2) {
+        var top = _ref2.top,
+            bottom = _ref2.bottom;
+
+        this.result.top = top;
+        this.result.bottom = bottom;
       }
     },
     components: {
@@ -17764,7 +17778,7 @@ if (__vue__options__.functional) {
   console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.");
 }
 __vue__options__.render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_c('vertical-gutter', { attrs: { "left": _vm.left, "right": _vm.right, "width": 800, "height": 600 }, on: { "resize": _vm.resize } }, [_c('horizontal-gutter', { attrs: { "slot": "left-content", "top": _vm.top, "bottom": _vm.bottom, "width": 800, "height": 600 }, slot: "left-content" }, [_c('div', { attrs: { "slot": "top-content" }, slot: "top-content" }, [_vm._v("top")]), _vm._v(" "), _c('div', { attrs: { "slot": "bottom-content" }, slot: "bottom-content" }, [_vm._v("bottom")])]), _vm._v(" "), _c('div', { attrs: { "slot": "right-content" }, slot: "right-content" }, [_vm._v("right")])], 1)], 1);
+  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_c('vertical-gutter', { attrs: { "left": _vm.left, "right": _vm.right, "width": 800, "height": 600, "gutterSize": 2, "color": "red" }, on: { "resize": _vm.resizeVertical } }, [_c('horizontal-gutter', { attrs: { "slot": "left-content", "top": _vm.top, "bottom": _vm.bottom, "width": 800, "height": 600, "gutterSize": 10, "color": "#fedcba" }, on: { "resize": _vm.resizeHorizontal }, slot: "left-content" }, [_c('div', { attrs: { "slot": "top-content" }, slot: "top-content" }, [_vm._v("\n        top : " + _vm._s(_vm.result.top)), _c('br'), _vm._v("\n        left : " + _vm._s(_vm.result.left) + "\n      ")]), _vm._v(" "), _c('div', { attrs: { "slot": "bottom-content" }, slot: "bottom-content" }, [_vm._v("\n        bottom : " + _vm._s(_vm.result.bottom) + "\n      ")])]), _vm._v(" "), _c('div', { attrs: { "slot": "right-content" }, slot: "right-content" }, [_vm._v("\n      right : " + _vm._s(_vm.result.right) + "\n    ")])], 1)], 1);
 };
 __vue__options__.staticRenderFns = [];
 if (module.hot) {
@@ -17776,11 +17790,11 @@ if (module.hot) {
     if (!module.hot.data) {
       hotAPI.createRecord("data-v-4b5cfa70", __vue__options__);
     } else {
-      hotAPI.reload("data-v-4b5cfa70", __vue__options__);
+      hotAPI.rerender("data-v-4b5cfa70", __vue__options__);
     }
   })();
 }
-},{"./components/vertical-gutter.vue":8,"./components/horizontal-gutter.vue":9,"vue-hot-reload-api":13,"vue":10}],2:[function(require,module,exports) {
+},{"./components/vertical-gutter.vue":8,"./components/horizontal-gutter.vue":9,"vue-hot-reload-api":11,"vue":10}],2:[function(require,module,exports) {
 'use strict';
 
 var _vueEsm = require('vue/dist/vue.esm.js');
@@ -17818,7 +17832,7 @@ function Module(config) {
 module.bundle.Module = Module;
 
 if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://localhost:49282/');
+  var ws = new WebSocket('ws://localhost:58124/');
   ws.onmessage = function(event) {
     var data = JSON.parse(event.data);
 
