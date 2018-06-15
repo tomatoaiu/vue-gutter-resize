@@ -1,14 +1,15 @@
 <template>
   <section ref="gutter" :style="`width: ${width}px; height: ${height}px;`">
-      <div class="pane pane-v left" :style="`width: calc(${resize.left}% - 2px);`">
+      <div class="pane pane-v left" :style="`width: calc(${resize.left}% - ${gutterSize / 2}px);`">
         <section class="content">
           <slot name="left-content"></slot>
         </section>
       </div>
       <div class="gutter gutter-v" draggable="true"
-          @drag="drag">
+        :style="`width: ${gutterSize}px; background-color: ${color};`"
+        @drag="drag">
       </div>
-      <div class="pane pane-v right" :style="`width: calc(${resize.right}% - 2px);`">
+      <div class="pane pane-v right" :style="`width: calc(${resize.right}% - ${gutterSize / 2}px);`">
         <section class="content">
           <slot name="right-content"></slot>
         </section>
@@ -22,7 +23,7 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'verticalGutter',
   mixins: [ gutter ],
-  props: ['left', 'right', 'width', 'height'],
+  props: ['left', 'right', 'width', 'height', 'gutterSize', 'color'],
   data () {
     return {
       resize: {

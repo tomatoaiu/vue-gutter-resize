@@ -1,14 +1,15 @@
 <template>
   <section ref="gutter" :style="`width: ${width}px; height: ${height}px;`">
-      <div class="pane pane-h top" :style="`height: calc(${resize.top}% - 2px);`">
+      <div class="pane pane-h top" :style="`height: calc(${resize.top}% - ${gutterSize / 2}px);`">
         <section class="content">
           <slot name="top-content"></slot>
         </section>
       </div>
       <div class="gutter gutter-h" draggable="true"
-          @drag="drag">
+        :style="`height: ${gutterSize}px; background-color: ${color};`"
+        @drag="drag">
       </div>
-      <div class="pane pane-h bottom" :style="`height: calc(${resize.bottom}% - 2px);`">
+      <div class="pane pane-h bottom" :style="`height: calc(${resize.bottom}% - ${gutterSize / 2}px);`">
         <section class="content">
           <slot name="bottom-content"></slot>
         </section>
@@ -22,7 +23,7 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'horizontalGutter',
   mixins: [ gutter ],
-  props: ['top', 'bottom', 'width', 'height'],
+  props: ['top', 'bottom', 'width', 'height', 'gutterSize', 'color'],
   data () {
     return {
       resize: {
