@@ -6,7 +6,7 @@
             <slot :name="`content-${n - 1}`"></slot>
           </section>
         </div>
-        <div v-if="n < column"
+        <div
           class="gutter gutter-v" draggable="true"
           :style="`width: ${gutterSize}px; height: ${height}px; background-color: ${color};`"
           @drag="drag">
@@ -30,12 +30,12 @@ export default {
   props: ['width', 'height', 'gutterSize', 'color', 'column'],
   data () {
     return {
-      col: new Array(this.column)
+      col: [],
     }
   },
   created () {
-    for (let i = 0; i < this.col.length; i++) {
-      this.col[i] = 100 / this.column
+    for (let i = 0; i < this.column; i++) {
+      this.col.push(100 / this.column)
     }
   },
   methods: {
@@ -44,8 +44,8 @@ export default {
       if (this.isDraggingGutter(e)) {
         const leftSize = ((mouseX) / this.gutterComponent.width) * 100
         if (this.isGutterInRange(leftSize)) {
-          this.col[0] = leftSize
-          this.col[1] = 100 - leftSize
+          this.col.splice(0, 1, leftSize);
+          this.col.splice(1, 1, 100 - leftSize);
         }
       }
     }
