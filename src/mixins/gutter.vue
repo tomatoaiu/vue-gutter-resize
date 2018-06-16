@@ -3,7 +3,7 @@ const MAX_DRAG_RANGE = 100
 const MIN_DRAG_RANGE = 0
 
 export default {
-  name: 'gutter',
+  // name: 'gutter',
   data () {
     return {
       gutterComponent: {
