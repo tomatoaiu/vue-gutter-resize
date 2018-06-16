@@ -8,7 +8,7 @@
         </div>
         <div v-if="n < column"
           class="gutter gutter-v" draggable="true"
-          :style="`width: ${gutterSize}px; background-color: ${color};`"
+          :style="`width: ${gutterSize}px; height: ${height}px; background-color: ${color};`"
           @drag="drag">
         </div>
         <div v-if="n < column"
@@ -44,15 +44,8 @@ export default {
       if (this.isDraggingGutter(e)) {
         const leftSize = ((mouseX) / this.gutterComponent.width) * 100
         if (this.isGutterInRange(leftSize)) {
-          // this.$emit('resize', { left: leftSize, right: 100 - leftSize})
-          // for (c of this.col) {
-          //   c = leftSize / this.column
-          // }
           this.col[0] = leftSize
           this.col[1] = 100 - leftSize
-          // this.col
-          // this.resize.left = leftSize
-          // this.resize.right = 100 - leftSize
         }
       }
     }

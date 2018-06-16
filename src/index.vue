@@ -4,7 +4,7 @@
       :column="column"
       :width="800"
       :height="600"
-      :gutterSize="2"
+      :gutterSize="4"
       :color="`red`">
       <div slot="content-0">0</div>
       <div slot="content-1">1</div>
