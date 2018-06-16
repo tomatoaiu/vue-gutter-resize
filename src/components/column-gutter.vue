@@ -53,6 +53,7 @@ export default {
           this.sum = sum
           this.col.splice(index, 1, leftSize - before)
           this.col.splice(index + 1, 1, before + sum - leftSize)
+          this.$emit('resize', { col: this.col })
         }
       }
     }
