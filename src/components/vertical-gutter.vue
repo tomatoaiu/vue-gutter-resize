@@ -6,7 +6,7 @@
         </section>
       </div>
       <div class="gutter gutter-v" draggable="true"
-        :style="`width: ${gutterSize}px; background-color: ${color};`"
+        :style="`width: ${gutterSize}px; height: ${height}px; background-color: ${color};`"
         @drag="drag">
       </div>
       <div class="pane pane-v right" :style="`width: calc(${resize.right}% - ${gutterSize / 2}px);`">
