@@ -2,12 +2,14 @@
   <div>
     <column-gutter
       :column="column"
-      :width="800"
+      :width="1200"
       :height="600"
       :gutterSize="4"
-      :color="`red`">
-      <div slot="content-0">0</div>
-      <div slot="content-1">1</div>
+      :colors="colors">
+      <div slot="col-0">0</div>
+      <div slot="col-1">1</div>
+      <div slot="col-2">2</div>
+      <div slot="col-3">3</div>
     </column-gutter>
   </div>
 </template>
@@ -18,7 +20,8 @@ import columnGutter from './components/column-gutter.vue'
 export default {
   data(){
     return {
-      column: 2
+      column: 4,
+      colors: ['red', 'blue', 'yellow']
     }
   },
   components: {
