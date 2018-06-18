@@ -241,5 +241,29 @@ export default {
 </script>
 ```
 
+## 全てのgutter
+- vertical-gutter
+- horizontal-gutter
+- column-gutter
+- row-gutter
+
+## インライン要素
+### 全てのprops
+- width
+- height
+- top
+- right
+- bottom
+- left
+- gutterSize
+- gutterSizes
+- color
+- colors
+- row
+- column
+
+### 全てのemit
+- resize
+
 ## ライセンス
 [MIT](./LICENSE.md)
