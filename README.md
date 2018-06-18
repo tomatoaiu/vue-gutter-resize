@@ -242,5 +242,29 @@ export default {
 </script>
 ```
 
+## all gutter
+- vertical-gutter
+- horizontal-gutter
+- column-gutter
+- row-gutter
+
+## inline elements
+### all props
+- width
+- height
+- top
+- right
+- bottom
+- left
+- gutterSize
+- gutterSizes
+- color
+- colors
+- row
+- column
+
+### all emit
+- resize
+
 ## License
 [MIT](./LICENSE.md)
