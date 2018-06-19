@@ -1,9 +1,9 @@
 <template>
-  <section ref="gutter" :style="`width: ${width}px; height: ${height}px;`">
+  <section ref="gutter" :style="`width: ${width}; height: ${height};`">
       <div
-        :style="`height: calc(${rowArray[0]}% - ${gutterSize || gutterSizes[0]}px);`">
+        :style="`height: calc(${rowArray[0]}% - ${gutterSize || gutterSizes[0]});`">
         <div
-          class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[0]}px);`">
+          class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[0]});`">
           <section class="content">
             {{ this.rowArray }}
             <slot :name="`row-0`"></slot>
@@ -12,14 +12,14 @@
       </div>
       <div
         v-for="n in (row - 1)" :key="n"
-        :style="`height: calc(${rowArray[n]}% - ${gutterSize || gutterSizes[n - 1]}px);`">
+        :style="`height: calc(${rowArray[n]}% - ${gutterSize || gutterSizes[n - 1]});`">
         <div
           class="gutter gutter-h" draggable="true"
-          :style="`height: ${gutterSize || gutterSizes[n - 1]}px; width: ${width}px; background-color: ${color || colors[n - 1]};`"
+          :style="`height: ${gutterSize || gutterSizes[n - 1]}; width: ${width}; background-color: ${color || colors[n - 1]};`"
           @drag="e => { drag(e, n - 1) }">
         </div>
         <div
-          class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[n - 1]}px);`">
+          class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[n - 1]});`">
           <section class="content">
             <slot :name="`row-${n}`"></slot>
           </section>
