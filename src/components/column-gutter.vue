@@ -1,19 +1,19 @@
 <template>
-  <section ref="gutter" :style="`width: ${width}px; height: ${height}px;`">
+  <section ref="gutter" :style="`width: ${width}; height: ${height};`">
       <div v-for="n in (column - 1)" :key="n">
         <div v-if="n == 1"
-          class="pane pane-v left" :style="`width: calc(${col[n - 1]}% - ${gutterSize || gutterSizes[n - 1]}px);`">
+          class="pane pane-v left" :style="`width: calc(${col[n - 1]}% - ${gutterSize || gutterSizes[n - 1]});`">
           <section class="content">
             <slot :name="`col-${n - 1}`"></slot>
           </section>
         </div>
         <div
           class="gutter gutter-v" draggable="true"
-          :style="`width: ${gutterSize || gutterSizes[n - 1]}px; height: ${height}px; background-color: ${color || colors[n - 1]};`"
+          :style="`width: ${gutterSize || gutterSizes[n - 1]}; height: ${height}; background-color: ${color || colors[n - 1]};`"
           @drag="e => { drag(e, n - 1) }">
         </div>
         <div
-          class="pane pane-v" :style="`width: calc(${col[n]}% - ${gutterSize || gutterSizes[n]}px);`">
+          class="pane pane-v" :style="`width: calc(${col[n]}% - ${gutterSize || gutterSizes[n]});`">
           <section class="content">
             <slot :name="`col-${n}`"></slot>
           </section>
