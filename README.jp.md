@@ -164,9 +164,9 @@ export default {
   <div>
     <column-gutter
       :column="column"
-      :width="1200"
-      :height="600"
-      :gutterSize="4"
+      :width="100vw"
+      :height="600px"
+      :gutterSizes="['4px', '1rem', '1em']"
       :colors="colors"
       @resize="resize">
       <div slot="col-0">0</div>
@@ -206,9 +206,9 @@ export default {
     <row-gutter
       style="border: 1px solid #ccc;"
       :row="row"
-      :width="800"
-      :height="600"
-      :gutterSize="4"
+      :width="800px"
+      :height="600px"
+      :gutterSize="4px"
       :colors="colors"
       @resize="resize">
       <div slot="row-0">0</div>
