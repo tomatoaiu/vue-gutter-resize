@@ -63,7 +63,7 @@ export default {
       :row="row"
       :width="'800px'"
       :height="'600px'"
-      :gutterSize="4px"
+      :gutterSize="'4px'"
       :colors="colors"
       @resize="resize">
       <div slot="row-0">0</div>
