@@ -19,8 +19,8 @@ npm i vue-gutter-resize
   <div>
     <column-gutter
       :column="column"
-      :width="100vw"
-      :height="600px"
+      :width="'100vw'"
+      :height="'600px'"
       :gutterSizes="['4px', '1rem', '1em']"
       :colors="colors"
       @resize="resize">
