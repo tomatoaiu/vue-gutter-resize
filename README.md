@@ -61,8 +61,8 @@ export default {
     <row-gutter
       style="border: 1px solid #ccc;"
       :row="row"
-      :width="800px"
-      :height="600px"
+      :width="'800px'"
+      :height="'600px'"
       :gutterSize="4px"
       :colors="colors"
       @resize="resize">
