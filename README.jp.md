@@ -97,22 +97,69 @@ export default {
 ```
 
 ## 全てのgutter
-- column-gutter
-- row-gutter
+### column-gutter
+#### props
+- width: String
+  - column-gutterの横幅
+- height : String
+  - column-gutterの縦幅
+- gutterSize : String
+  - 全gutterの幅
+- gutterSizes : Array<String>
+  - それぞれのgutterの幅
+  - gutterSizeが指定されている場合、gutterSizeが優先される
+- color : String
+  - 全gutterの色
+- colors : Array<String>
+  - それぞれのgutterの色
+  - colorが指定されている場合、colorが優先される
+- column : Number
+  - column数
 
-## インライン要素
-### 全てのprops
-- width
-- height
-- gutterSize
-- gutterSizes
-- color
-- colors
-- row
-- column
+#### emit
+- resize({ col })
+  - col : Array
+  - それぞれのcolumnの幅(合計で100)
 
-### 全てのemit
-- resize
+#### slot
+col-nで指定
+```html
+<div slot="col-0">1つ目のcolumn</div>
+<div slot="col-1">2つ目のcolumn</div>
+<div slot="col-2">3つ目のcolumn</div>
+```
+
+### row-gutter
+#### props
+- width: String
+  - row-gutterの横幅
+- height : String
+  - row-gutterの縦幅
+- gutterSize : String
+  - 全gutterの幅
+- gutterSizes : Array<String>
+  - それぞれのgutterの幅
+  - gutterSizeが指定されている場合、gutterSizeが優先される
+- color : String
+  - 全gutterの色
+- colors : Array<String>
+  - それぞれのgutterの色
+  - colorが指定されている場合、colorが優先される
+- row : Number
+  - row数
+
+#### emit
+- resize({ row })
+  - row : Array
+  - それぞれのcolumnの幅(合計で100)
+
+#### slot
+row-nで指定
+```html
+<div slot="row-0">1つ目のrow</div>
+<div slot="row-1">2つ目のrow</div>
+<div slot="row-2">3つ目のrow</div>
+```
 
 ## ライセンス
 [MIT](./LICENSE.md)

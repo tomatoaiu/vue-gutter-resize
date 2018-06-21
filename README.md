@@ -97,22 +97,69 @@ export default {
 ```
 
 ## all gutter
-- column-gutter
-- row-gutter
+### column-gutter
+#### props
+- width: String
+  - column-gutter width
+- height : String
+  - column-gutter height
+- gutterSize : String
+  - all gutter width
+- gutterSizes : Array<String>
+  - each gutter width
+  - If gutterSize is specified, gutterSize takes precedence
+- color : String
+  - all gutter color
+- colors : Array<String>
+  - each gutter clolr
+  - If color is specified, color takes precedence
+- column : Number
+  - column number
 
-## inline elements
-### all props
-- width
-- height
-- gutterSize
-- gutterSizes
-- color
-- colors
-- row
-- column
+#### emit
+- resize({ col })
+  - col : Array
+  - each column width(total 100)
 
-### all emit
-- resize
+#### slot
+Specified by col-n
+```html
+<div slot="col-0">the first column</div>
+<div slot="col-1">the second column</div>
+<div slot="col-2">the third column</div>
+```
+
+### row-gutter
+#### props
+- width: String
+  - row-gutter width
+- height : String
+  - row-gutter height
+- gutterSize : String
+  - all gutter height
+- gutterSizes : Array<String>
+  - each gutter height
+  - If gutterSize is specified, gutterSize takes precedence
+- color : String
+  - all gutterの color
+- colors : Array<String>
+  - each gutter color
+  - If color is specified, color takes precedence
+- row : Number
+  - row number
+
+#### emit
+- resize({ row })
+  - row : Array
+  - each column height(total 100)
+
+#### slot
+Specified by row-n
+```html
+<div slot="row-0">the first row</div>
+<div slot="row-1">the second row</div>
+<div slot="row-2">the third row</div>
+```
 
 ## License
 [MIT](./LICENSE.md)
