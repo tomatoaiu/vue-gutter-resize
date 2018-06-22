@@ -1,6 +1,11 @@
 .DS_Store
+
 .git
+
 npm-debug.log
+
 .cache
+
 yarn-error.log
-rollup.config.js
+
+build
