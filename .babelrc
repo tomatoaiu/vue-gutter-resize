@@ -1,17 +1,7 @@
 {
   "presets": [
-    "env", 
-    ["es2015", { "modules": false }]
-  ],
-  "plugins": [
-    [
-      "transform-runtime",
-      "syntax-dynamic-import",
-      "transform-vue-jsx",
-      {
-        "polyfill": false,
-        "regenerator": true
-      }
-    ]
+    ["env", {
+      "modules": false
+    }]
   ]
 }
