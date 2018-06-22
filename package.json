@@ -1,11 +1,17 @@
 {
   "name": "vue-gutter-resize",
   "version": "0.5.5",
-  "description": "",
-  "main": "index.js",
+  "description": "resize adjacent dom by dragging the gutter",
+  "main": "./dist/vue-gutter-resize.umd.js",
+  "module": "./dist/vue-gutter-resize.esm.js",
+  "unpkg": "./dist/vue-gutter-resize.js",
+  "jsdelivr": "./dist/vue-gutter-resize.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel index.html"
+    "dev": "parcel ./src/index.html -d ./docs",
+    "build": "run-s build:**",
+    "build:min": "rollup -c ./build/rollup.config.min.js",
+    "build:umd:esm": "rollup -c ./build/rollup.config.js"
   },
   "repository": {
     "type": "git",
@@ -24,16 +30,21 @@
     "url": "https://github.com/tomatoaiu/vue-gutter-resize/issues"
   },
   "homepage": "https://github.com/tomatoaiu/vue-gutter-resize#readme",
+  "dependencies": {
+    "vue": "^2.5.16"
+  },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-runtime": "^6.26.0",
-    "parcel-bundler": "^1.7.0",
-    "parcel-plugin-vue": "^1.5.0",
-    "vue": "^2.5.16",
+    "@babel/core": "^7.0.0-beta.51",
+    "@vue/component-compiler-utils": "^2.0.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "npm-run-all": "^4.1.3",
+    "parcel-bundler": "^1.9.2",
+    "rollup": "^0.61.1",
+    "rollup-plugin-babel": "^3.0.4",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^4.0.0",
+    "rollup-plugin-vue": "^4.2.0",
+    "vue-hot-reload-api": "^2.3.0",
     "vue-template-compiler": "^2.5.16"
   }
 }

@@ -3,3 +3,4 @@
 npm-debug.log
 .cache
 yarn-error.log
+rollup.config.js

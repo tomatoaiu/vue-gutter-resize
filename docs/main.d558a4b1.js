@@ -6,17 +6,19 @@
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
 
-require = (function (modules, cache, entry) {
+// eslint-disable-next-line no-global-assign
+parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
-  var previousRequire = typeof require === "function" && require;
+  var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
+  var nodeRequire = typeof require === 'function' && require;
 
-  function newRequire(name, jumped, ModuleConfig) {
+  function newRequire(name, jumped) {
     if (!cache[name]) {
       if (!modules[name]) {
         // if we cannot find the module within our internal map or
         // cache jump to the current global require ie. the last bundle
         // that was added to the page.
-        var currentRequire = typeof require === "function" && require;
+        var currentRequire = typeof parcelRequire === 'function' && parcelRequire;
         if (!jumped && currentRequire) {
           return currentRequire(name, true);
         }
@@ -29,16 +31,21 @@ require = (function (modules, cache, entry) {
           return previousRequire(name, true);
         }
 
+        // Try the node require function if it exists.
+        if (nodeRequire && typeof name === 'string') {
+          return nodeRequire(name);
+        }
+
         var err = new Error('Cannot find module \'' + name + '\'');
         err.code = 'MODULE_NOT_FOUND';
         throw err;
       }
-      
+
       localRequire.resolve = resolve;
 
-      var module = cache[name] = new newRequire.Module(ModuleConfig);
+      var module = cache[name] = new newRequire.Module(name);
 
-      modules[name][0].call(module.exports, localRequire, module, module.exports);
+      modules[name][0].call(module.exports, localRequire, module, module.exports, this);
     }
 
     return cache[name].exports;
@@ -52,18 +59,46 @@ require = (function (modules, cache, entry) {
     }
   }
 
-  function Module() {
+  function Module(moduleName) {
+    this.id = moduleName;
     this.bundle = newRequire;
     this.exports = {};
   }
 
+  newRequire.isParcelRequire = true;
   newRequire.Module = Module;
   newRequire.modules = modules;
   newRequire.cache = cache;
   newRequire.parent = previousRequire;
+  newRequire.register = function (id, exports) {
+    modules[id] = [function (require, module) {
+      module.exports = exports;
+    }, {}];
+  };
 
   for (var i = 0; i < entry.length; i++) {
     newRequire(entry[i]);
+  }
+
+  if (entry.length) {
+    // Expose entry point to Node, AMD or browser globals
+    // Based on https://github.com/ForbesLindesay/umd/blob/master/template.js
+    var mainExports = newRequire(entry[entry.length - 1]);
+
+    // CommonJS
+    if (typeof exports === "object" && typeof module !== "undefined") {
+      module.exports = mainExports;
+
+    // RequireJS
+    } else if (typeof define === "function" && define.amd) {
+     define(function () {
+       return mainExports;
+     });
+
+    // <script>
+    } else if (globalName) {
+      this[globalName] = mainExports;
+    }
   }
 
   // Override the current require with this new one
@@ -9968,31 +10003,115 @@ function getOuterHTML(el) {
 Vue.compile = compileToFunctions;
 
 exports.default = Vue;
-},{}],19:[function(require,module,exports) {
-var inserted = exports.cache = {}
+},{}],11:[function(require,module,exports) {
+var define;
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-function noop () {}
-
-exports.insert = function (css) {
-  if (inserted[css]) return noop
-  inserted[css] = true
-
-  var elem = document.createElement('style')
-  elem.setAttribute('type', 'text/css')
-
-  if ('textContent' in elem) {
-    elem.textContent = css
-  } else {
-    elem.styleSheet.cssText = css
-  }
-
-  document.getElementsByTagName('head')[0].appendChild(elem)
-  return function () {
-    document.getElementsByTagName('head')[0].removeChild(elem)
-    inserted[css] = false
-  }
-}
-
+!function (e, t) {
+  "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "undefined" != typeof module ? t(exports) : "function" == typeof define && define.amd ? define(["exports"], t) : t(e.VueGutterResize = {});
+}(this, function (e) {
+  "use strict";
+  var t = { data: function data() {
+      return { gutterComponent: { width: 0, height: 0, offsetX: 0, offsetY: 0 } };
+    }, mounted: function mounted() {
+      this.setPlaygroundRect();
+    }, methods: { setPlaygroundRect: function setPlaygroundRect() {
+        var e = this.$refs.gutter.getBoundingClientRect();this.gutterComponent.width = e.width, this.gutterComponent.height = e.height, this.gutterComponent.offsetX = window.pageXOffset + e.left, this.gutterComponent.offsetY = window.pageYOffset + e.top;
+      }, isDraggingGutter: function isDraggingGutter(e) {
+        return e && 0 < e.clientX && 0 < e.clientY;
+      }, isGutterInRange: function isGutterInRange(e) {
+        return e < 100 && 0 < e;
+      }, getCurrentMousePosition: function getCurrentMousePosition(e) {
+        return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
+      } } };function n() {
+    var c = document.head || document.getElementsByTagName("head")[0],
+        d = n.styles || (n.styles = {}),
+        l = "undefined" != typeof navigator && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());return function (e, t) {
+      if (!document.querySelector('style[data-vue-ssr-id~="' + e + '"]')) {
+        var n = l ? t.media || "default" : e,
+            r = d[n] || (d[n] = { ids: [], parts: [], element: void 0 });if (!r.ids.includes(e)) {
+          var i = t.source,
+              o = r.ids.length;if (r.ids.push(e), l && (r.element = r.element || document.querySelector("style[data-group=" + n + "]")), !r.element) {
+            var s = r.element = document.createElement("style");s.type = "text/css", t.media && s.setAttribute("media", t.media), l && (s.setAttribute("data-group", n), s.setAttribute("data-next-index", "0")), c.appendChild(s);
+          }if (l && (o = parseInt(r.element.getAttribute("data-next-index")), r.element.setAttribute("data-next-index", o + 1)), r.element.styleSheet) r.parts.push(i), r.element.styleSheet.cssText = r.parts.filter(Boolean).join("\n");else {
+            var a = document.createTextNode(i),
+                u = r.element.childNodes;u[o] && r.element.removeChild(u[o]), u.length ? r.element.insertBefore(a, u[o]) : r.element.appendChild(a);
+          }
+        }
+      }
+    };
+  }var r = function (e, t, n, r, i, o, s, a) {
+    var u = ("function" == typeof n ? n.options : n) || {};u.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/mixins/gutter.vue", u.render || (u.render = e.render, u.staticRenderFns = e.staticRenderFns, u._compiled = !0, i && (u.functional = !0)), u._scopeId = r;var c = void 0;if (t && (c = function c(e) {
+      t.call(this, s(e));
+    }), void 0 !== c) if (u.functional) {
+      var d = u.render;u.render = function (e, t) {
+        return c.call(t), d(e, t);
+      };
+    } else {
+      var l = u.beforeCreate;u.beforeCreate = l ? [].concat(l, c) : [c];
+    }return u;
+  }("undefined" != typeof __vue_render__ ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {}, function (e) {
+    e && e("data-v-25230442_0", { source: "\ndiv section[data-v-25230442] {\n  margin: 0;\n  padding: 0;\n}\nsection[data-v-25230442] {\n  width: 100%;\n  height: 100vh;\n}\n.content[data-v-25230442] {\n  height: 100%;\n}\n.pane[data-v-25230442] {\n  overflow: hidden;\n  height: 100%;\n}\n.pane .content .preview[data-v-25230442] {\n  overflow: scroll;\n  height: 100%;\n}\n.pane-v[data-v-25230442] {\n  float: left;\n}\n.gutter[data-v-25230442] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-25230442] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-25230442] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: void 0, media: void 0 });
+  }, void 0 === t ? {} : t, "data-v-25230442", void 0, 0, void 0 !== n ? n : function () {}, "undefined" != typeof __vue_create_injector_ssr__ && __vue_create_injector_ssr__),
+      i = { name: "columnGutter", mixins: [r], props: ["width", "height", "gutterSize", "gutterSizes", "color", "column", "colors"], data: function data() {
+      return { col: [] };
+    }, created: function created() {
+      for (var e = 0; e < this.column; e++) {
+        this.col.push(100 / this.column);
+      }
+    }, methods: { drag: function drag(e, t) {
+        var n = this.getCurrentMousePosition(e).mouseX;if (this.isDraggingGutter(e)) {
+          var r = n / this.gutterComponent.width * 100;if (this.isGutterInRange(r)) {
+            for (var i = 0, o = 0; o < t; o++) {
+              i += this.col[o];
+            }var s = this.col[t] + this.col[t + 1];this.sum = s, this.col.splice(t, 1, r - i), this.col.splice(t + 1, 1, i + s - r), this.$emit("resize", { col: this.col });
+          }
+        }
+      } } },
+      o = function o() {
+    var n = this,
+        e = n.$createElement,
+        r = n._self._c || e;return r("section", { ref: "gutter", style: "width: " + n.width + "; height: " + n.height + ";" }, n._l(n.column - 1, function (t) {
+      return r("div", { key: t }, [1 == t ? r("div", { staticClass: "pane pane-v left", style: "width: calc(" + n.col[t - 1] + "% - " + (n.gutterSize || n.gutterSizes[t - 1]) + ");" }, [r("section", { staticClass: "content" }, [n._t("col-" + (t - 1))], 2)]) : n._e(), n._v(" "), r("div", { staticClass: "gutter gutter-v", style: "width: " + (n.gutterSize || n.gutterSizes[t - 1]) + "; height: " + n.height + "; background-color: " + (n.color || n.colors[t - 1]) + ";", attrs: { draggable: "true" }, on: { drag: function drag(e) {
+            n.drag(e, t - 1);
+          } } }), n._v(" "), r("div", { staticClass: "pane pane-v", style: "width: calc(" + n.col[t] + "% - " + (n.gutterSize || n.gutterSizes[t]) + ");" }, [r("section", { staticClass: "content" }, [n._t("col-" + t)], 2)])]);
+    }));
+  };o._withStripped = !0;var s,
+      a,
+      u,
+      c,
+      d,
+      l = (s = void 0 !== o ? { render: o, staticRenderFns: [] } : {}, a = void 0 === i ? {} : i, u = void 0, c = !1, "undefined" != typeof __vue_create_injector_ssr__ && __vue_create_injector_ssr__, (d = ("function" == typeof a ? a.options : a) || {}).__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/column-gutter.vue", d.render || (d.render = s.render, d.staticRenderFns = s.staticRenderFns, d._compiled = !0, c && (d.functional = !0)), d._scopeId = u, d),
+      h = { name: "rowGutter", mixins: [r], props: ["width", "height", "gutterSize", "gutterSizes", "color", "row", "colors"], data: function data() {
+      return { rowArray: [] };
+    }, created: function created() {
+      for (var e = 0; e < this.row; e++) {
+        this.rowArray.push(100 / this.row);
+      }
+    }, methods: { drag: function drag(e, t) {
+        var n = this.getCurrentMousePosition(e).mouseY;if (this.isDraggingGutter(e)) {
+          var r = n / this.gutterComponent.height * 100;if (this.isGutterInRange(r)) {
+            for (var i = 0, o = 0; o < t; o++) {
+              i += this.rowArray[o];
+            }var s = this.rowArray[t] + this.rowArray[t + 1];this.rowArray.splice(t, 1, r - i), this.rowArray.splice(t + 1, 1, i + s - r), this.$emit("resize", { row: this.rowArray });
+          }
+        }
+      } } },
+      g = function g() {
+    var n = this,
+        e = n.$createElement,
+        r = n._self._c || e;return r("section", { ref: "gutter", style: "width: " + n.width + "; height: " + n.height + ";" }, [r("div", { style: "height: calc(" + n.rowArray[0] + "% - " + (n.gutterSize || n.gutterSizes[0]) + ");" }, [r("div", { staticClass: "pane pane-h", style: "height: calc(100% - " + (n.gutterSize || n.gutterSizes[0]) + ");" }, [r("section", { staticClass: "content" }, [n._v("\n          " + n._s(this.rowArray) + "\n          "), n._t("row-0")], 2)])]), n._v(" "), n._l(n.row - 1, function (t) {
+      return r("div", { key: t, style: "height: calc(" + n.rowArray[t] + "% - " + (n.gutterSize || n.gutterSizes[t - 1]) + ");" }, [r("div", { staticClass: "gutter gutter-h", style: "height: " + (n.gutterSize || n.gutterSizes[t - 1]) + "; width: " + n.width + "; background-color: " + (n.color || n.colors[t - 1]) + ";", attrs: { draggable: "true" }, on: { drag: function drag(e) {
+            n.drag(e, t - 1);
+          } } }), n._v(" "), r("div", { staticClass: "pane pane-h", style: "height: calc(100% - " + (n.gutterSize || n.gutterSizes[t - 1]) + ");" }, [r("section", { staticClass: "content" }, [n._t("row-" + t)], 2)])]);
+    })], 2);
+  };g._withStripped = !0;var f,
+      v,
+      _,
+      p,
+      m,
+      w = (f = void 0 !== g ? { render: g, staticRenderFns: [] } : {}, v = void 0 === h ? {} : h, _ = void 0, p = !1, "undefined" != typeof __vue_create_injector_ssr__ && __vue_create_injector_ssr__, (m = ("function" == typeof v ? v.options : v) || {}).__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/row-gutter.vue", m.render || (m.render = f.render, m.staticRenderFns = f.staticRenderFns, m._compiled = !0, p && (m.functional = !0)), m._scopeId = _, m);e.columnGutter = l, e.rowGutter = w, Object.defineProperty(e, "__esModule", { value: !0 });
+});
 },{}],14:[function(require,module,exports) {
 var Vue // late bind
 var version
@@ -10235,7 +10354,7 @@ exports.reload = tryWrap(function (id, options) {
   })
 })
 
-},{}],11:[function(require,module,exports) {
+},{}],12:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -17516,206 +17635,130 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-},{}],17:[function(require,module,exports) {
-var __vueify_style_dispose__ = require("vueify/lib/insert-css").insert("div section[data-v-53a9b314] {\n  margin: 0;\n  padding: 0;\n}\n\nsection[data-v-53a9b314] {\n  width: 100%;\n  height: 100vh;\n}\n\n.content[data-v-53a9b314] {\n  height: 100%;\n}\n\n.pane[data-v-53a9b314] {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview[data-v-53a9b314] {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v[data-v-53a9b314] {\n  float: left;\n}\n\n.gutter[data-v-53a9b314] {\n  background: #ccc;\n  overflow: hidden;\n}\n\n.gutter-v[data-v-53a9b314] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n\n.gutter-h[data-v-53a9b314] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}");(function () {
-  "use strict";
+},{}],6:[function(require,module,exports) {
+'use strict';
 
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-  var MAX_DRAG_RANGE = 100;
-  var MIN_DRAG_RANGE = 0;
+var _vueGutterResizeUmdMin = require('../dist/vue-gutter-resize.umd.min.js');
 
-  exports.default = {
-    data: function data() {
-      return {
-        gutterComponent: {
-          width: 0,
-          height: 0,
-          offsetX: 0,
-          offsetY: 0
-        }
-      };
-    },
-    mounted: function mounted() {
-      this.setPlaygroundRect();
-    },
+exports.default = {
+  data: function data() {
+    return {
+      column: 4,
+      colors: ['red', 'blue', 'yellow']
+    };
+  },
 
-    methods: {
-      setPlaygroundRect: function setPlaygroundRect() {
-        var clientRect = this.$refs.gutter.getBoundingClientRect();
-        this.gutterComponent.width = clientRect.width;
-        this.gutterComponent.height = clientRect.height;
-        this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
-        this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
-      },
-      isDraggingGutter: function isDraggingGutter(e) {
-        return e && e.clientX > 0 && e.clientY > 0;
-      },
-      isGutterInRange: function isGutterInRange(size) {
-        return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
-      },
-      getCurrentMousePosition: function getCurrentMousePosition(e) {
-        return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
-      }
+  methods: {
+    resize: function resize(_ref) {
+      var col = _ref.col;
+
+      console.log(col); // current col size (etc... [25, 25, 25, 25]
     }
-  };
-})();
-if (module.exports.__esModule) module.exports = module.exports.default;
-var __vue__options__ = typeof module.exports === "function" ? module.exports.options : module.exports;
-__vue__options__._scopeId = "data-v-53a9b314";
-if (module.hot) {
-  (function () {
-    var hotAPI = require("vue-hot-reload-api");
-    hotAPI.install(require("vue"), true);
-    if (!hotAPI.compatible) return;
-    module.hot.accept();
-    module.hot.dispose(__vueify_style_dispose__);
-    if (!module.hot.data) {
-      hotAPI.createRecord("data-v-53a9b314", __vue__options__);
-    } else {}
-  })();
-}
-},{"vueify/lib/insert-css":19,"vue-hot-reload-api":14,"vue":11}],25:[function(require,module,exports) {
-;(function () {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _gutter = require('../mixins/gutter.vue');
-
-  var _gutter2 = _interopRequireDefault(_gutter);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
+  },
+  components: {
+    'column-gutter': _vueGutterResizeUmdMin.columnGutter
   }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-  exports.default = {
-    name: 'columnGutter',
-    mixins: [_gutter2.default],
-    props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
-    data: function data() {
-      return {
-        col: []
-      };
-    },
-    created: function created() {
-      for (var i = 0; i < this.column; i++) {
-        this.col.push(100 / this.column);
+// import VueGutterResize from '../dist/vue-gutter-resize.esm.js'
+// import { columnGutter } from '../dist/vue-gutter-resize.umd.js'
+        var $b2549f = exports.default || module.exports;
+      
+      if (typeof $b2549f === 'function') {
+        $b2549f = $b2549f.options;
       }
-    },
+    
+        /* template */
+        Object.assign($b2549f, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "column-gutter",
+        {
+          attrs: {
+            column: _vm.column,
+            width: "100%",
+            height: "600px",
+            gutterSizes: ["4px", "1rem", "1em"],
+            colors: _vm.colors
+          },
+          on: { resize: _vm.resize }
+        },
+        [
+          _c("div", { attrs: { slot: "col-0" }, slot: "col-0" }, [
+            _vm._v(
+              "\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tristique euismod turpis sit amet aliquet. Nulla tempus lectus quis dui rhoncus finibus. Nunc vestibulum viverra condimentum. Integer finibus justo et velit scelerisque iaculis. Fusce porta laoreet lacus sed placerat. Mauris egestas nec ligula ut pulvinar. Maecenas nec ullamcorper ante. Phasellus rutrum ac sem quis imperdiet. Sed ullamcorper, velit non aliquet convallis, mi dui elementum sapien, ut imperdiet nibh eros eu ex. Donec sed aliquam nunc. Duis sit amet porttitor lorem. Etiam pretium maximus gravida. Nam congue, mi ac gravida tincidunt, eros nibh ornare nibh, ut ultricies lorem erat nec tortor. Donec non semper quam.\n    "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "col-1" }, slot: "col-1" }, [_vm._v("1")]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "col-2" }, slot: "col-2" }, [_vm._v("2")]),
+          _vm._v(" "),
+          _c("div", { attrs: { slot: "col-3" }, slot: "col-3" }, [_vm._v("3")])
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
 
-    methods: {
-      drag: function drag(e, index) {
-        var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-            mouseX = _getCurrentMousePosit.mouseX;
-
-        if (this.isDraggingGutter(e)) {
-          var leftSize = mouseX / this.gutterComponent.width * 100;
-          if (this.isGutterInRange(leftSize)) {
-            var before = 0;
-            for (var i = 0; i < index; i++) {
-              before += this.col[i];
-            }
-            var sum = this.col[index] + this.col[index + 1];
-            this.sum = sum;
-            this.col.splice(index, 1, leftSize - before);
-            this.col.splice(index + 1, 1, before + sum - leftSize);
-            this.$emit('resize', { col: this.col });
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: null,
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$b2549f', $b2549f);
+          } else {
+            api.reload('$b2549f', $b2549f);
           }
         }
+
+        
       }
-    }
-  };
-})();
-if (module.exports.__esModule) module.exports = module.exports.default;
-var __vue__options__ = typeof module.exports === "function" ? module.exports.options : module.exports;
-if (__vue__options__.functional) {
-  console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.");
-}
-__vue__options__.render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('section', { ref: "gutter", style: "width: " + _vm.width + "px; height: " + _vm.height + "px;" }, _vm._l(_vm.column - 1, function (n) {
-    return _c('div', { key: n }, [n == 1 ? _c('div', { staticClass: "pane pane-v left", style: "width: calc(" + _vm.col[n - 1] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("col-" + (n - 1))], 2)]) : _vm._e(), _vm._v(" "), _c('div', { staticClass: "gutter gutter-v", style: "width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "px; height: " + _vm.height + "px; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";", attrs: { "draggable": "true" }, on: { "drag": function drag(e) {
-          _vm.drag(e, n - 1);
-        } } }), _vm._v(" "), _c('div', { staticClass: "pane pane-v", style: "width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n]) + "px);" }, [_c('section', { staticClass: "content" }, [_vm._t("col-" + n)], 2)])]);
-  }));
-};
-__vue__options__.staticRenderFns = [];
-if (module.hot) {
-  (function () {
-    var hotAPI = require("vue-hot-reload-api");
-    hotAPI.install(require("vue"), true);
-    if (!hotAPI.compatible) return;
-    module.hot.accept();
-    if (!module.hot.data) {
-      hotAPI.createRecord("data-v-f133b72a", __vue__options__);
-    } else {
-      hotAPI.rerender("data-v-f133b72a", __vue__options__);
-    }
-  })();
-}
-},{"../mixins/gutter.vue":17,"vue-hot-reload-api":14,"vue":11}],6:[function(require,module,exports) {
-;(function () {
-  'use strict';
-
-  Object.defineProperty(exports, "__esModule", {
-    value: true
-  });
-
-  var _columnGutter = require('./components/column-gutter.vue');
-
-  var _columnGutter2 = _interopRequireDefault(_columnGutter);
-
-  function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-  }
-
-  exports.default = {
-    data: function data() {
-      return {
-        column: 4,
-        colors: ['red', 'blue', 'yellow']
-      };
-    },
-
-    methods: {
-      resize: function resize(_ref) {
-        var column = _ref.column;
-
-        console.log(column);
-      }
-    },
-    components: {
-      'column-gutter': _columnGutter2.default
-    }
-  };
-})();
-if (module.exports.__esModule) module.exports = module.exports.default;
-var __vue__options__ = typeof module.exports === "function" ? module.exports.options : module.exports;
-if (__vue__options__.functional) {
-  console.error("[vueify] functional components are not supported and should be defined in plain js files using render functions.");
-}
-__vue__options__.render = function render() {
-  var _vm = this;var _h = _vm.$createElement;var _c = _vm._self._c || _h;return _c('div', [_c('column-gutter', { staticStyle: { "border": "1px solid #ccc" }, attrs: { "column": _vm.column, "width": 800, "height": 600, "gutterSizes": [4, 10, 3], "colors": _vm.colors }, on: { "resize": _vm.resize } }, [_c('div', { attrs: { "slot": "col-0" }, slot: "col-0" }, [_vm._v("0")]), _vm._v(" "), _c('div', { attrs: { "slot": "col-1" }, slot: "col-1" }, [_vm._v("1")]), _vm._v(" "), _c('div', { attrs: { "slot": "col-2" }, slot: "col-2" }, [_vm._v("2")]), _vm._v(" "), _c('div', { attrs: { "slot": "col-3" }, slot: "col-3" }, [_vm._v("3")])])], 1);
-};
-__vue__options__.staticRenderFns = [];
-if (module.hot) {
-  (function () {
-    var hotAPI = require("vue-hot-reload-api");
-    hotAPI.install(require("vue"), true);
-    if (!hotAPI.compatible) return;
-    module.hot.accept();
-    if (!module.hot.data) {
-      hotAPI.createRecord("data-v-18ea5ae0", __vue__options__);
-    } else {
-      hotAPI.reload("data-v-18ea5ae0", __vue__options__);
-    }
-  })();
-}
-},{"./components/column-gutter.vue":25,"vue-hot-reload-api":14,"vue":11}],4:[function(require,module,exports) {
+    })();
+},{"../dist/vue-gutter-resize.umd.min.js":11,"vue-hot-reload-api":14,"vue":12}],4:[function(require,module,exports) {
 'use strict';
 
 var _vueEsm = require('vue/dist/vue.esm.js');
@@ -17734,37 +17777,49 @@ new _vueEsm2.default({
         return h(_index2.default);
     }
 });
-},{"vue/dist/vue.esm.js":8,"./index.vue":6}],0:[function(require,module,exports) {
-var global = (1, eval)('this');
+},{"vue/dist/vue.esm.js":8,"./index.vue":6}],15:[function(require,module,exports) {
+var global = arguments[3];
+var OVERLAY_ID = '__parcel__error__overlay__';
+
 var OldModule = module.bundle.Module;
-function Module(config) {
-  OldModule.call(this);
+
+function Module(moduleName) {
+  OldModule.call(this, moduleName);
   this.hot = {
+    data: module.bundle.hotData,
+    _acceptCallbacks: [],
+    _disposeCallbacks: [],
     accept: function (fn) {
-      this._acceptCallback = fn || function () {};
+      this._acceptCallbacks.push(fn || function () {});
     },
     dispose: function (fn) {
-      this._disposeCallback = fn;
-    },
-    data: config && config.hot
+      this._disposeCallbacks.push(fn);
+    }
   };
+
+  module.bundle.hotData = null;
 }
 
 module.bundle.Module = Module;
 
-if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
-  var ws = new WebSocket('ws://localhost:53568/');
-  ws.onmessage = function(event) {
+var parent = module.bundle.parent;
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
+  var hostname = '' || location.hostname;
+  var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '65369' + '/');
+  ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
+      console.clear();
+
       data.assets.forEach(function (asset) {
-        hmrApply(global.require, asset);
+        hmrApply(global.parcelRequire, asset);
       });
 
       data.assets.forEach(function (asset) {
         if (!asset.isNew) {
-          hmrAccept(global.require, asset.id);
+          hmrAccept(global.parcelRequire, asset.id);
         }
       });
     }
@@ -17772,18 +17827,47 @@ if (!module.bundle.parent && typeof WebSocket !== 'undefined') {
     if (data.type === 'reload') {
       ws.close();
       ws.onclose = function () {
-        window.location.reload();
-      }
+        location.reload();
+      };
     }
 
     if (data.type === 'error-resolved') {
       console.log('[parcel] ✨ Error resolved');
+
+      removeErrorOverlay();
     }
 
     if (data.type === 'error') {
-      console.error('[parcel] 🚨  ' + data.error.message + '\n' + 'data.error.stack');
+      console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
+
+      removeErrorOverlay();
+
+      var overlay = createErrorOverlay(data);
+      document.body.appendChild(overlay);
     }
   };
+}
+
+function removeErrorOverlay() {
+  var overlay = document.getElementById(OVERLAY_ID);
+  if (overlay) {
+    overlay.remove();
+  }
+}
+
+function createErrorOverlay(data) {
+  var overlay = document.createElement('div');
+  overlay.id = OVERLAY_ID;
+
+  // html encode message and stack trace
+  var message = document.createElement('div');
+  var stackTrace = document.createElement('pre');
+  message.innerText = data.error.message;
+  stackTrace.innerText = data.error.stack;
+
+  overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
+
+  return overlay;
 }
 
 function getParents(bundle, id) {
@@ -17798,7 +17882,7 @@ function getParents(bundle, id) {
   for (k in modules) {
     for (d in modules[k][1]) {
       dep = modules[k][1][d];
-      if (dep === id || (Array.isArray(dep) && dep[dep.length - 1] === id)) {
+      if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
         parents.push(+k);
       }
     }
@@ -17837,23 +17921,31 @@ function hmrAccept(bundle, id) {
   }
 
   var cached = bundle.cache[id];
-  if (cached && cached.hot._disposeCallback) {
-    cached.hot._disposeCallback();
+  bundle.hotData = {};
+  if (cached) {
+    cached.hot.data = bundle.hotData;
+  }
+
+  if (cached && cached.hot && cached.hot._disposeCallbacks.length) {
+    cached.hot._disposeCallbacks.forEach(function (cb) {
+      cb(bundle.hotData);
+    });
   }
 
   delete bundle.cache[id];
-  bundle(id, undefined, {
-    hot: true
-  });
+  bundle(id);
 
   cached = bundle.cache[id];
-  if (cached && cached.hot && cached.hot._acceptCallback) {
-    cached.hot._acceptCallback();
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    cached.hot._acceptCallbacks.forEach(function (cb) {
+      cb();
+    });
     return true;
   }
 
-  return getParents(global.require, id).some(function (id) {
-    return hmrAccept(global.require, id)
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[0,4])
+},{}]},{},[15,4], null)
+//# sourceMappingURL=/main.d558a4b1.map
