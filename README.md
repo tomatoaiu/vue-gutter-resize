@@ -24,15 +24,15 @@ import { columnGutter } from 'vue-gutter-resize'
 ```
 ### import esm module
 ```javascript
-import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.esm.js'
+import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.esm.js'
 ```
 ### import umd module
 ```javascript
-import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
+import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
 ```
 ### import common module
 ```javascript
-import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.js'
+import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
 ```
 
 ### Column Gutter

@@ -482,10 +482,10 @@ function install(Vue) {
   });
 }
 
+// Make it available as vue plugin
 var index = {
-  install: install,
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
+  install: install
 };
 
 export default index;
+export { columnGutter, rowGutter };

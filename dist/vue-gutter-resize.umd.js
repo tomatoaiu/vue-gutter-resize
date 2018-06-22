@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global.VueGutterResize = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.VueGutterResize = {})));
+}(this, (function (exports) { 'use strict';
 
   var MAX_DRAG_RANGE = 100;
   var MIN_DRAG_RANGE = 0;
@@ -488,12 +488,15 @@
     });
   }
 
+  // Make it available as vue plugin
   var index = {
-    install: install,
-    columnGutter: columnGutter,
-    rowGutter: rowGutter
+    install: install
   };
 
-  return index;
+  exports.columnGutter = columnGutter;
+  exports.rowGutter = rowGutter;
+  exports.default = index;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

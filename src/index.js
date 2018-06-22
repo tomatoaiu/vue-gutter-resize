@@ -12,8 +12,13 @@ function install (Vue) {
   })
 }
 
-export default { 
-  install,
+// Make it split and import
+export {
   columnGutter, 
   rowGutter
+}
+
+// Make it available as vue plugin
+export default { 
+  install
 }

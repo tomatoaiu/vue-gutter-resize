@@ -1,5 +1,7 @@
 'use strict';
 
+Object.defineProperty(exports, '__esModule', { value: true });
+
 var MAX_DRAG_RANGE = 100;
 var MIN_DRAG_RANGE = 0;
 
@@ -484,10 +486,11 @@ function install(Vue) {
   });
 }
 
+// Make it available as vue plugin
 var index = {
-  install: install,
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
+  install: install
 };
 
-module.exports = index;
+exports.columnGutter = columnGutter;
+exports.rowGutter = rowGutter;
+exports.default = index;
