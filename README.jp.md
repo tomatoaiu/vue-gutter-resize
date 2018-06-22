@@ -12,8 +12,30 @@ yarn add vue-gutter-resize
 # or
 npm i vue-gutter-resize
 ```
+### 全体import
+```javascript
+import Vue from 'vue/dist/vue.esm.js'
+import VueGutterResize from 'vue-gutter-resize'
+Vue.use(VueGutterResize)
+```
+### 必要な分だけimport
+```javascript
+import { columnGutter } from 'vue-gutter-resize'
+```
+### import esm module
+```javascript
+import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.esm.js'
+```
+### import umd module
+```javascript
+import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
+```
+### import common module
+```javascript
+import VueGutterResize from 'vue-gutter-resize/dist/vue-gutter-resize.js'
+```
 
-## Column Gutter
+### Column Gutter
 ```html
 <template>
   <div>
@@ -54,7 +76,7 @@ export default {
 </script>
 ```
 
-## Row Gutter
+### Row Gutter
 ```html
 <template>
   <div>
