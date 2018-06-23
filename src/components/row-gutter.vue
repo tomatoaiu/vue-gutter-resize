@@ -1,14 +1,8 @@
 <template>
   <section ref="gutter" :style="`width: ${width}; height: ${height};`">
       <div
-        :style="`height: calc(${rowArray[0]}% - ${gutterSize || gutterSizes[0]});`">
-        <div
-          class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[0]});`">
-          <section class="content">
-            {{ this.rowArray }}
-            <slot :name="`row-0`"></slot>
-          </section>
-        </div>
+        :style="`height: calc(${rowArray[0]}%);`">
+        <slot :name="`row-0`"></slot>
       </div>
       <div
         v-for="n in (row - 1)" :key="n"
@@ -19,10 +13,14 @@
           @drag="e => { drag(e, n - 1) }">
         </div>
         <div
+          v-if="n !== row - 1"
           class="pane pane-h" :style="`height: calc(${100}% - ${gutterSize || gutterSizes[n - 1]});`">
-          <section class="content">
-            <slot :name="`row-${n}`"></slot>
-          </section>
+          <slot :name="`row-${n}`"></slot>
+        </div>
+        <div
+          v-else
+          class="pane pane-h" :style="`height: calc(${100}%});`">
+          <slot :name="`row-${n}`"></slot>
         </div>
       </div>
   </section>
@@ -65,3 +63,24 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.pane {
+  height: 100%;
+}
+
+.pane-v {
+  float: left;
+}
+
+.gutter {
+  background: #ccc;
+  overflow: hidden;
+}
+
+.gutter-h {
+  width: 100%;
+  height: 2px;
+  cursor: ns-resize;
+}
+</style>

@@ -39,7 +39,7 @@ export default {
 </script>
 
 <style scoped>
-div section {
+/* div section {
   margin: 0;
   padding: 0;
 }
@@ -65,7 +65,7 @@ section {
 
 .pane-v {
   float: left;
-}
+} */
 
 .gutter {
   background: #ccc;
