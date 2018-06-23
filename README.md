@@ -128,10 +128,10 @@ export default {
 - gutterSize : String
   - all gutter width
 - gutterSizes : Array<String>
-  - each gutter width
+  - each gutter width
   - If gutterSize is specified, gutterSize takes precedence
 - color : String
-  - all gutter color
+  - all gutter color
 - colors : Array<String>
   - each gutter clolr
   - If color is specified, color takes precedence
@@ -160,10 +160,10 @@ Specified by col-n
 - gutterSize : String
   - all gutter height
 - gutterSizes : Array<String>
-  - each gutter height
+  - each gutter height
   - If gutterSize is specified, gutterSize takes precedence
 - color : String
-  - all gutterの color
+  - all gutterの color
 - colors : Array<String>
   - each gutter color
   - If color is specified, color takes precedence

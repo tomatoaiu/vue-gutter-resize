@@ -128,10 +128,10 @@ export default {
 - gutterSize : String
   - 全gutterの幅
 - gutterSizes : Array<String>
-  - それぞれのgutterの幅
+  - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
 - color : String
-  - 全gutterの色
+  - 全gutterの色
 - colors : Array<String>
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される
@@ -160,10 +160,10 @@ col-nで指定
 - gutterSize : String
   - 全gutterの幅
 - gutterSizes : Array<String>
-  - それぞれのgutterの幅
+  - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
 - color : String
-  - 全gutterの色
+  - 全gutterの色
 - colors : Array<String>
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される

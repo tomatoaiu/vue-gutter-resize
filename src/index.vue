@@ -18,9 +18,7 @@
 </template>
 
 <script>
-// import VueGutterResize from '../dist/vue-gutter-resize.esm.js'
-// import { columnGutter } from '../dist/vue-gutter-resize.umd.js'
-import { columnGutter } from '../dist/vue-gutter-resize.umd.min.js'
+import { columnGutter } from '../dist/vue-gutter-resize.esm.js'
 
 export default {
   data(){
