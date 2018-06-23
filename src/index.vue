@@ -1,39 +1,91 @@
 <template>
   <div>
-    <column-gutter
-      :column="column"
+    <row-gutter
+      :row="row"
       :width="'100%'"
-      :height="'600px'"
-      :gutterSizes="['4px', '1rem', '1em']"
-      :colors="colors"
-      @resize="resize">
-      <div slot="col-0">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tristique euismod turpis sit amet aliquet. Nulla tempus lectus quis dui rhoncus finibus. Nunc vestibulum viverra condimentum. Integer finibus justo et velit scelerisque iaculis. Fusce porta laoreet lacus sed placerat. Mauris egestas nec ligula ut pulvinar. Maecenas nec ullamcorper ante. Phasellus rutrum ac sem quis imperdiet. Sed ullamcorper, velit non aliquet convallis, mi dui elementum sapien, ut imperdiet nibh eros eu ex. Donec sed aliquam nunc. Duis sit amet porttitor lorem. Etiam pretium maximus gravida. Nam congue, mi ac gravida tincidunt, eros nibh ornare nibh, ut ultricies lorem erat nec tortor. Donec non semper quam.
+      :height="'100vh'"
+      :gutterSizes="['7px', '1rem']"
+      :colors="colors">
+      <div slot="row-0" class="row">
+        <column-gutter
+          :column="columnVue"
+          :width="'100%'"
+          :height="'100%'"
+          :gutterSize="'6px'"
+          :color="'green'">
+          <div class="column" slot="col-0">V</div>
+          <div class="column" slot="col-1">u</div>
+          <div class="column" slot="col-2">e</div>
+        </column-gutter>
       </div>
-      <div slot="col-1">1</div>
-      <div slot="col-2">2</div>
-      <div slot="col-3">3</div>
-    </column-gutter>
+      <div slot="row-1" class="row">
+        <column-gutter
+          :column="columnGutter"
+          :width="'100%'"
+          :height="'100%'"
+          :gutterSize="'10px'"
+          :color="'orange'">
+          <div class="column" slot="col-0">G</div>
+          <div class="column" slot="col-1">u</div>
+          <div class="column" slot="col-2">t</div>
+          <div class="column" slot="col-3">t</div>
+          <div class="column" slot="col-4">e</div>
+          <div class="column" slot="col-5">r</div>
+        </column-gutter>
+      </div>
+      <div slot="row-2" class="row">
+        <column-gutter
+          :column="columnResize"
+          :width="'100%'"
+          :height="'100%'"
+          :gutterSize="'4px'"
+          :color="'cyan'">
+          <div class="column" slot="col-0">R</div>
+          <div class="column" slot="col-1">e</div>
+          <div class="column" slot="col-2">s</div>
+          <div class="column" slot="col-3">i</div>
+          <div class="column" slot="col-4">z</div>
+          <div class="column" slot="col-5">e</div>
+        </column-gutter>
+      </div>
+    </row-gutter>
   </div>
 </template>
 
 <script>
-import { columnGutter } from '../dist/vue-gutter-resize.esm.js'
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
+import rowGutter from './components/row-gutter.vue'
+import columnGutter from './components/column-gutter.vue'
 
 export default {
-  data(){
+  name: 'app',
+  data () {
     return {
-      column: 4,
-      colors: ['red', 'blue', 'yellow']
-    }
-  },
-  methods: {
-    resize ({ col }) {
-      console.log(col) // current col size (etc... [25, 25, 25, 25]
+      row: 3,
+      colors: ['red', 'blue'],
+      columnVue: 3,
+      columnGutter: 6,
+      columnResize: 6,
     }
   },
   components: {
+    'row-gutter': rowGutter,
     'column-gutter': columnGutter
   }
 }
 </script>
+
+<style scoped>
+.row .column {
+  font-size: 12rem;
+}
+
+.column {
+  overflow: hidden;
+}
+
+.row {
+  height: 100%;
+  overflow: hidden;
+}
+</style>

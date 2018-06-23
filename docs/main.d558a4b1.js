@@ -10003,1513 +10003,68 @@ function getOuterHTML(el) {
 Vue.compile = compileToFunctions;
 
 exports.default = Vue;
-},{}],20:[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var MAX_DRAG_RANGE = 100;
-var MIN_DRAG_RANGE = 0;
-
-var script = {
-  // name: 'gutter',
-  data: function data() {
-    return {
-      gutterComponent: {
-        width: 0,
-        height: 0,
-        offsetX: 0,
-        offsetY: 0
-      }
-    };
-  },
-  mounted: function mounted() {
-    this.setPlaygroundRect();
-  },
-
-  methods: {
-    setPlaygroundRect: function setPlaygroundRect() {
-      var clientRect = this.$refs.gutter.getBoundingClientRect();
-      this.gutterComponent.width = clientRect.width;
-      this.gutterComponent.height = clientRect.height;
-      this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
-      this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
-    },
-    isDraggingGutter: function isDraggingGutter(e) {
-      return e && e.clientX > 0 && e.clientY > 0;
-    },
-    isGutterInRange: function isGutterInRange(size) {
-      return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
-    },
-    getCurrentMousePosition: function getCurrentMousePosition(e) {
-      return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
-    }
-  }
-};
-
-var __vue_script__ = script;
-
-/* template */
-
-var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
-/* style */
-var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
-  if (!inject) return;
-  inject("data-v-25230442_0", { source: "\ndiv section[data-v-25230442] {\n  margin: 0;\n  padding: 0;\n}\nsection[data-v-25230442] {\n  width: 100%;\n  height: 100vh;\n}\n.content[data-v-25230442] {\n  height: 100%;\n}\n.pane[data-v-25230442] {\n  overflow: hidden;\n  height: 100%;\n}\n.pane .content .preview[data-v-25230442] {\n  overflow: scroll;\n  height: 100%;\n}\n.pane-v[data-v-25230442] {\n  float: left;\n}\n.gutter[data-v-25230442] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-25230442] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-25230442] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
-};
-/* scoped */
-var __vue_scope_id__ = "data-v-25230442";
-/* module identifier */
-var __vue_module_identifier__ = undefined;
-/* functional template */
-var __vue_is_functional_template__ = undefined;
-/* component normalizer */
-function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/mixins/gutter.vue";
+},{}],26:[function(require,module,exports) {
+var bundleURL = null;
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
   }
 
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  {
-    var hook = void 0;
-    if (style) {
-      hook = function hook(context) {
-        style.call(this, createInjector(context));
-      };
-    }
-
-    if (hook !== undefined) {
-      if (component.functional) {
-        // register for functional component in vue file
-        var originalRender = component.render;
-        component.render = function renderWithStyleInjection(h, context) {
-          hook.call(context);
-          return originalRender(h, context);
-        };
-      } else {
-        // inject component registration as beforeCreate hook
-        var existing = component.beforeCreate;
-        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-      }
-    }
-  }
-
-  return component;
-}
-/* style inject */
-function __vue_create_injector__() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var gutter = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-//
-
-var script$1 = {
-  name: 'columnGutter',
-  mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
-  data: function data() {
-    return {
-      col: []
-    };
-  },
-  created: function created() {
-    for (var i = 0; i < this.column; i++) {
-      this.col.push(100 / this.column);
-    }
-  },
-
-  methods: {
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseX = _getCurrentMousePosit.mouseX;
-
-      if (this.isDraggingGutter(e)) {
-        var leftSize = mouseX / this.gutterComponent.width * 100;
-        if (this.isGutterInRange(leftSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.col[i];
-          }
-          var sum = this.col[index] + this.col[index + 1];
-          this.sum = sum;
-          this.col.splice(index, 1, leftSize - before);
-          this.col.splice(index + 1, 1, before + sum - leftSize);
-          this.$emit('resize', { col: this.col });
-        }
-      }
-    }
-  }
-};
-
-var __vue_script__$1 = script$1;
-
-/* template */
-var __vue_render__$1 = function __vue_render__() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("section", {
-    ref: "gutter",
-    style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, _vm._l(_vm.column - 1, function (n) {
-    return _c("div", { key: n }, [n == 1 ? _c("div", {
-      staticClass: "pane pane-v left",
-      style: "width: calc(" + _vm.col[n - 1] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + (n - 1))], 2)]) : _vm._e(), _vm._v(" "), _c("div", {
-      staticClass: "gutter gutter-v",
-      style: "width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; height: " + _vm.height + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-      attrs: { draggable: "true" },
-      on: {
-        drag: function drag(e) {
-          _vm.drag(e, n - 1);
-        }
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "pane pane-v",
-      style: "width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + n)], 2)])]);
-  }));
-};
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-
-var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 } : {};
-/* style */
-var __vue_inject_styles__$1 = undefined;
-/* scoped */
-var __vue_scope_id__$1 = undefined;
-/* module identifier */
-var __vue_module_identifier__$1 = undefined;
-/* functional template */
-var __vue_is_functional_template__$1 = false;
-/* component normalizer */
-function __vue_normalize__$1(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script === 'function' ? script.options : script) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/column-gutter.vue";
-  }
-
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  return component;
-}
-/* style inject */
-function __vue_create_injector__$1() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__$1.styles || (__vue_create_injector__$1.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var columnGutter = __vue_normalize__$1(__vue_template__$1, __vue_inject_styles__$1, typeof __vue_script__$1 === 'undefined' ? {} : __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, typeof __vue_create_injector__$1 !== 'undefined' ? __vue_create_injector__$1 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-//
-
-var script$2 = {
-  name: 'rowGutter',
-  mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
-  data: function data() {
-    return {
-      rowArray: []
-    };
-  },
-  created: function created() {
-    for (var i = 0; i < this.row; i++) {
-      this.rowArray.push(100 / this.row);
-    }
-  },
-
-  methods: {
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseY = _getCurrentMousePosit.mouseY;
-
-      if (this.isDraggingGutter(e)) {
-        var topSize = mouseY / this.gutterComponent.height * 100;
-        if (this.isGutterInRange(topSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.rowArray[i];
-          }
-          var sum = this.rowArray[index] + this.rowArray[index + 1];
-          this.rowArray.splice(index, 1, topSize - before);
-          this.rowArray.splice(index + 1, 1, before + sum - topSize);
-          this.$emit('resize', { row: this.rowArray });
-        }
-      }
-    }
-  }
-};
-
-var __vue_script__$2 = script$2;
-
-/* template */
-var __vue_render__$2 = function __vue_render__() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("section", {
-    ref: "gutter",
-    style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, [_c("div", {
-    style: "height: calc(" + _vm.rowArray[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("div", {
-    staticClass: "pane pane-h",
-    style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("section", { staticClass: "content" }, [_vm._v("\n          " + _vm._s(this.rowArray) + "\n          "), _vm._t("row-0")], 2)])]), _vm._v(" "), _vm._l(_vm.row - 1, function (n) {
-    return _c("div", {
-      key: n,
-      style: "height: calc(" + _vm.rowArray[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("div", {
-      staticClass: "gutter gutter-h",
-      style: "height: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; width: " + _vm.width + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-      attrs: { draggable: "true" },
-      on: {
-        drag: function drag(e) {
-          _vm.drag(e, n - 1);
-        }
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "pane pane-h",
-      style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("row-" + n)], 2)])]);
-  })], 2);
-};
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
-
-var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 } : {};
-/* style */
-var __vue_inject_styles__$2 = undefined;
-/* scoped */
-var __vue_scope_id__$2 = undefined;
-/* module identifier */
-var __vue_module_identifier__$2 = undefined;
-/* functional template */
-var __vue_is_functional_template__$2 = false;
-/* component normalizer */
-function __vue_normalize__$2(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script === 'function' ? script.options : script) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/row-gutter.vue";
-  }
-
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  return component;
-}
-/* style inject */
-function __vue_create_injector__$2() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__$2.styles || (__vue_create_injector__$2.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var rowGutter = __vue_normalize__$2(__vue_template__$2, __vue_inject_styles__$2, typeof __vue_script__$2 === 'undefined' ? {} : __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, typeof __vue_create_injector__$2 !== 'undefined' ? __vue_create_injector__$2 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-var Components = {
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
-};
-
-function install(Vue) {
-  Object.keys(Components).forEach(function (name) {
-    Vue.component(name, Components[name]);
-  });
+  return bundleURL;
 }
 
-// Make it available as vue plugin
-var index = {
-  install: install,
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
-};
-
-exports.default = index;
-exports.columnGutter = columnGutter;
-exports.rowGutter = rowGutter;
-},{}],21:[function(require,module,exports) {
-var define;
-var global = arguments[3];
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-(function (global, factory) {
-  (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : factory(global.VueGutterResize = {});
-})(this, function (exports) {
-  'use strict';
-
-  var MAX_DRAG_RANGE = 100;
-  var MIN_DRAG_RANGE = 0;
-
-  var script = {
-    // name: 'gutter',
-    data: function data() {
-      return {
-        gutterComponent: {
-          width: 0,
-          height: 0,
-          offsetX: 0,
-          offsetY: 0
-        }
-      };
-    },
-    mounted: function mounted() {
-      this.setPlaygroundRect();
-    },
-
-    methods: {
-      setPlaygroundRect: function setPlaygroundRect() {
-        var clientRect = this.$refs.gutter.getBoundingClientRect();
-        this.gutterComponent.width = clientRect.width;
-        this.gutterComponent.height = clientRect.height;
-        this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
-        this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
-      },
-      isDraggingGutter: function isDraggingGutter(e) {
-        return e && e.clientX > 0 && e.clientY > 0;
-      },
-      isGutterInRange: function isGutterInRange(size) {
-        return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
-      },
-      getCurrentMousePosition: function getCurrentMousePosition(e) {
-        return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
-      }
-    }
-  };
-
-  var __vue_script__ = script;
-
-  /* template */
-
-  var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
-  /* style */
-  var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
-    if (!inject) return;
-    inject("data-v-25230442_0", { source: "\ndiv section[data-v-25230442] {\n  margin: 0;\n  padding: 0;\n}\nsection[data-v-25230442] {\n  width: 100%;\n  height: 100vh;\n}\n.content[data-v-25230442] {\n  height: 100%;\n}\n.pane[data-v-25230442] {\n  overflow: hidden;\n  height: 100%;\n}\n.pane .content .preview[data-v-25230442] {\n  overflow: scroll;\n  height: 100%;\n}\n.pane-v[data-v-25230442] {\n  float: left;\n}\n.gutter[data-v-25230442] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-25230442] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-25230442] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
-  };
-  /* scoped */
-  var __vue_scope_id__ = "data-v-25230442";
-  /* module identifier */
-  var __vue_module_identifier__ = undefined;
-  /* functional template */
-  var __vue_is_functional_template__ = undefined;
-  /* component normalizer */
-  function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
-
-    {
-      component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/mixins/gutter.vue";
-    }
-
-    if (!component.render) {
-      component.render = template.render;
-      component.staticRenderFns = template.staticRenderFns;
-      component._compiled = true;
-
-      if (functional) component.functional = true;
-    }
-
-    component._scopeId = scope;
-
-    {
-      var hook = void 0;
-      if (style) {
-        hook = function hook(context) {
-          style.call(this, createInjector(context));
-        };
-      }
-
-      if (hook !== undefined) {
-        if (component.functional) {
-          // register for functional component in vue file
-          var originalRender = component.render;
-          component.render = function renderWithStyleInjection(h, context) {
-            hook.call(context);
-            return originalRender(h, context);
-          };
-        } else {
-          // inject component registration as beforeCreate hook
-          var existing = component.beforeCreate;
-          component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-      }
-    }
-
-    return component;
-  }
-  /* style inject */
-  function __vue_create_injector__() {
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
-    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-    return function addStyle(id, css) {
-      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-      if (!style.ids.includes(id)) {
-        var code = css.source;
-        var index = style.ids.length;
-
-        style.ids.push(id);
-
-        if (isOldIE) {
-          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-        }
-
-        if (!style.element) {
-          var el = style.element = document.createElement('style');
-          el.type = 'text/css';
-
-          if (css.media) el.setAttribute('media', css.media);
-          if (isOldIE) {
-            el.setAttribute('data-group', group);
-            el.setAttribute('data-next-index', '0');
-          }
-
-          head.appendChild(el);
-        }
-
-        if (isOldIE) {
-          index = parseInt(style.element.getAttribute('data-next-index'));
-          style.element.setAttribute('data-next-index', index + 1);
-        }
-
-        if (style.element.styleSheet) {
-          style.parts.push(code);
-          style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-        } else {
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) style.element.removeChild(nodes[index]);
-          if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-        }
-      }
-    };
-  }
-  /* style inject SSR */
-
-  var gutter = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-  //
-
-  var script$1 = {
-    name: 'columnGutter',
-    mixins: [gutter],
-    props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
-    data: function data() {
-      return {
-        col: []
-      };
-    },
-    created: function created() {
-      for (var i = 0; i < this.column; i++) {
-        this.col.push(100 / this.column);
-      }
-    },
-
-    methods: {
-      drag: function drag(e, index) {
-        var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-            mouseX = _getCurrentMousePosit.mouseX;
-
-        if (this.isDraggingGutter(e)) {
-          var leftSize = mouseX / this.gutterComponent.width * 100;
-          if (this.isGutterInRange(leftSize)) {
-            var before = 0;
-            for (var i = 0; i < index; i++) {
-              before += this.col[i];
-            }
-            var sum = this.col[index] + this.col[index + 1];
-            this.sum = sum;
-            this.col.splice(index, 1, leftSize - before);
-            this.col.splice(index + 1, 1, before + sum - leftSize);
-            this.$emit('resize', { col: this.col });
-          }
-        }
-      }
-    }
-  };
-
-  var __vue_script__$1 = script$1;
-
-  /* template */
-  var __vue_render__$1 = function __vue_render__() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("section", {
-      ref: "gutter",
-      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-    }, _vm._l(_vm.column - 1, function (n) {
-      return _c("div", { key: n }, [n == 1 ? _c("div", {
-        staticClass: "pane pane-v left",
-        style: "width: calc(" + _vm.col[n - 1] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-      }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + (n - 1))], 2)]) : _vm._e(), _vm._v(" "), _c("div", {
-        staticClass: "gutter gutter-v",
-        style: "width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; height: " + _vm.height + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-        attrs: { draggable: "true" },
-        on: {
-          drag: function drag(e) {
-            _vm.drag(e, n - 1);
-          }
-        }
-      }), _vm._v(" "), _c("div", {
-        staticClass: "pane pane-v",
-        style: "width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n]) + ");"
-      }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + n)], 2)])]);
-    }));
-  };
-  var __vue_staticRenderFns__$1 = [];
-  __vue_render__$1._withStripped = true;
-
-  var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 } : {};
-  /* style */
-  var __vue_inject_styles__$1 = undefined;
-  /* scoped */
-  var __vue_scope_id__$1 = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$1 = undefined;
-  /* functional template */
-  var __vue_is_functional_template__$1 = false;
-  /* component normalizer */
-  function __vue_normalize__$1(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    var component = (typeof script === 'function' ? script.options : script) || {};
-
-    {
-      component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/column-gutter.vue";
-    }
-
-    if (!component.render) {
-      component.render = template.render;
-      component.staticRenderFns = template.staticRenderFns;
-      component._compiled = true;
-
-      if (functional) component.functional = true;
-    }
-
-    component._scopeId = scope;
-
-    return component;
-  }
-  /* style inject */
-  function __vue_create_injector__$1() {
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var styles = __vue_create_injector__$1.styles || (__vue_create_injector__$1.styles = {});
-    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-    return function addStyle(id, css) {
-      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-      if (!style.ids.includes(id)) {
-        var code = css.source;
-        var index = style.ids.length;
-
-        style.ids.push(id);
-
-        if (isOldIE) {
-          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-        }
-
-        if (!style.element) {
-          var el = style.element = document.createElement('style');
-          el.type = 'text/css';
-
-          if (css.media) el.setAttribute('media', css.media);
-          if (isOldIE) {
-            el.setAttribute('data-group', group);
-            el.setAttribute('data-next-index', '0');
-          }
-
-          head.appendChild(el);
-        }
-
-        if (isOldIE) {
-          index = parseInt(style.element.getAttribute('data-next-index'));
-          style.element.setAttribute('data-next-index', index + 1);
-        }
-
-        if (style.element.styleSheet) {
-          style.parts.push(code);
-          style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-        } else {
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) style.element.removeChild(nodes[index]);
-          if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-        }
-      }
-    };
-  }
-  /* style inject SSR */
-
-  var columnGutter = __vue_normalize__$1(__vue_template__$1, __vue_inject_styles__$1, typeof __vue_script__$1 === 'undefined' ? {} : __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, typeof __vue_create_injector__$1 !== 'undefined' ? __vue_create_injector__$1 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-  //
-
-  var script$2 = {
-    name: 'rowGutter',
-    mixins: [gutter],
-    props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
-    data: function data() {
-      return {
-        rowArray: []
-      };
-    },
-    created: function created() {
-      for (var i = 0; i < this.row; i++) {
-        this.rowArray.push(100 / this.row);
-      }
-    },
-
-    methods: {
-      drag: function drag(e, index) {
-        var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-            mouseY = _getCurrentMousePosit.mouseY;
-
-        if (this.isDraggingGutter(e)) {
-          var topSize = mouseY / this.gutterComponent.height * 100;
-          if (this.isGutterInRange(topSize)) {
-            var before = 0;
-            for (var i = 0; i < index; i++) {
-              before += this.rowArray[i];
-            }
-            var sum = this.rowArray[index] + this.rowArray[index + 1];
-            this.rowArray.splice(index, 1, topSize - before);
-            this.rowArray.splice(index + 1, 1, before + sum - topSize);
-            this.$emit('resize', { row: this.rowArray });
-          }
-        }
-      }
-    }
-  };
-
-  var __vue_script__$2 = script$2;
-
-  /* template */
-  var __vue_render__$2 = function __vue_render__() {
-    var _vm = this;
-    var _h = _vm.$createElement;
-    var _c = _vm._self._c || _h;
-    return _c("section", {
-      ref: "gutter",
-      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-    }, [_c("div", {
-      style: "height: calc(" + _vm.rowArray[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-    }, [_c("div", {
-      staticClass: "pane pane-h",
-      style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._v("\n          " + _vm._s(this.rowArray) + "\n          "), _vm._t("row-0")], 2)])]), _vm._v(" "), _vm._l(_vm.row - 1, function (n) {
-      return _c("div", {
-        key: n,
-        style: "height: calc(" + _vm.rowArray[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-      }, [_c("div", {
-        staticClass: "gutter gutter-h",
-        style: "height: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; width: " + _vm.width + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-        attrs: { draggable: "true" },
-        on: {
-          drag: function drag(e) {
-            _vm.drag(e, n - 1);
-          }
-        }
-      }), _vm._v(" "), _c("div", {
-        staticClass: "pane pane-h",
-        style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-      }, [_c("section", { staticClass: "content" }, [_vm._t("row-" + n)], 2)])]);
-    })], 2);
-  };
-  var __vue_staticRenderFns__$2 = [];
-  __vue_render__$2._withStripped = true;
-
-  var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 } : {};
-  /* style */
-  var __vue_inject_styles__$2 = undefined;
-  /* scoped */
-  var __vue_scope_id__$2 = undefined;
-  /* module identifier */
-  var __vue_module_identifier__$2 = undefined;
-  /* functional template */
-  var __vue_is_functional_template__$2 = false;
-  /* component normalizer */
-  function __vue_normalize__$2(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-    var component = (typeof script === 'function' ? script.options : script) || {};
-
-    {
-      component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/row-gutter.vue";
-    }
-
-    if (!component.render) {
-      component.render = template.render;
-      component.staticRenderFns = template.staticRenderFns;
-      component._compiled = true;
-
-      if (functional) component.functional = true;
-    }
-
-    component._scopeId = scope;
-
-    return component;
-  }
-  /* style inject */
-  function __vue_create_injector__$2() {
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var styles = __vue_create_injector__$2.styles || (__vue_create_injector__$2.styles = {});
-    var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-    return function addStyle(id, css) {
-      if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-      var group = isOldIE ? css.media || 'default' : id;
-      var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-      if (!style.ids.includes(id)) {
-        var code = css.source;
-        var index = style.ids.length;
-
-        style.ids.push(id);
-
-        if (isOldIE) {
-          style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-        }
-
-        if (!style.element) {
-          var el = style.element = document.createElement('style');
-          el.type = 'text/css';
-
-          if (css.media) el.setAttribute('media', css.media);
-          if (isOldIE) {
-            el.setAttribute('data-group', group);
-            el.setAttribute('data-next-index', '0');
-          }
-
-          head.appendChild(el);
-        }
-
-        if (isOldIE) {
-          index = parseInt(style.element.getAttribute('data-next-index'));
-          style.element.setAttribute('data-next-index', index + 1);
-        }
-
-        if (style.element.styleSheet) {
-          style.parts.push(code);
-          style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-        } else {
-          var textNode = document.createTextNode(code);
-          var nodes = style.element.childNodes;
-          if (nodes[index]) style.element.removeChild(nodes[index]);
-          if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-        }
-      }
-    };
-  }
-  /* style inject SSR */
-
-  var rowGutter = __vue_normalize__$2(__vue_template__$2, __vue_inject_styles__$2, typeof __vue_script__$2 === 'undefined' ? {} : __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, typeof __vue_create_injector__$2 !== 'undefined' ? __vue_create_injector__$2 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-  var Components = {
-    columnGutter: columnGutter,
-    rowGutter: rowGutter
-  };
-
-  function install(Vue) {
-    Object.keys(Components).forEach(function (name) {
-      Vue.component(name, Components[name]);
-    });
-  }
-
-  // Make it available as vue plugin
-  var index = {
-    install: install,
-    columnGutter: columnGutter,
-    rowGutter: rowGutter
-  };
-
-  exports.columnGutter = columnGutter;
-  exports.rowGutter = rowGutter;
-  exports.default = index;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
-});
-},{}],22:[function(require,module,exports) {
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var MAX_DRAG_RANGE = 100;
-var MIN_DRAG_RANGE = 0;
-
-var script = {
-  // name: 'gutter',
-  data: function data() {
-    return {
-      gutterComponent: {
-        width: 0,
-        height: 0,
-        offsetX: 0,
-        offsetY: 0
-      }
-    };
-  },
-  mounted: function mounted() {
-    this.setPlaygroundRect();
-  },
-
-  methods: {
-    setPlaygroundRect: function setPlaygroundRect() {
-      var clientRect = this.$refs.gutter.getBoundingClientRect();
-      this.gutterComponent.width = clientRect.width;
-      this.gutterComponent.height = clientRect.height;
-      this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
-      this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
-    },
-    isDraggingGutter: function isDraggingGutter(e) {
-      return e && e.clientX > 0 && e.clientY > 0;
-    },
-    isGutterInRange: function isGutterInRange(size) {
-      return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
-    },
-    getCurrentMousePosition: function getCurrentMousePosition(e) {
-      return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
-    }
-  }
-};
-
-var __vue_script__ = script;
-
-/* template */
-
-var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
-/* style */
-var __vue_inject_styles__ = function __vue_inject_styles__(inject) {
-  if (!inject) return;
-  inject("data-v-25230442_0", { source: "\ndiv section[data-v-25230442] {\n  margin: 0;\n  padding: 0;\n}\nsection[data-v-25230442] {\n  width: 100%;\n  height: 100vh;\n}\n.content[data-v-25230442] {\n  height: 100%;\n}\n.pane[data-v-25230442] {\n  overflow: hidden;\n  height: 100%;\n}\n.pane .content .preview[data-v-25230442] {\n  overflow: scroll;\n  height: 100%;\n}\n.pane-v[data-v-25230442] {\n  float: left;\n}\n.gutter[data-v-25230442] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-25230442] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-25230442] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
-};
-/* scoped */
-var __vue_scope_id__ = "data-v-25230442";
-/* module identifier */
-var __vue_module_identifier__ = undefined;
-/* functional template */
-var __vue_is_functional_template__ = undefined;
-/* component normalizer */
-function __vue_normalize__(template, style, script$$1, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script$$1 === 'function' ? script$$1.options : script$$1) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/mixins/gutter.vue";
-  }
-
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  {
-    var hook = void 0;
-    if (style) {
-      hook = function hook(context) {
-        style.call(this, createInjector(context));
-      };
-    }
-
-    if (hook !== undefined) {
-      if (component.functional) {
-        // register for functional component in vue file
-        var originalRender = component.render;
-        component.render = function renderWithStyleInjection(h, context) {
-          hook.call(context);
-          return originalRender(h, context);
-        };
-      } else {
-        // inject component registration as beforeCreate hook
-        var existing = component.beforeCreate;
-        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-      }
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
+    if (matches) {
+      return getBaseURL(matches[0]);
     }
   }
 
-  return component;
-}
-/* style inject */
-function __vue_create_injector__() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__.styles || (__vue_create_injector__.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var gutter = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof __vue_script__ === 'undefined' ? {} : __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, typeof __vue_create_injector__ !== 'undefined' ? __vue_create_injector__ : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-//
-
-var script$1 = {
-  name: 'columnGutter',
-  mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
-  data: function data() {
-    return {
-      col: []
-    };
-  },
-  created: function created() {
-    for (var i = 0; i < this.column; i++) {
-      this.col.push(100 / this.column);
-    }
-  },
-
-  methods: {
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseX = _getCurrentMousePosit.mouseX;
-
-      if (this.isDraggingGutter(e)) {
-        var leftSize = mouseX / this.gutterComponent.width * 100;
-        if (this.isGutterInRange(leftSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.col[i];
-          }
-          var sum = this.col[index] + this.col[index + 1];
-          this.sum = sum;
-          this.col.splice(index, 1, leftSize - before);
-          this.col.splice(index + 1, 1, before + sum - leftSize);
-          this.$emit('resize', { col: this.col });
-        }
-      }
-    }
-  }
-};
-
-var __vue_script__$1 = script$1;
-
-/* template */
-var __vue_render__$1 = function __vue_render__() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("section", {
-    ref: "gutter",
-    style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, _vm._l(_vm.column - 1, function (n) {
-    return _c("div", { key: n }, [n == 1 ? _c("div", {
-      staticClass: "pane pane-v left",
-      style: "width: calc(" + _vm.col[n - 1] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + (n - 1))], 2)]) : _vm._e(), _vm._v(" "), _c("div", {
-      staticClass: "gutter gutter-v",
-      style: "width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; height: " + _vm.height + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-      attrs: { draggable: "true" },
-      on: {
-        drag: function drag(e) {
-          _vm.drag(e, n - 1);
-        }
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "pane pane-v",
-      style: "width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + n)], 2)])]);
-  }));
-};
-var __vue_staticRenderFns__$1 = [];
-__vue_render__$1._withStripped = true;
-
-var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 } : {};
-/* style */
-var __vue_inject_styles__$1 = undefined;
-/* scoped */
-var __vue_scope_id__$1 = undefined;
-/* module identifier */
-var __vue_module_identifier__$1 = undefined;
-/* functional template */
-var __vue_is_functional_template__$1 = false;
-/* component normalizer */
-function __vue_normalize__$1(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script === 'function' ? script.options : script) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/column-gutter.vue";
-  }
-
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  return component;
-}
-/* style inject */
-function __vue_create_injector__$1() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__$1.styles || (__vue_create_injector__$1.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var columnGutter = __vue_normalize__$1(__vue_template__$1, __vue_inject_styles__$1, typeof __vue_script__$1 === 'undefined' ? {} : __vue_script__$1, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, typeof __vue_create_injector__$1 !== 'undefined' ? __vue_create_injector__$1 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-//
-
-var script$2 = {
-  name: 'rowGutter',
-  mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
-  data: function data() {
-    return {
-      rowArray: []
-    };
-  },
-  created: function created() {
-    for (var i = 0; i < this.row; i++) {
-      this.rowArray.push(100 / this.row);
-    }
-  },
-
-  methods: {
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseY = _getCurrentMousePosit.mouseY;
-
-      if (this.isDraggingGutter(e)) {
-        var topSize = mouseY / this.gutterComponent.height * 100;
-        if (this.isGutterInRange(topSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.rowArray[i];
-          }
-          var sum = this.rowArray[index] + this.rowArray[index + 1];
-          this.rowArray.splice(index, 1, topSize - before);
-          this.rowArray.splice(index + 1, 1, before + sum - topSize);
-          this.$emit('resize', { row: this.rowArray });
-        }
-      }
-    }
-  }
-};
-
-var __vue_script__$2 = script$2;
-
-/* template */
-var __vue_render__$2 = function __vue_render__() {
-  var _vm = this;
-  var _h = _vm.$createElement;
-  var _c = _vm._self._c || _h;
-  return _c("section", {
-    ref: "gutter",
-    style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, [_c("div", {
-    style: "height: calc(" + _vm.rowArray[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("div", {
-    staticClass: "pane pane-h",
-    style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("section", { staticClass: "content" }, [_vm._v("\n          " + _vm._s(this.rowArray) + "\n          "), _vm._t("row-0")], 2)])]), _vm._v(" "), _vm._l(_vm.row - 1, function (n) {
-    return _c("div", {
-      key: n,
-      style: "height: calc(" + _vm.rowArray[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("div", {
-      staticClass: "gutter gutter-h",
-      style: "height: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; width: " + _vm.width + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
-      attrs: { draggable: "true" },
-      on: {
-        drag: function drag(e) {
-          _vm.drag(e, n - 1);
-        }
-      }
-    }), _vm._v(" "), _c("div", {
-      staticClass: "pane pane-h",
-      style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("row-" + n)], 2)])]);
-  })], 2);
-};
-var __vue_staticRenderFns__$2 = [];
-__vue_render__$2._withStripped = true;
-
-var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 } : {};
-/* style */
-var __vue_inject_styles__$2 = undefined;
-/* scoped */
-var __vue_scope_id__$2 = undefined;
-/* module identifier */
-var __vue_module_identifier__$2 = undefined;
-/* functional template */
-var __vue_is_functional_template__$2 = false;
-/* component normalizer */
-function __vue_normalize__$2(template, style, script, scope, functional, moduleIdentifier, createInjector, createInjectorSSR) {
-  var component = (typeof script === 'function' ? script.options : script) || {};
-
-  {
-    component.__file = "/Users/tobashunsuke/development/vue-gutter-resize/src/components/row-gutter.vue";
-  }
-
-  if (!component.render) {
-    component.render = template.render;
-    component.staticRenderFns = template.staticRenderFns;
-    component._compiled = true;
-
-    if (functional) component.functional = true;
-  }
-
-  component._scopeId = scope;
-
-  return component;
-}
-/* style inject */
-function __vue_create_injector__$2() {
-  var head = document.head || document.getElementsByTagName('head')[0];
-  var styles = __vue_create_injector__$2.styles || (__vue_create_injector__$2.styles = {});
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
-  return function addStyle(id, css) {
-    if (document.querySelector('style[data-vue-ssr-id~="' + id + '"]')) return; // SSR styles are present.
-
-    var group = isOldIE ? css.media || 'default' : id;
-    var style = styles[group] || (styles[group] = { ids: [], parts: [], element: undefined });
-
-    if (!style.ids.includes(id)) {
-      var code = css.source;
-      var index = style.ids.length;
-
-      style.ids.push(id);
-
-      if (isOldIE) {
-        style.element = style.element || document.querySelector('style[data-group=' + group + ']');
-      }
-
-      if (!style.element) {
-        var el = style.element = document.createElement('style');
-        el.type = 'text/css';
-
-        if (css.media) el.setAttribute('media', css.media);
-        if (isOldIE) {
-          el.setAttribute('data-group', group);
-          el.setAttribute('data-next-index', '0');
-        }
-
-        head.appendChild(el);
-      }
-
-      if (isOldIE) {
-        index = parseInt(style.element.getAttribute('data-next-index'));
-        style.element.setAttribute('data-next-index', index + 1);
-      }
-
-      if (style.element.styleSheet) {
-        style.parts.push(code);
-        style.element.styleSheet.cssText = style.parts.filter(Boolean).join('\n');
-      } else {
-        var textNode = document.createTextNode(code);
-        var nodes = style.element.childNodes;
-        if (nodes[index]) style.element.removeChild(nodes[index]);
-        if (nodes.length) style.element.insertBefore(textNode, nodes[index]);else style.element.appendChild(textNode);
-      }
-    }
-  };
-}
-/* style inject SSR */
-
-var rowGutter = __vue_normalize__$2(__vue_template__$2, __vue_inject_styles__$2, typeof __vue_script__$2 === 'undefined' ? {} : __vue_script__$2, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, typeof __vue_create_injector__$2 !== 'undefined' ? __vue_create_injector__$2 : function () {}, typeof __vue_create_injector_ssr__ !== 'undefined' ? __vue_create_injector_ssr__ : function () {});
-
-var Components = {
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
-};
-
-function install(Vue) {
-  Object.keys(Components).forEach(function (name) {
-    Vue.component(name, Components[name]);
-  });
+  return '/';
 }
 
-// Make it available as vue plugin
-var index = {
-  install: install,
-  columnGutter: columnGutter,
-  rowGutter: rowGutter
-};
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
 
-exports.columnGutter = columnGutter;
-exports.rowGutter = rowGutter;
-exports.default = index;
-},{}],15:[function(require,module,exports) {
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],25:[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+  newLink.onload = function () {
+    link.remove();
+  };
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":26}],15:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -19032,24 +17587,493 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-},{}],6:[function(require,module,exports) {
+},{}],24:[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var MAX_DRAG_RANGE = 100;
+var MIN_DRAG_RANGE = 0;
+
+exports.default = {
+  // name: 'gutter',
+  data: function data() {
+    return {
+      gutterComponent: {
+        width: 0,
+        height: 0,
+        offsetX: 0,
+        offsetY: 0
+      }
+    };
+  },
+  mounted: function mounted() {
+    this.setPlaygroundRect();
+  },
+
+  methods: {
+    setPlaygroundRect: function setPlaygroundRect() {
+      var clientRect = this.$refs.gutter.getBoundingClientRect();
+      this.gutterComponent.width = clientRect.width;
+      this.gutterComponent.height = clientRect.height;
+      this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
+      this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
+    },
+    isDraggingGutter: function isDraggingGutter(e) {
+      return e && e.clientX > 0 && e.clientY > 0;
+    },
+    isGutterInRange: function isGutterInRange(size) {
+      return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
+    },
+    getCurrentMousePosition: function getCurrentMousePosition(e) {
+      return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
+    }
+  }
+};
+        var $7b5295 = exports.default || module.exports;
+      
+      if (typeof $7b5295 === 'function') {
+        $7b5295 = $7b5295.options;
+      }
+    
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$7b5295', $7b5295);
+          } else {
+            api.reload('$7b5295', $7b5295);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"_css_loader":25,"vue-hot-reload-api":15,"vue":13}],22:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _vueGutterResizeEsm = require('../dist/vue-gutter-resize.esm.js');
+var _gutter = require('../mixins/gutter.vue');
 
-var _vueGutterResizeEsm2 = _interopRequireDefault(_vueGutterResizeEsm);
+var _gutter2 = _interopRequireDefault(_gutter);
 
-var _vueGutterResizeUmd = require('../dist/vue-gutter-resize.umd.js');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _vueGutterResizeUmd2 = _interopRequireDefault(_vueGutterResizeUmd);
+exports.default = {
+  name: 'rowGutter',
+  mixins: [_gutter2.default],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
+  data: function data() {
+    return {
+      rowArray: []
+    };
+  },
+  created: function created() {
+    for (var i = 0; i < this.row; i++) {
+      this.rowArray.push(100 / this.row);
+    }
+  },
 
-var _vueGutterResize = require('../dist/vue-gutter-resize.js');
+  methods: {
+    drag: function drag(e, index) {
+      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
+          mouseY = _getCurrentMousePosit.mouseY;
 
-var _vueGutterResize2 = _interopRequireDefault(_vueGutterResize);
+      if (this.isDraggingGutter(e)) {
+        var topSize = mouseY / this.gutterComponent.height * 100;
+        if (this.isGutterInRange(topSize)) {
+          var before = 0;
+          for (var i = 0; i < index; i++) {
+            before += this.rowArray[i];
+          }
+          var sum = this.rowArray[index] + this.rowArray[index + 1];
+          this.rowArray.splice(index, 1, topSize - before);
+          this.rowArray.splice(index + 1, 1, before + sum - topSize);
+          this.$emit('resize', { row: this.rowArray });
+        }
+      }
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+        var $a38399 = exports.default || module.exports;
+      
+      if (typeof $a38399 === 'function') {
+        $a38399 = $a38399.options;
+      }
+    
+        /* template */
+        Object.assign($a38399, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      ref: "gutter",
+      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
+    },
+    [
+      _c(
+        "div",
+        { style: "height: calc(" + _vm.rowArray[0] + "%);" },
+        [_vm._t("row-0")],
+        2
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.row - 1, function(n) {
+        return _c(
+          "div",
+          {
+            key: n,
+            style:
+              "height: calc(" +
+              _vm.rowArray[n] +
+              "% - " +
+              (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
+              ");"
+          },
+          [
+            _c("div", {
+              staticClass: "gutter gutter-h",
+              style:
+                "height: " +
+                (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
+                "; width: " +
+                _vm.width +
+                "; background-color: " +
+                (_vm.color || _vm.colors[n - 1]) +
+                ";",
+              attrs: { draggable: "true" },
+              on: {
+                drag: function(e) {
+                  _vm.drag(e, n - 1)
+                }
+              }
+            }),
+            _vm._v(" "),
+            n !== _vm.row - 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "pane pane-h",
+                    style:
+                      "height: calc(" +
+                      100 +
+                      "% - " +
+                      (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
+                      ");"
+                  },
+                  [_vm._t("row-" + n)],
+                  2
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "pane pane-h",
+                    style: "height: calc(" + 100 + "%});"
+                  },
+                  [_vm._t("row-" + n)],
+                  2
+                )
+          ]
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-a38399",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$a38399', $a38399);
+          } else {
+            api.reload('$a38399', $a38399);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"../mixins/gutter.vue":24,"_css_loader":25,"vue-hot-reload-api":15,"vue":13}],23:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _gutter = require('../mixins/gutter.vue');
+
+var _gutter2 = _interopRequireDefault(_gutter);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  name: 'columnGutter',
+  mixins: [_gutter2.default],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
+  data: function data() {
+    return {
+      col: []
+    };
+  },
+  created: function created() {
+    for (var i = 0; i < this.column; i++) {
+      this.col.push(100 / this.column);
+    }
+  },
+
+  methods: {
+    drag: function drag(e, index) {
+      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
+          mouseX = _getCurrentMousePosit.mouseX;
+
+      if (this.isDraggingGutter(e)) {
+        var leftSize = mouseX / this.gutterComponent.width * 100;
+        if (this.isGutterInRange(leftSize)) {
+          var before = 0;
+          for (var i = 0; i < index; i++) {
+            before += this.col[i];
+          }
+          var sum = this.col[index] + this.col[index + 1];
+          this.col.splice(index, 1, leftSize - before);
+          this.col.splice(index + 1, 1, before + sum - leftSize);
+          this.$emit('resize', { col: this.col });
+        }
+      }
+    }
+  }
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+        var $bf9d58 = exports.default || module.exports;
+      
+      if (typeof $bf9d58 === 'function') {
+        $bf9d58 = $bf9d58.options;
+      }
+    
+        /* template */
+        Object.assign($bf9d58, (function () {
+          var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "section",
+    {
+      ref: "gutter",
+      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "pane pane-v left",
+          style:
+            "height: 100%; width: calc(" +
+            _vm.col[0] +
+            "% - " +
+            (_vm.gutterSize || _vm.gutterSizes[0]) +
+            ");"
+        },
+        [_vm._t("col-" + 0)],
+        2
+      ),
+      _vm._v(" "),
+      _vm._l(_vm.column - 1, function(n) {
+        return _c(
+          "div",
+          {
+            key: n,
+            style:
+              "display: inline-block; height: 100%; width: calc(" +
+              _vm.col[n] +
+              "% - " +
+              (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
+              ");"
+          },
+          [
+            _c("div", {
+              staticClass: "gutter gutter-v",
+              style:
+                "width: " +
+                (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
+                "; height: " +
+                _vm.height +
+                "; background-color: " +
+                (_vm.color || _vm.colors[n - 1]) +
+                ";",
+              attrs: { draggable: "true" },
+              on: {
+                drag: function(e) {
+                  _vm.drag(e, n - 1)
+                }
+              }
+            }),
+            _vm._v(" "),
+            n !== _vm.column - 1
+              ? _c(
+                  "div",
+                  {
+                    staticClass: "pane pane-v",
+                    style:
+                      "height: 100%; width: calc(" +
+                      100 +
+                      "% - " +
+                      (_vm.gutterSize || _vm.gutterSizes[n - 1])
+                  },
+                  [_vm._t("col-" + n)],
+                  2
+                )
+              : _c(
+                  "div",
+                  {
+                    staticClass: "pane pane-v",
+                    style: "height: 100%; width: calc(" + 100 + "%}"
+                  },
+                  [_vm._t("col-" + n)],
+                  2
+                )
+          ]
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+          return {
+            render: render,
+            staticRenderFns: staticRenderFns,
+            _compiled: true,
+            _scopeId: "data-v-bf9d58",
+            functional: undefined
+          };
+        })());
+      
+    /* hot reload */
+    (function () {
+      if (module.hot) {
+        var api = require('vue-hot-reload-api');
+        api.install(require('vue'));
+        if (api.compatible) {
+          module.hot.accept();
+          if (!module.hot.data) {
+            api.createRecord('$bf9d58', $bf9d58);
+          } else {
+            api.reload('$bf9d58', $bf9d58);
+          }
+        }
+
+        
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
+      }
+    })();
+},{"../mixins/gutter.vue":24,"_css_loader":25,"vue-hot-reload-api":15,"vue":13}],6:[function(require,module,exports) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _rowGutter = require('./components/row-gutter.vue');
+
+var _rowGutter2 = _interopRequireDefault(_rowGutter);
+
+var _columnGutter = require('./components/column-gutter.vue');
+
+var _columnGutter2 = _interopRequireDefault(_columnGutter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -19072,26 +18096,58 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-console.log(_vueGutterResizeEsm2.default, _vueGutterResizeUmd2.default, _vueGutterResize2.default, _vueGutterResizeEsm.esmG, _vueGutterResizeUmd.esmU, _vueGutterResize.columnGutter);
-
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
 exports.default = {
+  name: 'app',
   data: function data() {
     return {
-      column: 4,
-      colors: ['red', 'blue', 'yellow']
+      row: 3,
+      colors: ['red', 'blue'],
+      columnVue: 3,
+      columnGutter: 6,
+      columnResize: 6
     };
   },
 
-  methods: {
-    resize: function resize(_ref) {
-      var col = _ref.col;
-
-      console.log(col); // current col size (etc... [25, 25, 25, 25]
-    }
-  },
   components: {
-    'column-gutter': _vueGutterResize.columnGutter
+    'row-gutter': _rowGutter2.default,
+    'column-gutter': _columnGutter2.default
   }
 };
         var $b2549f = exports.default || module.exports;
@@ -19110,29 +18166,229 @@ exports.default = {
     "div",
     [
       _c(
-        "column-gutter",
+        "row-gutter",
         {
           attrs: {
-            column: _vm.column,
+            row: _vm.row,
             width: "100%",
-            height: "600px",
-            gutterSizes: ["4px", "1rem", "1em"],
+            height: "100vh",
+            gutterSizes: ["7px", "1rem"],
             colors: _vm.colors
-          },
-          on: { resize: _vm.resize }
+          }
         },
         [
-          _c("div", { attrs: { slot: "col-0" }, slot: "col-0" }, [
-            _vm._v(
-              "\n      Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tristique euismod turpis sit amet aliquet. Nulla tempus lectus quis dui rhoncus finibus. Nunc vestibulum viverra condimentum. Integer finibus justo et velit scelerisque iaculis. Fusce porta laoreet lacus sed placerat. Mauris egestas nec ligula ut pulvinar. Maecenas nec ullamcorper ante. Phasellus rutrum ac sem quis imperdiet. Sed ullamcorper, velit non aliquet convallis, mi dui elementum sapien, ut imperdiet nibh eros eu ex. Donec sed aliquam nunc. Duis sit amet porttitor lorem. Etiam pretium maximus gravida. Nam congue, mi ac gravida tincidunt, eros nibh ornare nibh, ut ultricies lorem erat nec tortor. Donec non semper quam.\n    "
-            )
-          ]),
+          _c(
+            "div",
+            { staticClass: "row", attrs: { slot: "row-0" }, slot: "row-0" },
+            [
+              _c(
+                "column-gutter",
+                {
+                  attrs: {
+                    column: _vm.columnVue,
+                    width: "100%",
+                    height: "100%",
+                    gutterSize: "6px",
+                    color: "green"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-0" },
+                      slot: "col-0"
+                    },
+                    [_vm._v("V")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-1" },
+                      slot: "col-1"
+                    },
+                    [_vm._v("u")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-2" },
+                      slot: "col-2"
+                    },
+                    [_vm._v("e")]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { attrs: { slot: "col-1" }, slot: "col-1" }, [_vm._v("1")]),
+          _c(
+            "div",
+            { staticClass: "row", attrs: { slot: "row-1" }, slot: "row-1" },
+            [
+              _c(
+                "column-gutter",
+                {
+                  attrs: {
+                    column: _vm.columnGutter,
+                    width: "100%",
+                    height: "100%",
+                    gutterSize: "10px",
+                    color: "orange"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-0" },
+                      slot: "col-0"
+                    },
+                    [_vm._v("G")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-1" },
+                      slot: "col-1"
+                    },
+                    [_vm._v("u")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-2" },
+                      slot: "col-2"
+                    },
+                    [_vm._v("t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-3" },
+                      slot: "col-3"
+                    },
+                    [_vm._v("t")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-4" },
+                      slot: "col-4"
+                    },
+                    [_vm._v("e")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-5" },
+                      slot: "col-5"
+                    },
+                    [_vm._v("r")]
+                  )
+                ]
+              )
+            ],
+            1
+          ),
           _vm._v(" "),
-          _c("div", { attrs: { slot: "col-2" }, slot: "col-2" }, [_vm._v("2")]),
-          _vm._v(" "),
-          _c("div", { attrs: { slot: "col-3" }, slot: "col-3" }, [_vm._v("3")])
+          _c(
+            "div",
+            { staticClass: "row", attrs: { slot: "row-2" }, slot: "row-2" },
+            [
+              _c(
+                "column-gutter",
+                {
+                  attrs: {
+                    column: _vm.columnResize,
+                    width: "100%",
+                    height: "100%",
+                    gutterSize: "4px",
+                    color: "cyan"
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-0" },
+                      slot: "col-0"
+                    },
+                    [_vm._v("R")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-1" },
+                      slot: "col-1"
+                    },
+                    [_vm._v("e")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-2" },
+                      slot: "col-2"
+                    },
+                    [_vm._v("s")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-3" },
+                      slot: "col-3"
+                    },
+                    [_vm._v("i")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-4" },
+                      slot: "col-4"
+                    },
+                    [_vm._v("z")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "column",
+                      attrs: { slot: "col-5" },
+                      slot: "col-5"
+                    },
+                    [_vm._v("e")]
+                  )
+                ]
+              )
+            ],
+            1
+          )
         ]
       )
     ],
@@ -19146,7 +18402,7 @@ render._withStripped = true
             render: render,
             staticRenderFns: staticRenderFns,
             _compiled: true,
-            _scopeId: null,
+            _scopeId: "data-v-b2549f",
             functional: undefined
           };
         })());
@@ -19166,9 +18422,13 @@ render._withStripped = true
         }
 
         
+        var reloadCSS = require('_css_loader');
+        module.hot.dispose(reloadCSS);
+        module.hot.accept(reloadCSS);
+      
       }
     })();
-},{"../dist/vue-gutter-resize.esm.js":20,"../dist/vue-gutter-resize.umd.js":21,"../dist/vue-gutter-resize.js":22,"vue-hot-reload-api":15,"vue":13}],4:[function(require,module,exports) {
+},{"./components/row-gutter.vue":22,"./components/column-gutter.vue":23,"_css_loader":25,"vue-hot-reload-api":15,"vue":13}],4:[function(require,module,exports) {
 'use strict';
 
 var _vueEsm = require('vue/dist/vue.esm.js');
@@ -19187,7 +18447,7 @@ new _vueEsm2.default({
         return h(_index2.default);
     }
 });
-},{"vue/dist/vue.esm.js":8,"./index.vue":6}],18:[function(require,module,exports) {
+},{"vue/dist/vue.esm.js":8,"./index.vue":6}],12:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -19216,7 +18476,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54153' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '55423' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -19357,5 +18617,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[18,4], null)
+},{}]},{},[12,4], null)
 //# sourceMappingURL=/main.d558a4b1.map

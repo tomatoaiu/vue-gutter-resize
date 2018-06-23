@@ -45,10 +45,10 @@ var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_r
 /* style */
 var __vue_inject_styles__ = function (inject) {
   if (!inject) return;
-  inject("data-v-25230442_0", { source: "\ndiv section[data-v-25230442] {\n  margin: 0;\n  padding: 0;\n}\nsection[data-v-25230442] {\n  width: 100%;\n  height: 100vh;\n}\n.content[data-v-25230442] {\n  height: 100%;\n}\n.pane[data-v-25230442] {\n  overflow: hidden;\n  height: 100%;\n}\n.pane .content .preview[data-v-25230442] {\n  overflow: scroll;\n  height: 100%;\n}\n.pane-v[data-v-25230442] {\n  float: left;\n}\n.gutter[data-v-25230442] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-25230442] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-25230442] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+  inject("data-v-6dd33b21_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* div section {\n  margin: 0;\n  padding: 0;\n}\n\nsection {\n  width: 100%;\n  height: 100vh;\n}\n\n.content {\n  height: 100%;\n}\n\n.pane {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v {\n  float: left;\n} */\n.gutter[data-v-6dd33b21] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-6dd33b21] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-6dd33b21] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
 };
 /* scoped */
-var __vue_scope_id__ = "data-v-25230442";
+var __vue_scope_id__ = "data-v-6dd33b21";
 /* module identifier */
 var __vue_module_identifier__ = undefined;
 /* functional template */
@@ -183,7 +183,6 @@ var script$1 = {
             before += this.col[i];
           }
           var sum = this.col[index] + this.col[index + 1];
-          this.sum = sum;
           this.col.splice(index, 1, leftSize - before);
           this.col.splice(index + 1, 1, before + sum - leftSize);
           this.$emit('resize', { col: this.col });
@@ -203,11 +202,14 @@ var __vue_render__$1 = function __vue_render__() {
   return _c("section", {
     ref: "gutter",
     style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, _vm._l(_vm.column - 1, function (n) {
-    return _c("div", { key: n }, [n == 1 ? _c("div", {
-      staticClass: "pane pane-v left",
-      style: "width: calc(" + _vm.col[n - 1] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + (n - 1))], 2)]) : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_c("div", {
+    staticClass: "pane pane-v left",
+    style: "height: 100%; width: calc(" + _vm.col[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
+  }, [_vm._t("col-" + 0)], 2), _vm._v(" "), _vm._l(_vm.column - 1, function (n) {
+    return _c("div", {
+      key: n,
+      style: "display: inline-block; height: 100%; width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
+    }, [_c("div", {
       staticClass: "gutter gutter-v",
       style: "width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + "; height: " + _vm.height + "; background-color: " + (_vm.color || _vm.colors[n - 1]) + ";",
       attrs: { draggable: "true" },
@@ -216,20 +218,26 @@ var __vue_render__$1 = function __vue_render__() {
           _vm.drag(e, n - 1);
         }
       }
-    }), _vm._v(" "), _c("div", {
+    }), _vm._v(" "), n !== _vm.column - 1 ? _c("div", {
       staticClass: "pane pane-v",
-      style: "width: calc(" + _vm.col[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("col-" + n)], 2)])]);
-  }));
+      style: "height: 100%; width: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1])
+    }, [_vm._t("col-" + n)], 2) : _c("div", {
+      staticClass: "pane pane-v",
+      style: "height: 100%; width: calc(" + 100 + "%}"
+    }, [_vm._t("col-" + n)], 2)]);
+  })], 2);
 };
 var __vue_staticRenderFns__$1 = [];
 __vue_render__$1._withStripped = true;
 
 var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __vue_render__$1, staticRenderFns: __vue_staticRenderFns__$1 } : {};
 /* style */
-var __vue_inject_styles__$1 = undefined;
+var __vue_inject_styles__$1 = function (inject) {
+  if (!inject) return;
+  inject("data-v-20d32f94_0", { source: "\n.pane-v[data-v-20d32f94] {\n  float: left;\n}\n.gutter[data-v-20d32f94] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-20d32f94] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+};
 /* scoped */
-var __vue_scope_id__$1 = undefined;
+var __vue_scope_id__$1 = "data-v-20d32f94";
 /* module identifier */
 var __vue_module_identifier__$1 = undefined;
 /* functional template */
@@ -251,6 +259,30 @@ function __vue_normalize__$1(template, style, script, scope, functional, moduleI
   }
 
   component._scopeId = scope;
+
+  {
+    var hook = void 0;
+    if (style) {
+      hook = function hook(context) {
+        style.call(this, createInjector(context));
+      };
+    }
+
+    if (hook !== undefined) {
+      if (component.functional) {
+        // register for functional component in vue file
+        var originalRender = component.render;
+        component.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        // inject component registration as beforeCreate hook
+        var existing = component.beforeCreate;
+        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+  }
 
   return component;
 }
@@ -359,12 +391,7 @@ var __vue_render__$2 = function __vue_render__() {
   return _c("section", {
     ref: "gutter",
     style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-  }, [_c("div", {
-    style: "height: calc(" + _vm.rowArray[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("div", {
-    staticClass: "pane pane-h",
-    style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
-  }, [_c("section", { staticClass: "content" }, [_vm._v("\n          " + _vm._s(this.rowArray) + "\n          "), _vm._t("row-0")], 2)])]), _vm._v(" "), _vm._l(_vm.row - 1, function (n) {
+  }, [_c("div", { style: "height: calc(" + _vm.rowArray[0] + "%);" }, [_vm._t("row-0")], 2), _vm._v(" "), _vm._l(_vm.row - 1, function (n) {
     return _c("div", {
       key: n,
       style: "height: calc(" + _vm.rowArray[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
@@ -377,10 +404,13 @@ var __vue_render__$2 = function __vue_render__() {
           _vm.drag(e, n - 1);
         }
       }
-    }), _vm._v(" "), _c("div", {
+    }), _vm._v(" "), n !== _vm.row - 1 ? _c("div", {
       staticClass: "pane pane-h",
       style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
-    }, [_c("section", { staticClass: "content" }, [_vm._t("row-" + n)], 2)])]);
+    }, [_vm._t("row-" + n)], 2) : _c("div", {
+      staticClass: "pane pane-h",
+      style: "height: calc(" + 100 + "%});"
+    }, [_vm._t("row-" + n)], 2)]);
   })], 2);
 };
 var __vue_staticRenderFns__$2 = [];
@@ -388,9 +418,12 @@ __vue_render__$2._withStripped = true;
 
 var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __vue_render__$2, staticRenderFns: __vue_staticRenderFns__$2 } : {};
 /* style */
-var __vue_inject_styles__$2 = undefined;
+var __vue_inject_styles__$2 = function (inject) {
+  if (!inject) return;
+  inject("data-v-d3ba09d0_0", { source: "\n.pane[data-v-d3ba09d0] {\n  height: 100%;\n}\n.pane-v[data-v-d3ba09d0] {\n  float: left;\n}\n.gutter[data-v-d3ba09d0] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-d3ba09d0] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+};
 /* scoped */
-var __vue_scope_id__$2 = undefined;
+var __vue_scope_id__$2 = "data-v-d3ba09d0";
 /* module identifier */
 var __vue_module_identifier__$2 = undefined;
 /* functional template */
@@ -412,6 +445,30 @@ function __vue_normalize__$2(template, style, script, scope, functional, moduleI
   }
 
   component._scopeId = scope;
+
+  {
+    var hook = void 0;
+    if (style) {
+      hook = function hook(context) {
+        style.call(this, createInjector(context));
+      };
+    }
+
+    if (hook !== undefined) {
+      if (component.functional) {
+        // register for functional component in vue file
+        var originalRender = component.render;
+        component.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        // inject component registration as beforeCreate hook
+        var existing = component.beforeCreate;
+        component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+  }
 
   return component;
 }

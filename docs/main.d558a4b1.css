@@ -1,0 +1,80 @@
+/* div section {
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  width: 100%;
+  height: 100vh;
+}
+
+.content {
+  height: 100%;
+}
+
+.pane {
+  overflow: hidden;
+  height: 100%;
+}
+
+.pane .content .preview {
+  overflow: scroll;
+  height: 100%;
+}
+
+.pane-v {
+  float: left;
+} */
+.gutter[data-v-7b5295] {
+  background: #ccc;
+  overflow: hidden;
+}
+.gutter-v[data-v-7b5295] {
+  float: left;
+  width: 2px;
+  height: 100%;
+  cursor: ew-resize;
+}
+.gutter-h[data-v-7b5295] {
+  width: 100%;
+  height: 2px;
+  cursor: ns-resize;
+}
+.pane[data-v-a38399] {
+  height: 100%;
+}
+.pane-v[data-v-a38399] {
+  float: left;
+}
+.gutter[data-v-a38399] {
+  background: #ccc;
+  overflow: hidden;
+}
+.gutter-h[data-v-a38399] {
+  width: 100%;
+  height: 2px;
+  cursor: ns-resize;
+}
+.pane-v[data-v-bf9d58] {
+  float: left;
+}
+.gutter[data-v-bf9d58] {
+  background: #ccc;
+  overflow: hidden;
+}
+.gutter-v[data-v-bf9d58] {
+  float: left;
+  width: 2px;
+  height: 100%;
+  cursor: ew-resize;
+}
+.row .column[data-v-b2549f] {
+  font-size: 12rem;
+}
+.column[data-v-b2549f] {
+  overflow: hidden;
+}
+.row[data-v-b2549f] {
+  height: 100%;
+  overflow: hidden;
+}
