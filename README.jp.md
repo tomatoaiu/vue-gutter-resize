@@ -183,5 +183,8 @@ row-nで指定
 <div slot="row-2">3つ目のrow</div>
 ```
 
+## サンプル
+https://github.com/tomatoaiu/vue-gutter-resize-example
+
 ## ライセンス
 [MIT](./LICENSE.md)

@@ -183,5 +183,8 @@ Specified by row-n
 <div slot="row-2">the third row</div>
 ```
 
+## sample
+https://github.com/tomatoaiu/vue-gutter-resize-example
+
 ## License
 [MIT](./LICENSE.md)
