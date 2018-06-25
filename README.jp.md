@@ -22,16 +22,13 @@ Vue.use(VueGutterResize)
 ```javascript
 import { columnGutter } from 'vue-gutter-resize'
 ```
-### import esm module
+### module別import
 ```javascript
+// esm module
 import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.esm.js'
-```
-### import umd module
-```javascript
+// umd module
 import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
-```
-### import common module
-```javascript
+// commonjs module
 import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
 ```
 
