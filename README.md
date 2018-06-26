@@ -120,7 +120,7 @@ export default {
 #### props
 - width: `String`
   - column-gutter width
-  - - `:width="'800px'"`
+  - `:width="'800px'"`
 - height : `String`
   - column-gutter height
   - `:height="'600px'"`
