@@ -134,6 +134,9 @@ export default {
   - If color is specified, color takes precedence
 - column : Number
   - column number
+- columnSizes: Array<Number>
+  - column size
+  - :columnSizes="[1, 2, 3]"
 
 #### emit
 - resize({ col })
@@ -166,6 +169,9 @@ Specified by col-n
   - If color is specified, color takes precedence
 - row : Number
   - row number
+- rowSizes: Array<Number>
+  - row size
+  - :rowSizes="[1, 2, 3]"
 
 #### emit
 - resize({ row })
