@@ -118,29 +118,36 @@ export default {
 ## 全てのgutter
 ### column-gutter
 #### props
-- width: String
+- width: `String`
   - column-gutterの横幅
-- height : String
+  - `:width="'800px'"`
+- height : `String`
   - column-gutterの縦幅
-- gutterSize : String
+  - `:height="'600px'"`
+- gutterSize : `String`
   - 全gutterの幅
-- gutterSizes : Array<String>
+  - `:gutterSize="'4px'"`
+- gutterSizes : `Array<String>`
   - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
-- color : String
+  - `:gutterSizes="['7px', '1rem']"`
+- color : `String`
   - 全gutterの色
-- colors : Array<String>
+  - `:color="'green'"`
+- colors : `Array<String>`
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される
-- column : Number
+  - `:colors="['red', 'blue']"`
+- column : `Number`
   - column数
-- columnSizes: Array<Number>
+  - `:column="3"`
+- columnSizes: `Array<Number>`
   - columnのサイズ
-  - :columnSizes="[1, 2, 3]"
+  - `:columnSizes="[1, 2, 3]"`
 
 #### emit
-- resize({ col })
-  - col : Array
+- resize({ col }): `Object`
+  - col : `Array<Number>`
   - それぞれのcolumnの幅(合計で100)
 
 #### slot
@@ -153,29 +160,36 @@ col-nで指定
 
 ### row-gutter
 #### props
-- width: String
+- width: `String`
   - row-gutterの横幅
-- height : String
+  - `:width="'800px'"`
+- height : `String`
   - row-gutterの縦幅
-- gutterSize : String
+  - `:height="'600px'"`
+- gutterSize : `String`
   - 全gutterの幅
-- gutterSizes : Array<String>
+  - `:gutterSize="'4px'"`
+- gutterSizes : `Array<String>`
   - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
-- color : String
+  - `:gutterSizes="['7px', '1rem']"`
+- color : `String`
   - 全gutterの色
-- colors : Array<String>
+  - `:color="'green'"`
+- colors : `Array<String>`
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される
-- row : Number
+  - `:colors="['red', 'blue']"`
+- row : `Number`
   - row数
-- rowSizes: Array<Number>
+  - `:row="3"`
+- rowSizes: `Array<Number>`
   - rowのサイズ
-  - :rowSizes="[1, 2, 3]"
+  - `:rowSizes="[1, 2, 3]"`
 
 #### emit
-- resize({ row })
-  - row : Array
+- resize({ row }): `Object`
+  - row : `Array<Number>`
   - それぞれのcolumnの幅(合計で100)
 
 #### slot
