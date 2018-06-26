@@ -5,14 +5,16 @@
       :width="'100%'"
       :height="'100vh'"
       :gutterSizes="['7px', '1rem']"
-      :colors="colors">
+      :colors="colors"
+      :rowSizes="[1, 2, 9]">
       <div slot="row-0" class="row">
         <column-gutter
           :column="columnVue"
           :width="'100%'"
           :height="'100%'"
           :gutterSize="'6px'"
-          :color="'green'">
+          :color="'green'"
+          :columnSizes="[5, 1, 1]">
           <div class="column" slot="col-0">V</div>
           <div class="column" slot="col-1">u</div>
           <div class="column" slot="col-2">e</div>
@@ -53,9 +55,11 @@
 </template>
 
 <script>
+import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.js'
 // import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
-import rowGutter from './components/row-gutter.vue'
-import columnGutter from './components/column-gutter.vue'
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
+// import rowGutter from './components/row-gutter.vue'
+// import columnGutter from './components/column-gutter.vue'
 
 export default {
   name: 'app',

@@ -32,15 +32,25 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'rowGutter',
   mixins: [ gutter ],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   data () {
     return {
       rowArray: []
     }
   },
   created () {
-    for (let i = 0; i < this.row; i++) {
-      this.rowArray.push(100 / this.row)
+    if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+      const sum = this.rowSizes.reduce((prev, current) => {
+        return prev + current
+      })
+      this.rowSizes.forEach(size => {
+        const raio = 100 / sum
+        this.rowArray.push(size * raio)
+      })
+    } else {
+      for (let i = 0; i < this.row; i++) {
+        this.rowArray.push(100 / this.row)
+      }
     }
   },
   methods: {

@@ -158,15 +158,27 @@ var gutter = __vue_normalize__(__vue_template__, __vue_inject_styles__, typeof _
 var script$1 = {
   name: 'columnGutter',
   mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
   data: function data() {
     return {
       col: []
     };
   },
   created: function created() {
-    for (var i = 0; i < this.column; i++) {
-      this.col.push(100 / this.column);
+    var _this = this;
+
+    if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+      var sum = this.columnSizes.reduce(function (prev, current) {
+        return prev + current;
+      });
+      this.columnSizes.forEach(function (size) {
+        var raio = 100 / sum;
+        _this.col.push(size * raio);
+      });
+    } else {
+      for (var i = 0; i < this.column; i++) {
+        this.col.push(100 / this.column);
+      }
     }
   },
 
@@ -234,10 +246,10 @@ var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __v
 /* style */
 var __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-20d32f94_0", { source: "\n.pane-v[data-v-20d32f94] {\n  float: left;\n}\n.gutter[data-v-20d32f94] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-20d32f94] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+  inject("data-v-0a1dd1aa_0", { source: "\n.pane-v[data-v-0a1dd1aa] {\n  float: left;\n}\n.gutter[data-v-0a1dd1aa] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-0a1dd1aa] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
 };
 /* scoped */
-var __vue_scope_id__$1 = "data-v-20d32f94";
+var __vue_scope_id__$1 = "data-v-0a1dd1aa";
 /* module identifier */
 var __vue_module_identifier__$1 = undefined;
 /* functional template */
@@ -347,15 +359,27 @@ var columnGutter = __vue_normalize__$1(__vue_template__$1, __vue_inject_styles__
 var script$2 = {
   name: 'rowGutter',
   mixins: [gutter],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors'],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   data: function data() {
     return {
       rowArray: []
     };
   },
   created: function created() {
-    for (var i = 0; i < this.row; i++) {
-      this.rowArray.push(100 / this.row);
+    var _this = this;
+
+    if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+      var sum = this.rowSizes.reduce(function (prev, current) {
+        return prev + current;
+      });
+      this.rowSizes.forEach(function (size) {
+        var raio = 100 / sum;
+        _this.rowArray.push(size * raio);
+      });
+    } else {
+      for (var i = 0; i < this.row; i++) {
+        this.rowArray.push(100 / this.row);
+      }
     }
   },
 
@@ -420,10 +444,10 @@ var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __v
 /* style */
 var __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
-  inject("data-v-d3ba09d0_0", { source: "\n.pane[data-v-d3ba09d0] {\n  height: 100%;\n}\n.pane-v[data-v-d3ba09d0] {\n  float: left;\n}\n.gutter[data-v-d3ba09d0] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-d3ba09d0] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+  inject("data-v-cdf87fae_0", { source: "\n.pane[data-v-cdf87fae] {\n  height: 100%;\n}\n.pane-v[data-v-cdf87fae] {\n  float: left;\n}\n.gutter[data-v-cdf87fae] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-cdf87fae] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
 };
 /* scoped */
-var __vue_scope_id__$2 = "data-v-d3ba09d0";
+var __vue_scope_id__$2 = "data-v-cdf87fae";
 /* module identifier */
 var __vue_module_identifier__$2 = undefined;
 /* functional template */

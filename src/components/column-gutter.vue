@@ -32,15 +32,25 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'columnGutter',
   mixins: [ gutter ],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors'],
+  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
   data () {
     return {
       col: [],
     }
   },
   created () {
-    for (let i = 0; i < this.column; i++) {
-      this.col.push(100 / this.column)
+    if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+      const sum = this.columnSizes.reduce((prev, current) => {
+        return prev + current
+      })
+      this.columnSizes.forEach(size => {
+        const raio = 100 / sum
+        this.col.push(size * raio)
+      })
+    } else {
+      for (let i = 0; i < this.column; i++) {
+        this.col.push(100 / this.column)
+      }
     }
   },
   methods: {
