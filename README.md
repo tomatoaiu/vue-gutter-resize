@@ -1,5 +1,5 @@
 # vue-gutter-resize
-[![npm version](https://badge.fury.io/js/vue-gutter-resize.svg)](https://badge.fury.io/js/vue-gutter-resize)
+[![current npm version](https://img.shields.io/npm/v/vue-gutter-resize.svg)](https://www.npmjs.com/package/vue-gutter-resize)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ad4d8157285645c5893c521e5130c51d)](https://www.codacy.com/app/tomatoaiu/vue-gutter-resize?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomatoaiu/vue-gutter-resize&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/56f0f345d51e956c5bca/maintainability)](https://codeclimate.com/github/tomatoaiu/vue-gutter-resize/maintainability)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
