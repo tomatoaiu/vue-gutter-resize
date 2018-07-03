@@ -39,6 +39,21 @@
       },
       getCurrentMousePosition: function getCurrentMousePosition(e) {
         return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
+      },
+      getGutterSum: function getGutterSum(index, gutterSize, gutterSizes) {
+        var gutterSum = 0;
+        if (this.gutterSizes && this.gutterSizes.length && this.gutterSizes.length > 0) {
+          for (var i = 0; i < index; i++) {
+            gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
+          }
+          gutterSum += (this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
+        } else {
+          for (var _i = 0; _i < index; _i++) {
+            gutterSum += this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
+          }
+          gutterSum += (this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
+        }
+        return gutterSum;
       }
     }
   };
@@ -51,10 +66,10 @@
   /* style */
   var __vue_inject_styles__ = function (inject) {
     if (!inject) return;
-    inject("data-v-6dd33b21_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* div section {\n  margin: 0;\n  padding: 0;\n}\n\nsection {\n  width: 100%;\n  height: 100vh;\n}\n\n.content {\n  height: 100%;\n}\n\n.pane {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v {\n  float: left;\n} */\n.gutter[data-v-6dd33b21] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-6dd33b21] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-6dd33b21] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-2e3b29bc_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* div section {\n  margin: 0;\n  padding: 0;\n}\n\nsection {\n  width: 100%;\n  height: 100vh;\n}\n\n.content {\n  height: 100%;\n}\n\n.pane {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v {\n  float: left;\n} */\n.gutter[data-v-2e3b29bc] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-2e3b29bc] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-2e3b29bc] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__ = "data-v-6dd33b21";
+  var __vue_scope_id__ = "data-v-2e3b29bc";
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
@@ -193,8 +208,9 @@
         var _getCurrentMousePosit = this.getCurrentMousePosition(e),
             mouseX = _getCurrentMousePosit.mouseX;
 
+        var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
         if (this.isDraggingGutter(e)) {
-          var leftSize = mouseX / this.gutterComponent.width * 100;
+          var leftSize = (mouseX + gutterSum) / this.gutterComponent.width * 100;
           if (this.isGutterInRange(leftSize)) {
             var before = 0;
             for (var i = 0; i < index; i++) {
@@ -252,10 +268,10 @@
   /* style */
   var __vue_inject_styles__$1 = function (inject) {
     if (!inject) return;
-    inject("data-v-0a1dd1aa_0", { source: "\n.pane-v[data-v-0a1dd1aa] {\n  float: left;\n}\n.gutter[data-v-0a1dd1aa] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-0a1dd1aa] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-1b06ba3f_0", { source: "\n.pane-v[data-v-1b06ba3f] {\n  float: left;\n}\n.gutter[data-v-1b06ba3f] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-1b06ba3f] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$1 = "data-v-0a1dd1aa";
+  var __vue_scope_id__$1 = "data-v-1b06ba3f";
   /* module identifier */
   var __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -394,8 +410,9 @@
         var _getCurrentMousePosit = this.getCurrentMousePosition(e),
             mouseY = _getCurrentMousePosit.mouseY;
 
+        var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
         if (this.isDraggingGutter(e)) {
-          var topSize = mouseY / this.gutterComponent.height * 100;
+          var topSize = (mouseY + gutterSum) / this.gutterComponent.height * 100;
           if (this.isGutterInRange(topSize)) {
             var before = 0;
             for (var i = 0; i < index; i++) {
@@ -450,10 +467,10 @@
   /* style */
   var __vue_inject_styles__$2 = function (inject) {
     if (!inject) return;
-    inject("data-v-cdf87fae_0", { source: "\n.pane[data-v-cdf87fae] {\n  height: 100%;\n}\n.pane-v[data-v-cdf87fae] {\n  float: left;\n}\n.gutter[data-v-cdf87fae] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-cdf87fae] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-39a2bd9e_0", { source: "\n.pane[data-v-39a2bd9e] {\n  height: 100%;\n}\n.pane-v[data-v-39a2bd9e] {\n  float: left;\n}\n.gutter[data-v-39a2bd9e] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-39a2bd9e] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$2 = "data-v-cdf87fae";
+  var __vue_scope_id__$2 = "data-v-39a2bd9e";
   /* module identifier */
   var __vue_module_identifier__$2 = undefined;
   /* functional template */

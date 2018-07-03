@@ -34,6 +34,21 @@ export default {
     getCurrentMousePosition: function (e) {
       return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY }
     },
+    getGutterSum: function (index, gutterSize, gutterSizes) {
+      let gutterSum = 0
+      if (this.gutterSizes && this.gutterSizes.length && this.gutterSizes.length > 0) {
+        for (let i = 0; i < index; i++) {
+          gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0
+        }
+        gutterSum += (this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2
+      } else {
+        for (let i = 0; i < index; i++) {
+          gutterSum += this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0
+        }
+        gutterSum += (this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2
+      }
+      return gutterSum
+    }
   }
 }
 </script>

@@ -56,8 +56,9 @@ export default {
   methods: {
     drag (e, index) {
       const { mouseY } = this.getCurrentMousePosition(e)
+      const gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes)
       if (this.isDraggingGutter(e)) {
-        const topSize = ((mouseY) / this.gutterComponent.height) * 100
+        const topSize = ((mouseY + gutterSum) / this.gutterComponent.height) * 100
         if (this.isGutterInRange(topSize)) {
           let before = 0
           for (let i = 0; i < index; i++) {
