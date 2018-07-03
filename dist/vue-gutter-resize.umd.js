@@ -8,7 +8,6 @@
   var MIN_DRAG_RANGE = 0;
 
   var script = {
-    // name: 'gutter',
     data: function data() {
       return {
         gutterComponent: {
@@ -64,12 +63,9 @@
 
   var __vue_template__ = typeof __vue_render__ !== 'undefined' ? { render: __vue_render__, staticRenderFns: __vue_staticRenderFns__ } : {};
   /* style */
-  var __vue_inject_styles__ = function (inject) {
-    if (!inject) return;
-    inject("data-v-2e3b29bc_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* div section {\n  margin: 0;\n  padding: 0;\n}\n\nsection {\n  width: 100%;\n  height: 100vh;\n}\n\n.content {\n  height: 100%;\n}\n\n.pane {\n  overflow: hidden;\n  height: 100%;\n}\n\n.pane .content .preview {\n  overflow: scroll;\n  height: 100%;\n}\n\n.pane-v {\n  float: left;\n} */\n.gutter[data-v-2e3b29bc] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-2e3b29bc] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.gutter-h[data-v-2e3b29bc] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
-  };
+  var __vue_inject_styles__ = undefined;
   /* scoped */
-  var __vue_scope_id__ = "data-v-2e3b29bc";
+  var __vue_scope_id__ = undefined;
   /* module identifier */
   var __vue_module_identifier__ = undefined;
   /* functional template */
@@ -91,30 +87,6 @@
     }
 
     component._scopeId = scope;
-
-    {
-      var hook = void 0;
-      if (style) {
-        hook = function hook(context) {
-          style.call(this, createInjector(context));
-        };
-      }
-
-      if (hook !== undefined) {
-        if (component.functional) {
-          // register for functional component in vue file
-          var originalRender = component.render;
-          component.render = function renderWithStyleInjection(h, context) {
-            hook.call(context);
-            return originalRender(h, context);
-          };
-        } else {
-          // inject component registration as beforeCreate hook
-          var existing = component.beforeCreate;
-          component.beforeCreate = existing ? [].concat(existing, hook) : [hook];
-        }
-      }
-    }
 
     return component;
   }
