@@ -23,6 +23,13 @@
     },
 
     methods: {
+      dragstart: function dragstart(e, index) {
+        if (this.target && this.target.classList) {
+          this.target.classList.remove('active');
+        }
+        e.target.classList.add('active');
+        this.target = e.target;
+      },
       setPlaygroundRect: function setPlaygroundRect() {
         var clientRect = this.$refs.gutter.getBoundingClientRect();
         this.gutterComponent.width = clientRect.width;
@@ -154,7 +161,8 @@
     props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
     data: function data() {
       return {
-        col: []
+        col: [],
+        target: undefined
       };
     },
     created: function created() {
@@ -189,9 +197,11 @@
               before += this.col[i];
             }
             var sum = this.col[index] + this.col[index + 1];
-            this.col.splice(index, 1, leftSize - before);
-            this.col.splice(index + 1, 1, before + sum - leftSize);
-            this.$emit('resize', { col: this.col });
+            if (leftSize - before >= 0 && before + sum - leftSize >= 0) {
+              this.col.splice(index, 1, leftSize - before);
+              this.col.splice(index + 1, 1, before + sum - leftSize);
+              this.$emit('resize', { col: this.col });
+            }
           }
         }
       }
@@ -222,6 +232,9 @@
         on: {
           drag: function drag(e) {
             _vm.drag(e, n - 1);
+          },
+          dragstart: function dragstart($event) {
+            _vm.dragstart($event, n - 1);
           }
         }
       }), _vm._v(" "), n !== _vm.column - 1 ? _c("div", {
@@ -240,10 +253,10 @@
   /* style */
   var __vue_inject_styles__$1 = function (inject) {
     if (!inject) return;
-    inject("data-v-1b06ba3f_0", { source: "\n.pane-v[data-v-1b06ba3f] {\n  float: left;\n}\n.gutter[data-v-1b06ba3f] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-v[data-v-1b06ba3f] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-ac07d972_0", { source: "\n.pane-v[data-v-ac07d972] {\n  float: left;\n}\n.gutter[data-v-ac07d972] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-ac07d972] {\n  z-index: 1;\n}\n.gutter-v[data-v-ac07d972] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$1 = "data-v-1b06ba3f";
+  var __vue_scope_id__$1 = "data-v-ac07d972";
   /* module identifier */
   var __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -356,7 +369,8 @@
     props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
     data: function data() {
       return {
-        rowArray: []
+        rowArray: [],
+        target: undefined
       };
     },
     created: function created() {
@@ -391,9 +405,11 @@
               before += this.rowArray[i];
             }
             var sum = this.rowArray[index] + this.rowArray[index + 1];
-            this.rowArray.splice(index, 1, topSize - before);
-            this.rowArray.splice(index + 1, 1, before + sum - topSize);
-            this.$emit('resize', { row: this.rowArray });
+            if (topSize - before >= 0 && before + sum - topSize >= 0) {
+              this.rowArray.splice(index, 1, topSize - before);
+              this.rowArray.splice(index + 1, 1, before + sum - topSize);
+              this.$emit('resize', { row: this.rowArray });
+            }
           }
         }
       }
@@ -421,6 +437,9 @@
         on: {
           drag: function drag(e) {
             _vm.drag(e, n - 1);
+          },
+          dragstart: function dragstart($event) {
+            _vm.dragstart($event, n - 1);
           }
         }
       }), _vm._v(" "), n !== _vm.row - 1 ? _c("div", {
@@ -439,10 +458,10 @@
   /* style */
   var __vue_inject_styles__$2 = function (inject) {
     if (!inject) return;
-    inject("data-v-39a2bd9e_0", { source: "\n.pane[data-v-39a2bd9e] {\n  height: 100%;\n}\n.pane-v[data-v-39a2bd9e] {\n  float: left;\n}\n.gutter[data-v-39a2bd9e] {\n  background: #ccc;\n  overflow: hidden;\n}\n.gutter-h[data-v-39a2bd9e] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-2d284b54_0", { source: "\n.pane[data-v-2d284b54] {\n  height: 100%;\n}\n.pane-v[data-v-2d284b54] {\n  float: left;\n}\n.gutter[data-v-2d284b54] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-2d284b54] {\n  z-index: 1;\n}\n.gutter-h[data-v-2d284b54] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$2 = "data-v-39a2bd9e";
+  var __vue_scope_id__$2 = "data-v-2d284b54";
   /* module identifier */
   var __vue_module_identifier__$2 = undefined;
   /* functional template */
