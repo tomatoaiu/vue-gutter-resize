@@ -5,6 +5,8 @@ const MIN_DRAG_RANGE = 0
 export default {
   data () {
     return {
+      target: undefined,
+      areaSize: [],
       gutterComponent: {
         width: 0,
         height: 0,
@@ -13,10 +15,44 @@ export default {
       }
     }
   },
+  created () {
+    this.divideArea()
+  },
   mounted () {
     this.setPlaygroundRect()
   },
   methods: {
+    draggingGutter (e, mousePosition, index, gutterSize) {
+      const gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes)
+      if (this.isDraggingGutter(e)) {
+        const oneTopSize = ((mousePosition + gutterSum) / gutterSize) * 100
+        if (this.isGutterInRange(oneTopSize)) {
+          let before = 0
+          for (let i = 0; i < index; i++) {
+            before += this.areaSize[i]
+          }
+          const sum = this.areaSize[index] + this.areaSize[index + 1]
+          if ((oneTopSize - before) >= 0 && (before + sum - oneTopSize) >= 0) {
+            this.areaSize.splice(index, 1, oneTopSize - before)
+            this.areaSize.splice(index + 1, 1, before + sum - oneTopSize)
+          }
+        }
+      }
+    },
+    specifyDivideArea (sizes) {
+      const sum = sizes.reduce((prev, current) => {
+        return prev + current
+      })
+      sizes.forEach(size => {
+        const raio = 100 / sum
+        this.areaSize.push(size * raio)
+      })
+    },
+    generalDivideArea () {
+      for (let i = 0; i < this.row; i++) {
+        this.areaSize.push(100 / this.row)
+      }
+    },
     dragstart (e, index) {
       if (this.target && this.target.classList) {
         this.target.classList.remove('active');

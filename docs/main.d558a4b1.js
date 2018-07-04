@@ -17539,6 +17539,8 @@ var MIN_DRAG_RANGE = 0;
 exports.default = {
   data: function data() {
     return {
+      target: undefined,
+      areaSize: [],
       gutterComponent: {
         width: 0,
         height: 0,
@@ -17547,11 +17549,47 @@ exports.default = {
       }
     };
   },
+  created: function created() {
+    this.divideArea();
+  },
   mounted: function mounted() {
     this.setPlaygroundRect();
   },
 
   methods: {
+    draggingGutter: function draggingGutter(e, mousePosition, index, gutterSize) {
+      var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
+      if (this.isDraggingGutter(e)) {
+        var oneTopSize = (mousePosition + gutterSum) / gutterSize * 100;
+        if (this.isGutterInRange(oneTopSize)) {
+          var before = 0;
+          for (var i = 0; i < index; i++) {
+            before += this.areaSize[i];
+          }
+          var sum = this.areaSize[index] + this.areaSize[index + 1];
+          if (oneTopSize - before >= 0 && before + sum - oneTopSize >= 0) {
+            this.areaSize.splice(index, 1, oneTopSize - before);
+            this.areaSize.splice(index + 1, 1, before + sum - oneTopSize);
+          }
+        }
+      }
+    },
+    specifyDivideArea: function specifyDivideArea(sizes) {
+      var _this = this;
+
+      var sum = sizes.reduce(function (prev, current) {
+        return prev + current;
+      });
+      sizes.forEach(function (size) {
+        var raio = 100 / sum;
+        _this.areaSize.push(size * raio);
+      });
+    },
+    generalDivideArea: function generalDivideArea() {
+      for (var i = 0; i < this.row; i++) {
+        this.areaSize.push(100 / this.row);
+      }
+    },
     dragstart: function dragstart(e, index) {
       if (this.target && this.target.classList) {
         this.target.classList.remove('active');
@@ -17693,51 +17731,20 @@ exports.default = {
   name: 'rowGutter',
   mixins: [_gutter2.default],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
-  data: function data() {
-    return {
-      rowArray: [],
-      target: undefined
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
-      var sum = this.rowSizes.reduce(function (prev, current) {
-        return prev + current;
-      });
-      this.rowSizes.forEach(function (size) {
-        var raio = 100 / sum;
-        _this.rowArray.push(size * raio);
-      });
-    } else {
-      for (var i = 0; i < this.row; i++) {
-        this.rowArray.push(100 / this.row);
-      }
-    }
-  },
-
   methods: {
+    divideArea: function divideArea() {
+      if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+        this.specifyDivideArea(this.rowSizes);
+      } else {
+        this.generalDivideArea();
+      }
+    },
     drag: function drag(e, index) {
       var _getCurrentMousePosit = this.getCurrentMousePosition(e),
           mouseY = _getCurrentMousePosit.mouseY;
 
-      var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
-      if (this.isDraggingGutter(e)) {
-        var topSize = (mouseY + gutterSum) / this.gutterComponent.height * 100;
-        if (this.isGutterInRange(topSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.rowArray[i];
-          }
-          var sum = this.rowArray[index] + this.rowArray[index + 1];
-          if (topSize - before >= 0 && before + sum - topSize >= 0) {
-            this.rowArray.splice(index, 1, topSize - before);
-            this.rowArray.splice(index + 1, 1, before + sum - topSize);
-            this.$emit('resize', { row: this.rowArray });
-          }
-        }
-      }
+      this.draggingGutter(e, mouseY, index, this.gutterComponent.height);
+      this.$emit('resize', { row: this.areaSize });
     }
   }
 }; //
@@ -17790,7 +17797,7 @@ exports.default = {
     [
       _c(
         "div",
-        { style: "height: calc(" + _vm.rowArray[0] + "%);" },
+        { style: "height: calc(" + _vm.areaSize[0] + "%);" },
         [_vm._t("row-0")],
         2
       ),
@@ -17802,7 +17809,7 @@ exports.default = {
             key: n,
             style:
               "height: calc(" +
-              _vm.rowArray[n] +
+              _vm.areaSize[n] +
               "% - " +
               (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
               ");"
@@ -17910,54 +17917,24 @@ exports.default = {
   name: 'columnGutter',
   mixins: [_gutter2.default],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
-  data: function data() {
-    return {
-      col: [],
-      target: undefined
-    };
-  },
-  created: function created() {
-    var _this = this;
-
-    if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
-      var sum = this.columnSizes.reduce(function (prev, current) {
-        return prev + current;
-      });
-      this.columnSizes.forEach(function (size) {
-        var raio = 100 / sum;
-        _this.col.push(size * raio);
-      });
-    } else {
-      for (var i = 0; i < this.column; i++) {
-        this.col.push(100 / this.column);
-      }
-    }
-  },
-
   methods: {
+    divideArea: function divideArea() {
+      if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+        this.specifyDivideArea(this.columnSizes);
+      } else {
+        this.generalDivideArea();
+      }
+    },
     drag: function drag(e, index) {
       var _getCurrentMousePosit = this.getCurrentMousePosition(e),
           mouseX = _getCurrentMousePosit.mouseX;
 
-      var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
-      if (this.isDraggingGutter(e)) {
-        var leftSize = (mouseX + gutterSum) / this.gutterComponent.width * 100;
-        if (this.isGutterInRange(leftSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.col[i];
-          }
-          var sum = this.col[index] + this.col[index + 1];
-          if (leftSize - before >= 0 && before + sum - leftSize >= 0) {
-            this.col.splice(index, 1, leftSize - before);
-            this.col.splice(index + 1, 1, before + sum - leftSize);
-            this.$emit('resize', { col: this.col });
-          }
-        }
-      }
+      this.draggingGutter(e, mouseX, index, this.gutterComponent.width);
+      this.$emit('resize', { col: this.areaSize });
     }
   }
 }; //
+//
 //
 //
 //
@@ -18010,8 +17987,8 @@ exports.default = {
         {
           staticClass: "pane pane-v left",
           style:
-            "height: 100%; width: calc(" +
-            _vm.col[0] +
+            "width: calc(" +
+            _vm.areaSize[0] +
             "% - " +
             (_vm.gutterSize || _vm.gutterSizes[0]) +
             ");"
@@ -18025,9 +18002,10 @@ exports.default = {
           "div",
           {
             key: n,
+            staticClass: "afterCol",
             style:
-              "display: inline-block; height: 100%; width: calc(" +
-              _vm.col[n] +
+              "width: calc(" +
+              _vm.areaSize[n] +
               "% - " +
               (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
               ");"
@@ -18060,7 +18038,7 @@ exports.default = {
                   {
                     staticClass: "pane pane-v",
                     style:
-                      "height: 100%; width: calc(" +
+                      "width: calc(" +
                       100 +
                       "% - " +
                       (_vm.gutterSize || _vm.gutterSizes[n - 1])
@@ -18072,7 +18050,7 @@ exports.default = {
                   "div",
                   {
                     staticClass: "pane pane-v",
-                    style: "height: 100%; width: calc(" + 100 + "%}"
+                    style: "width: calc(" + 100 + "%}"
                   },
                   [_vm._t("col-" + n)],
                   2
@@ -18543,7 +18521,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60412' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53516' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

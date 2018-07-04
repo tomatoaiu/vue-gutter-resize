@@ -1,13 +1,13 @@
 <template>
   <section ref="gutter" :style="`width: ${width}; height: ${height};`">
     <div
-      class="pane pane-v left" :style="`width: calc(${col[0]}% - ${gutterSize || gutterSizes[0]});`">
+      class="pane pane-v left" :style="`width: calc(${areaSize[0]}% - ${gutterSize || gutterSizes[0]});`">
       <slot :name="`col-${0}`"></slot>
     </div>
     <div
       v-for="n in (column - 1)" :key="n"
       class="afterCol"
-      :style="`width: calc(${col[n]}% - ${gutterSize || gutterSizes[n - 1]});`">
+      :style="`width: calc(${areaSize[n]}% - ${gutterSize || gutterSizes[n - 1]});`">
       <div
         class="gutter gutter-v" draggable="true"
         :style="`width: ${gutterSize || gutterSizes[n - 1]}; height: ${height}; background-color: ${color || colors[n - 1]};`"
@@ -35,46 +35,18 @@ export default {
   name: 'columnGutter',
   mixins: [ gutter ],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
-  data () {
-    return {
-      col: [],
-      target: undefined
-    }
-  },
-  created () {
-    if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
-      const sum = this.columnSizes.reduce((prev, current) => {
-        return prev + current
-      })
-      this.columnSizes.forEach(size => {
-        const raio = 100 / sum
-        this.col.push(size * raio)
-      })
-    } else {
-      for (let i = 0; i < this.column; i++) {
-        this.col.push(100 / this.column)
-      }
-    }
-  },
   methods: {
+    divideArea () {
+      if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+        this.specifyDivideArea(this.columnSizes)
+      } else {
+        this.generalDivideArea()
+      }
+    },
     drag (e, index) {
       const { mouseX } = this.getCurrentMousePosition(e)
-      const gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes)
-      if (this.isDraggingGutter(e)) {
-        const leftSize = ((mouseX + gutterSum) / this.gutterComponent.width) * 100
-        if (this.isGutterInRange(leftSize)) {
-          let before = 0
-          for (let i = 0; i < index; i++) {
-            before += this.col[i]
-          }
-          const sum = this.col[index] + this.col[index + 1]
-          if ((leftSize - before) >= 0 && (before + sum - leftSize) >= 0) {
-            this.col.splice(index, 1, leftSize - before)
-            this.col.splice(index + 1, 1, before + sum - leftSize)
-            this.$emit('resize', { col: this.col })
-          }
-        }
-      }
+      this.draggingGutter(e, mouseX, index, this.gutterComponent.width)
+      this.$emit('resize', { col: this.areaSize })
     }
   }
 }

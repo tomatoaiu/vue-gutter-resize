@@ -20,6 +20,11 @@
 }
 .pane-v[data-v-bf9d58] {
   float: left;
+  height: 100%;
+}
+.afterCol[data-v-bf9d58] {
+  height: 100%;
+  display: inline-block;
 }
 .gutter[data-v-bf9d58] {
   background: #ccc;
