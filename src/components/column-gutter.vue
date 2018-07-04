@@ -1,12 +1,13 @@
 <template>
   <section ref="gutter" :style="`width: ${width}; height: ${height};`">
       <div
-        class="pane pane-v left" :style="`height: 100%; width: calc(${col[0]}% - ${gutterSize || gutterSizes[0]});`">
+        class="pane pane-v left" :style="`width: calc(${col[0]}% - ${gutterSize || gutterSizes[0]});`">
         <slot :name="`col-${0}`"></slot>
       </div>
       <div
         v-for="n in (column - 1)" :key="n"
-        :style="`display: inline-block; height: 100%; width: calc(${col[n]}% - ${gutterSize || gutterSizes[n - 1]});`">
+        class="afterCol"
+        :style="`width: calc(${col[n]}% - ${gutterSize || gutterSizes[n - 1]});`">
         <div
           class="gutter gutter-v" draggable="true"
           :style="`width: ${gutterSize || gutterSizes[n - 1]}; height: ${height}; background-color: ${color || colors[n - 1]};`"
@@ -15,12 +16,12 @@
         </div>
         <div
           v-if="n !== column - 1"
-          class="pane pane-v" :style="`height: 100%; width: calc(${100}% - ${gutterSize || gutterSizes[n - 1]}`">
+          class="pane pane-v" :style="`width: calc(${100}% - ${gutterSize || gutterSizes[n - 1]}`">
           <slot :name="`col-${n}`"></slot>
         </div>
         <div
           v-else
-          class="pane pane-v" :style="`height: 100%; width: calc(${100}%}`">
+          class="pane pane-v" :style="`width: calc(${100}%}`">
           <slot :name="`col-${n}`"></slot>
         </div>
       </div>
@@ -82,6 +83,12 @@ export default {
 <style scoped>
 .pane-v {
   float: left;
+  height: 100%;
+}
+
+.afterCol {
+  height: 100%;
+  display: inline-block;
 }
 
 .gutter {
