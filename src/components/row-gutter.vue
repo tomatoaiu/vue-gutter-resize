@@ -65,9 +65,11 @@ export default {
             before += this.rowArray[i]
           }
           const sum = this.rowArray[index] + this.rowArray[index + 1]
-          this.rowArray.splice(index, 1, topSize - before)
-          this.rowArray.splice(index + 1, 1, before + sum - topSize)
-          this.$emit('resize', { row: this.rowArray })
+          if ((topSize - before) >= 0 && (before + sum - topSize) >= 0) {
+            this.rowArray.splice(index, 1, topSize - before)
+            this.rowArray.splice(index + 1, 1, before + sum - topSize)
+            this.$emit('resize', { row: this.rowArray })
+          }
         }
       }
     }

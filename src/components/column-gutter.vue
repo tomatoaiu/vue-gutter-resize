@@ -65,9 +65,11 @@ export default {
             before += this.col[i]
           }
           const sum = this.col[index] + this.col[index + 1]
-          this.col.splice(index, 1, leftSize - before)
-          this.col.splice(index + 1, 1, before + sum - leftSize)
-          this.$emit('resize', { col: this.col })
+          if ((leftSize - before) >= 0 && (before + sum - leftSize) >= 0) {
+            this.col.splice(index, 1, leftSize - before)
+            this.col.splice(index + 1, 1, before + sum - leftSize)
+            this.$emit('resize', { col: this.col })
+          }
         }
       }
     }

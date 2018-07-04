@@ -103,7 +103,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({51:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -10003,7 +10003,7 @@ function getOuterHTML(el) {
 Vue.compile = compileToFunctions;
 
 exports.default = Vue;
-},{}],17:[function(require,module,exports) {
+},{}],21:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -17526,8 +17526,8 @@ if (inBrowser) {
 /*  */
 
 exports.default = Vue;
-},{}],32:[function(require,module,exports) {
-"use strict";
+},{}],34:[function(require,module,exports) {
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -17552,6 +17552,13 @@ exports.default = {
   },
 
   methods: {
+    dragstart: function dragstart(e, index) {
+      if (this.target && this.target.classList) {
+        this.target.classList.remove('active');
+      }
+      e.target.classList.add('active');
+      this.target = e.target;
+    },
     setPlaygroundRect: function setPlaygroundRect() {
       var clientRect = this.$refs.gutter.getBoundingClientRect();
       this.gutterComponent.width = clientRect.width;
@@ -17608,7 +17615,7 @@ exports.default = {
         
       }
     })();
-},{"vue-hot-reload-api":17,"vue":16}],24:[function(require,module,exports) {
+},{"vue-hot-reload-api":21,"vue":16}],26:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -17638,7 +17645,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],15:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -17669,7 +17676,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":24}],12:[function(require,module,exports) {
+},{"./bundle-url":26}],14:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17723,9 +17730,11 @@ exports.default = {
             before += this.rowArray[i];
           }
           var sum = this.rowArray[index] + this.rowArray[index + 1];
-          this.rowArray.splice(index, 1, topSize - before);
-          this.rowArray.splice(index + 1, 1, before + sum - topSize);
-          this.$emit('resize', { row: this.rowArray });
+          if (topSize - before >= 0 && before + sum - topSize >= 0) {
+            this.rowArray.splice(index, 1, topSize - before);
+            this.rowArray.splice(index + 1, 1, before + sum - topSize);
+            this.$emit('resize', { row: this.rowArray });
+          }
         }
       }
     }
@@ -17879,7 +17888,7 @@ render._withStripped = true
       
       }
     })();
-},{"../mixins/gutter.vue":32,"_css_loader":15,"vue-hot-reload-api":17,"vue":16}],13:[function(require,module,exports) {
+},{"../mixins/gutter.vue":34,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -17933,9 +17942,11 @@ exports.default = {
             before += this.col[i];
           }
           var sum = this.col[index] + this.col[index + 1];
-          this.col.splice(index, 1, leftSize - before);
-          this.col.splice(index + 1, 1, before + sum - leftSize);
-          this.$emit('resize', { col: this.col });
+          if (leftSize - before >= 0 && before + sum - leftSize >= 0) {
+            this.col.splice(index, 1, leftSize - before);
+            this.col.splice(index + 1, 1, before + sum - leftSize);
+            this.$emit('resize', { col: this.col });
+          }
         }
       }
     }
@@ -18096,7 +18107,7 @@ render._withStripped = true
       
       }
     })();
-},{"../mixins/gutter.vue":32,"_css_loader":15,"vue-hot-reload-api":17,"vue":16}],6:[function(require,module,exports) {
+},{"../mixins/gutter.vue":34,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],6:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -18474,7 +18485,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/row-gutter.vue":12,"./components/column-gutter.vue":13,"_css_loader":15,"vue-hot-reload-api":17,"vue":16}],4:[function(require,module,exports) {
+},{"./components/row-gutter.vue":14,"./components/column-gutter.vue":15,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],4:[function(require,module,exports) {
 'use strict';
 
 var _vueEsm = require('vue/dist/vue.esm.js');
@@ -18493,7 +18504,7 @@ new _vueEsm2.default({
         return h(_index2.default);
     }
 });
-},{"vue/dist/vue.esm.js":51,"./index.vue":6}],37:[function(require,module,exports) {
+},{"vue/dist/vue.esm.js":8,"./index.vue":6}],37:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -18522,7 +18533,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50717' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '60412' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
