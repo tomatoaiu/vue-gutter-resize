@@ -10,7 +10,8 @@
         <div
           class="gutter gutter-h" draggable="true"
           :style="`height: ${gutterSize || gutterSizes[n - 1]}; width: ${width}; background-color: ${color || colors[n - 1]};`"
-          @drag="e => { drag(e, n - 1) }">
+          @drag="e => { drag(e, n - 1) }"
+          @dragstart="dragstart($event, n - 1)">
         </div>
         <div
           v-if="n !== row - 1"
@@ -35,7 +36,8 @@ export default {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   data () {
     return {
-      rowArray: []
+      rowArray: [],
+      target: undefined
     }
   },
   created () {
@@ -89,6 +91,11 @@ export default {
 .gutter {
   background: #ccc;
   overflow: hidden;
+  position: relative;
+}
+
+.active {
+  z-index: 1;
 }
 
 .gutter-h {

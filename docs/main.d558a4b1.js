@@ -17695,7 +17695,8 @@ exports.default = {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   data: function data() {
     return {
-      rowArray: []
+      rowArray: [],
+      target: undefined
     };
   },
   created: function created() {
@@ -17740,6 +17741,7 @@ exports.default = {
     }
   }
 }; //
+//
 //
 //
 //
@@ -17820,6 +17822,9 @@ exports.default = {
               on: {
                 drag: function(e) {
                   _vm.drag(e, n - 1)
+                },
+                dragstart: function($event) {
+                  _vm.dragstart($event, n - 1)
                 }
               }
             }),
@@ -17907,7 +17912,8 @@ exports.default = {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
   data: function data() {
     return {
-      col: []
+      col: [],
+      target: undefined
     };
   },
   created: function created() {
@@ -17952,6 +17958,7 @@ exports.default = {
     }
   }
 }; //
+//
 //
 //
 //
@@ -18040,6 +18047,9 @@ exports.default = {
               on: {
                 drag: function(e) {
                   _vm.drag(e, n - 1)
+                },
+                dragstart: function($event) {
+                  _vm.dragstart($event, n - 1)
                 }
               }
             }),

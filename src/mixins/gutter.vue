@@ -17,6 +17,13 @@ export default {
     this.setPlaygroundRect()
   },
   methods: {
+    dragstart (e, index) {
+      if (this.target && this.target.classList) {
+        this.target.classList.remove('active');
+      }
+      e.target.classList.add('active');
+      this.target = e.target
+    },
     setPlaygroundRect () { 
       const clientRect = this.$refs.gutter.getBoundingClientRect()
       this.gutterComponent.width = clientRect.width

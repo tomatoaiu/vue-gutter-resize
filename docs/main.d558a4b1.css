@@ -8,6 +8,10 @@
 .gutter[data-v-a38399] {
   background: #ccc;
   overflow: hidden;
+  position: relative;
+}
+.active[data-v-a38399] {
+  z-index: 1;
 }
 .gutter-h[data-v-a38399] {
   width: 100%;
@@ -20,6 +24,10 @@
 .gutter[data-v-bf9d58] {
   background: #ccc;
   overflow: hidden;
+  position: relative;
+}
+.active[data-v-bf9d58] {
+  z-index: 1;
 }
 .gutter-v[data-v-bf9d58] {
   float: left;
