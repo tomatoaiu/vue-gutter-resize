@@ -154,7 +154,7 @@ export default {
   - column number
   - `:column="3"`
 - columnSizes: `Array<Number>`
-  - column size
+  - column size(total 100)
   - `:columnSizes="[1, 2, 3]"`
 
 #### emit
@@ -196,7 +196,7 @@ Specified by col-n
   - row number
   - `:row="3"`
 - rowSizes: `Array<Number>`
-  - row size
+  - row size(total 100)
   - `:rowSizes="[1, 2, 3]"`
 
 #### emit

@@ -154,7 +154,7 @@ export default {
   - column数
   - `:column="3"`
 - columnSizes: `Array<Number>`
-  - columnのサイズ
+  - columnのサイズ(合計で100)
   - `:columnSizes="[1, 2, 3]"`
 
 #### emit
@@ -196,7 +196,7 @@ col-nで指定
   - row数
   - `:row="3"`
 - rowSizes: `Array<Number>`
-  - rowのサイズ
+  - rowのサイズ(合計で100)
   - `:rowSizes="[1, 2, 3]"`
 
 #### emit
