@@ -54,6 +54,7 @@ import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
       :height="'600px'"
       :gutterSizes="['4px', '1rem', '1em']"
       :colors="colors"
+      :columnSizes="[4, 1, 4, 1]"
       @resize="resize">
       <div slot="col-0">0</div>
       <div slot="col-1">1</div>
@@ -96,6 +97,7 @@ export default {
       :height="'600px'"
       :gutterSize="'4px'"
       :colors="colors"
+      :rowSizes="[1, 2, 3, 4]"
       @resize="resize">
       <div slot="row-0">0</div>
       <div slot="row-1">1</div>
