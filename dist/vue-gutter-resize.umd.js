@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.VueGutterResize = {})));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('assert')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'assert'], factory) :
+  (factory((global.VueGutterResize = {}),global.assert));
+}(this, (function (exports,assert) { 'use strict';
 
   var MAX_DRAG_RANGE = 100;
   var MIN_DRAG_RANGE = 0;
@@ -51,6 +51,7 @@
         var sum = sizes.reduce(function (prev, current) {
           return prev + current;
         });
+        if (sum > 100) throw console.error('Please total area size is 100 or less.');
         sizes.forEach(function (size) {
           var raio = 100 / sum;
           _this.areaSize.push(size * raio);

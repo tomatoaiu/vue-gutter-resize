@@ -2,6 +2,8 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+require('assert');
+
 var MAX_DRAG_RANGE = 100;
 var MIN_DRAG_RANGE = 0;
 
@@ -49,6 +51,7 @@ var script = {
       var sum = sizes.reduce(function (prev, current) {
         return prev + current;
       });
+      if (sum > 100) throw console.error('Please total area size is 100 or less.');
       sizes.forEach(function (size) {
         var raio = 100 / sum;
         _this.areaSize.push(size * raio);

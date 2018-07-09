@@ -1,4 +1,5 @@
 <script>
+import { throws } from 'assert';
 const MAX_DRAG_RANGE = 100
 const MIN_DRAG_RANGE = 0
 
@@ -43,6 +44,7 @@ export default {
       const sum = sizes.reduce((prev, current) => {
         return prev + current
       })
+      if (sum > 100) throw console.error('Please total area size is 100 or less.')
       sizes.forEach(size => {
         const raio = 100 / sum
         this.areaSize.push(size * raio)
