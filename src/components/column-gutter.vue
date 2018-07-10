@@ -35,6 +35,14 @@ export default {
   name: 'columnGutter',
   mixins: [ gutter ],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+  created () {
+    if (this.isArrayContains(this.columnSizes)) {
+      if (this.column !== this.columnSizes.length) throw console.error(`Please column equal columnSizes.length\ncolumn: ${this.column}, columnSizes.length: ${this.columnSizes.length}`)
+    }
+    if (this.isArrayContains(this.colors)) {
+      if ((this.column - 1) !== this.colors.length) throw console.error(`Please (column - 1) equal colors.length\n(column - 1): ${this.column - 1}, colors.length: ${this.colors.length}`)
+    }
+  },
   methods: {
     divideArea () {
       if (this.isArrayContains(this.columnSizes)) {

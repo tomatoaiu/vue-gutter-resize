@@ -34,6 +34,14 @@ export default {
   name: 'rowGutter',
   mixins: [ gutter ],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+  created () {
+    if (this.isArrayContains(this.rowSizes)) {
+      if (this.row !== this.rowSizes.length) throw console.error(`Please row equal rowSizes.length\nrow: ${this.row}, rowSizes.length: ${this.rowSizes.length}`)
+    }
+    if (this.isArrayContains(this.colors)) {
+      if ((this.row - 1) !== this.colors.length) throw console.error(`Please (row - 1) equal colors.length\n(row - 1): ${this.row - 1}, colors.length: ${this.colors.length}`)
+    }
+  },
   methods: {
     divideArea () {
       if (this.isArrayContains(this.rowSizes)) {

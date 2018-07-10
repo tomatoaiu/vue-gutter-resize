@@ -28,6 +28,9 @@ var script = {
   },
 
   methods: {
+    isArrayContains: function isArrayContains(array) {
+      return array && array.length && array.length > 0;
+    },
     draggingGutter: function draggingGutter(e, mousePosition, index, gutterSize) {
       var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
       if (this.isDraggingGutter(e)) {
@@ -87,7 +90,7 @@ var script = {
     },
     getGutterSum: function getGutterSum(index, gutterSize, gutterSizes) {
       var gutterSum = 0;
-      if (this.gutterSizes && this.gutterSizes.length && this.gutterSizes.length > 0) {
+      if (this.isArrayContains(this.gutterSizes)) {
         for (var i = 0; i < index; i++) {
           gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
         }
@@ -198,9 +201,18 @@ var script$1 = {
   name: 'columnGutter',
   mixins: [gutter],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+  created: function created() {
+    if (this.isArrayContains(this.columnSizes)) {
+      if (this.column !== this.columnSizes.length) throw console.error('Please column equal columnSizes.length\ncolumn: ' + this.column + ', columnSizes.length: ' + this.columnSizes.length);
+    }
+    if (this.isArrayContains(this.colors)) {
+      if (this.column - 1 !== this.colors.length) throw console.error('Please (column - 1) equal colors.length\n(column - 1): ' + (this.column - 1) + ', colors.length: ' + this.colors.length);
+    }
+  },
+
   methods: {
     divideArea: function divideArea() {
-      if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+      if (this.isArrayContains(this.columnSizes)) {
         this.specifyDivideArea(this.columnSizes);
       } else {
         this.generalDivideArea();
@@ -262,10 +274,10 @@ var __vue_template__$1 = typeof __vue_render__$1 !== 'undefined' ? { render: __v
 /* style */
 var __vue_inject_styles__$1 = function (inject) {
   if (!inject) return;
-  inject("data-v-4b1f587d_0", { source: "\n.pane-v[data-v-4b1f587d] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-4b1f587d] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-4b1f587d] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-4b1f587d] {\n  z-index: 1;\n}\n.gutter-v[data-v-4b1f587d] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+  inject("data-v-2b6e8df4_0", { source: "\n.pane-v[data-v-2b6e8df4] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-2b6e8df4] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-2b6e8df4] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-2b6e8df4] {\n  z-index: 1;\n}\n.gutter-v[data-v-2b6e8df4] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
 };
 /* scoped */
-var __vue_scope_id__$1 = "data-v-4b1f587d";
+var __vue_scope_id__$1 = "data-v-2b6e8df4";
 /* module identifier */
 var __vue_module_identifier__$1 = undefined;
 /* functional template */
@@ -376,9 +388,18 @@ var script$2 = {
   name: 'rowGutter',
   mixins: [gutter],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+  created: function created() {
+    if (this.isArrayContains(this.rowSizes)) {
+      if (this.row !== this.rowSizes.length) throw console.error('Please row equal rowSizes.length\nrow: ' + this.row + ', rowSizes.length: ' + this.rowSizes.length);
+    }
+    if (this.isArrayContains(this.colors)) {
+      if (this.row - 1 !== this.colors.length) throw console.error('Please (row - 1) equal colors.length\n(row - 1): ' + (this.row - 1) + ', colors.length: ' + this.colors.length);
+    }
+  },
+
   methods: {
     divideArea: function divideArea() {
-      if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+      if (this.isArrayContains(this.rowSizes)) {
         this.specifyDivideArea(this.rowSizes);
       } else {
         this.generalDivideArea();
@@ -436,10 +457,10 @@ var __vue_template__$2 = typeof __vue_render__$2 !== 'undefined' ? { render: __v
 /* style */
 var __vue_inject_styles__$2 = function (inject) {
   if (!inject) return;
-  inject("data-v-69001e36_0", { source: "\n.pane[data-v-69001e36] {\n  height: 100%;\n}\n.pane-v[data-v-69001e36] {\n  float: left;\n}\n.gutter[data-v-69001e36] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-69001e36] {\n  z-index: 1;\n}\n.gutter-h[data-v-69001e36] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+  inject("data-v-3e458b0a_0", { source: "\n.pane[data-v-3e458b0a] {\n  height: 100%;\n}\n.pane-v[data-v-3e458b0a] {\n  float: left;\n}\n.gutter[data-v-3e458b0a] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-3e458b0a] {\n  z-index: 1;\n}\n.gutter-h[data-v-3e458b0a] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
 };
 /* scoped */
-var __vue_scope_id__$2 = "data-v-69001e36";
+var __vue_scope_id__$2 = "data-v-3e458b0a";
 /* module identifier */
 var __vue_module_identifier__$2 = undefined;
 /* functional template */

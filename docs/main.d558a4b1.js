@@ -18996,6 +18996,15 @@ exports.default = {
   name: 'rowGutter',
   mixins: [_gutter2.default],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+  created: function created() {
+    if (this.isArrayContains(this.rowSizes)) {
+      if (this.row !== this.rowSizes.length) throw console.error('Please row equal rowSizes.length\nrow: ' + this.row + ', rowSizes.length: ' + this.rowSizes.length);
+    }
+    if (this.isArrayContains(this.colors)) {
+      if (this.row - 1 !== this.colors.length) throw console.error('Please (row - 1) equal colors.length\n(row - 1): ' + (this.row - 1) + ', colors.length: ' + this.colors.length);
+    }
+  },
+
   methods: {
     divideArea: function divideArea() {
       if (this.isArrayContains(this.rowSizes)) {
@@ -19182,6 +19191,15 @@ exports.default = {
   name: 'columnGutter',
   mixins: [_gutter2.default],
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+  created: function created() {
+    if (this.isArrayContains(this.columnSizes)) {
+      if (this.column !== this.columnSizes.length) throw console.error('Please column equal columnSizes.length\ncolumn: ' + this.column + ', columnSizes.length: ' + this.columnSizes.length);
+    }
+    if (this.isArrayContains(this.colors)) {
+      if (this.column - 1 !== this.colors.length) throw console.error('Please (column - 1) equal colors.length\n(column - 1): ' + (this.column - 1) + ', colors.length: ' + this.colors.length);
+    }
+  },
+
   methods: {
     divideArea: function divideArea() {
       if (this.isArrayContains(this.columnSizes)) {
