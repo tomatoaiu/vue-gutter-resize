@@ -15,7 +15,7 @@
     "dev": "parcel ./src/index.html -d ./docs",
     "build": "run-s build:**",
     "build:min": "rollup -c ./build/rollup.config.min.js",
-    "build:umd:esm": "rollup -c ./build/rollup.config.js"
+    "build:common:umd:esm": "rollup -c ./build/rollup.config.js"
   },
   "repository": {
     "type": "git",
