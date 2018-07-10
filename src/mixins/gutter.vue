@@ -23,6 +23,9 @@ export default {
     this.setPlaygroundRect()
   },
   methods: {
+    isArrayContains (array) {
+      return (array && array.length && array.length > 0)
+    },
     draggingGutter (e, mousePosition, index, gutterSize) {
       const gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes)
       if (this.isDraggingGutter(e)) {
@@ -80,7 +83,7 @@ export default {
     },
     getGutterSum (index, gutterSize, gutterSizes) {
       let gutterSum = 0
-      if (this.gutterSizes && this.gutterSizes.length && this.gutterSizes.length > 0) {
+      if (this.isArrayContains(this.gutterSizes)) {
         for (let i = 0; i < index; i++) {
           gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0
         }

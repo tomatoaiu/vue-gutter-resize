@@ -36,7 +36,7 @@ export default {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   methods: {
     divideArea () {
-      if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+      if (this.isArrayContains(this.rowSizes)) {
         this.specifyDivideArea(this.rowSizes)
       } else {
         this.generalDivideArea()

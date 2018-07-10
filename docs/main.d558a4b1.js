@@ -103,7 +103,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({8:[function(require,module,exports) {
+})({7:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -10035,7 +10035,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],44:[function(require,module,exports) {
+},{}],42:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -10769,7 +10769,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":41,"inherits":43,"process":44}],37:[function(require,module,exports) {
+},{"./support/isBuffer":41,"inherits":43,"process":42}],37:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -18818,6 +18818,9 @@ exports.default = {
   },
 
   methods: {
+    isArrayContains: function isArrayContains(array) {
+      return array && array.length && array.length > 0;
+    },
     draggingGutter: function draggingGutter(e, mousePosition, index, gutterSize) {
       var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
       if (this.isDraggingGutter(e)) {
@@ -18877,7 +18880,7 @@ exports.default = {
     },
     getGutterSum: function getGutterSum(index, gutterSize, gutterSizes) {
       var gutterSum = 0;
-      if (this.gutterSizes && this.gutterSizes.length && this.gutterSizes.length > 0) {
+      if (this.isArrayContains(this.gutterSizes)) {
         for (var i = 0; i < index; i++) {
           gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
         }
@@ -18995,7 +18998,7 @@ exports.default = {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
   methods: {
     divideArea: function divideArea() {
-      if (this.rowSizes && this.rowSizes.length && this.rowSizes.length > 0) {
+      if (this.isArrayContains(this.rowSizes)) {
         this.specifyDivideArea(this.rowSizes);
       } else {
         this.generalDivideArea();
@@ -19181,7 +19184,7 @@ exports.default = {
   props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
   methods: {
     divideArea: function divideArea() {
-      if (this.columnSizes && this.columnSizes.length && this.columnSizes.length > 0) {
+      if (this.isArrayContains(this.columnSizes)) {
         this.specifyDivideArea(this.columnSizes);
       } else {
         this.generalDivideArea();
@@ -19754,7 +19757,7 @@ new _vueEsm2.default({
         return h(_index2.default);
     }
 });
-},{"vue/dist/vue.esm.js":8,"./index.vue":6}],47:[function(require,module,exports) {
+},{"vue/dist/vue.esm.js":7,"./index.vue":6}],17:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -19783,7 +19786,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '54633' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61416' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -19924,5 +19927,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[47,4], null)
+},{}]},{},[17,4], null)
 //# sourceMappingURL=/main.d558a4b1.map
