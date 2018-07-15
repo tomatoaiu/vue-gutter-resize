@@ -638,14 +638,17 @@
     });
   }
 
-  // Make it available as vue plugin
-  var index = {
+  var plugin = {
     install: install
   };
 
+  if (typeof window !== 'undefined' && window.Vue) {
+    window.Vue.use(plugin);
+  }
+
   exports.columnGutter = columnGutter;
   exports.rowGutter = rowGutter;
-  exports.default = index;
+  exports.default = plugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

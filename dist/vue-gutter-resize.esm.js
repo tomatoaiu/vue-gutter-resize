@@ -634,10 +634,13 @@ function install(Vue) {
   });
 }
 
-// Make it available as vue plugin
-var index = {
+var plugin = {
   install: install
 };
 
-export default index;
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin);
+}
+
+export default plugin;
 export { columnGutter, rowGutter };

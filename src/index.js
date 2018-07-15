@@ -12,6 +12,14 @@ function install (Vue) {
   })
 }
 
+const plugin = {
+  install
+}
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(plugin)
+}
+
 // Make it split and import
 export {
   columnGutter, 
@@ -19,6 +27,4 @@ export {
 }
 
 // Make it available as vue plugin
-export default { 
-  install
-}
+export default plugin
