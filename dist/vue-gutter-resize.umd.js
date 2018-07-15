@@ -200,7 +200,38 @@
   var script$1 = {
     name: 'columnGutter',
     mixins: [gutter],
-    props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+    props: {
+      width: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      height: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      gutterSize: {
+        type: String
+      },
+      gutterSizes: {
+        type: Array
+      },
+      color: {
+        type: String
+      },
+      colors: {
+        type: Array
+      },
+      column: {
+        type: Number,
+        required: true,
+        default: 2
+      },
+      columnSizes: {
+        type: Array
+      }
+    },
     created: function created() {
       if (this.isArrayContains(this.columnSizes)) {
         if (this.column !== this.columnSizes.length) throw console.error('Please column equal columnSizes.length\ncolumn: ' + this.column + ', columnSizes.length: ' + this.columnSizes.length);
@@ -274,10 +305,10 @@
   /* style */
   var __vue_inject_styles__$1 = function (inject) {
     if (!inject) return;
-    inject("data-v-2b6e8df4_0", { source: "\n.pane-v[data-v-2b6e8df4] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-2b6e8df4] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-2b6e8df4] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-2b6e8df4] {\n  z-index: 1;\n}\n.gutter-v[data-v-2b6e8df4] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-2f5ba3b4_0", { source: "\n.pane-v[data-v-2f5ba3b4] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-2f5ba3b4] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-2f5ba3b4] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-2f5ba3b4] {\n  z-index: 1;\n}\n.gutter-v[data-v-2f5ba3b4] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$1 = "data-v-2b6e8df4";
+  var __vue_scope_id__$1 = "data-v-2f5ba3b4";
   /* module identifier */
   var __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -387,7 +418,38 @@
   var script$2 = {
     name: 'rowGutter',
     mixins: [gutter],
-    props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+    props: {
+      width: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      height: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      gutterSize: {
+        type: String
+      },
+      gutterSizes: {
+        type: Array
+      },
+      color: {
+        type: String
+      },
+      colors: {
+        type: Array
+      },
+      row: {
+        type: Number,
+        required: true,
+        default: 2
+      },
+      rowSizes: {
+        type: Array
+      }
+    },
     created: function created() {
       if (this.isArrayContains(this.rowSizes)) {
         if (this.row !== this.rowSizes.length) throw console.error('Please row equal rowSizes.length\nrow: ' + this.row + ', rowSizes.length: ' + this.rowSizes.length);
@@ -457,10 +519,10 @@
   /* style */
   var __vue_inject_styles__$2 = function (inject) {
     if (!inject) return;
-    inject("data-v-3e458b0a_0", { source: "\n.pane[data-v-3e458b0a] {\n  height: 100%;\n}\n.pane-v[data-v-3e458b0a] {\n  float: left;\n}\n.gutter[data-v-3e458b0a] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-3e458b0a] {\n  z-index: 1;\n}\n.gutter-h[data-v-3e458b0a] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-7a7a92d9_0", { source: "\n.pane[data-v-7a7a92d9] {\n  height: 100%;\n}\n.pane-v[data-v-7a7a92d9] {\n  float: left;\n}\n.gutter[data-v-7a7a92d9] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-7a7a92d9] {\n  z-index: 1;\n}\n.gutter-h[data-v-7a7a92d9] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$2 = "data-v-3e458b0a";
+  var __vue_scope_id__$2 = "data-v-7a7a92d9";
   /* module identifier */
   var __vue_module_identifier__$2 = undefined;
   /* functional template */

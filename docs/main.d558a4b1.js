@@ -18995,7 +18995,38 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   name: 'rowGutter',
   mixins: [_gutter2.default],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array
+    },
+    row: {
+      type: Number,
+      required: true,
+      default: 2
+    },
+    rowSizes: {
+      type: Array
+    }
+  },
   created: function created() {
     if (this.isArrayContains(this.rowSizes)) {
       if (this.row !== this.rowSizes.length) throw console.error('Please row equal rowSizes.length\nrow: ' + this.row + ', rowSizes.length: ' + this.rowSizes.length);
@@ -19190,7 +19221,38 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
   name: 'columnGutter',
   mixins: [_gutter2.default],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array
+    },
+    column: {
+      type: Number,
+      required: true,
+      default: 2
+    },
+    columnSizes: {
+      type: Array
+    }
+  },
   created: function created() {
     if (this.isArrayContains(this.columnSizes)) {
       if (this.column !== this.columnSizes.length) throw console.error('Please column equal columnSizes.length\ncolumn: ' + this.column + ', columnSizes.length: ' + this.columnSizes.length);
@@ -19804,7 +19866,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '61416' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51887' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 

@@ -33,7 +33,38 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'rowGutter',
   mixins: [ gutter ],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'row', 'colors', 'rowSizes'],
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array,
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array,
+    },
+    row: {
+      type: Number,
+      required: true,
+      default: 2
+    },
+    rowSizes: {
+      type: Array,
+    }
+  },
   created () {
     if (this.isArrayContains(this.rowSizes)) {
       if (this.row !== this.rowSizes.length) throw console.error(`Please row equal rowSizes.length\nrow: ${this.row}, rowSizes.length: ${this.rowSizes.length}`)

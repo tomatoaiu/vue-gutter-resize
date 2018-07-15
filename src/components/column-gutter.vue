@@ -34,7 +34,38 @@ import gutter from '../mixins/gutter.vue'
 export default {
   name: 'columnGutter',
   mixins: [ gutter ],
-  props: ['width', 'height', 'gutterSize', 'gutterSizes', 'color', 'column', 'colors', 'columnSizes'],
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array,
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array,
+    },
+    column: {
+      type: Number,
+      required: true,
+      default: 2
+    },
+    columnSizes: {
+      type: Array,
+    }
+  },
   created () {
     if (this.isArrayContains(this.columnSizes)) {
       if (this.column !== this.columnSizes.length) throw console.error(`Please column equal columnSizes.length\ncolumn: ${this.column}, columnSizes.length: ${this.columnSizes.length}`)
