@@ -1,5 +1,4 @@
 <script>
-import { throws } from 'assert';
 const MAX_DRAG_RANGE = 100
 const MIN_DRAG_RANGE = 0
 

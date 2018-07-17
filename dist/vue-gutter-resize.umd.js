@@ -1,13 +1,37 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('assert')) :
-  typeof define === 'function' && define.amd ? define(['exports', 'assert'], factory) :
-  (factory((global.VueGutterResize = {}),global.assert));
-}(this, (function (exports,assert) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.VueGutterResize = {})));
+}(this, (function (exports) { 'use strict';
 
   var MAX_DRAG_RANGE = 100;
   var MIN_DRAG_RANGE = 0;
 
   var script = {
+    props: {
+      width: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      height: {
+        type: String,
+        required: true,
+        default: '500px'
+      },
+      gutterSize: {
+        type: String
+      },
+      gutterSizes: {
+        type: Array
+      },
+      color: {
+        type: String
+      },
+      colors: {
+        type: Array
+      }
+    },
     data: function data() {
       return {
         target: undefined,
@@ -201,28 +225,6 @@
     name: 'columnGutter',
     mixins: [gutter],
     props: {
-      width: {
-        type: String,
-        required: true,
-        default: '500px'
-      },
-      height: {
-        type: String,
-        required: true,
-        default: '500px'
-      },
-      gutterSize: {
-        type: String
-      },
-      gutterSizes: {
-        type: Array
-      },
-      color: {
-        type: String
-      },
-      colors: {
-        type: Array
-      },
       column: {
         type: Number,
         required: true,
@@ -305,10 +307,10 @@
   /* style */
   var __vue_inject_styles__$1 = function (inject) {
     if (!inject) return;
-    inject("data-v-2f5ba3b4_0", { source: "\n.pane-v[data-v-2f5ba3b4] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-2f5ba3b4] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-2f5ba3b4] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-2f5ba3b4] {\n  z-index: 1;\n}\n.gutter-v[data-v-2f5ba3b4] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-00bb4cab_0", { source: "\n.pane-v[data-v-00bb4cab] {\n  float: left;\n  height: 100%;\n}\n.afterCol[data-v-00bb4cab] {\n  height: 100%;\n  display: inline-block;\n}\n.gutter[data-v-00bb4cab] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-00bb4cab] {\n  z-index: 1;\n}\n.gutter-v[data-v-00bb4cab] {\n  float: left;\n  width: 2px;\n  height: 100%;\n  cursor: ew-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$1 = "data-v-2f5ba3b4";
+  var __vue_scope_id__$1 = "data-v-00bb4cab";
   /* module identifier */
   var __vue_module_identifier__$1 = undefined;
   /* functional template */
@@ -419,28 +421,6 @@
     name: 'rowGutter',
     mixins: [gutter],
     props: {
-      width: {
-        type: String,
-        required: true,
-        default: '500px'
-      },
-      height: {
-        type: String,
-        required: true,
-        default: '500px'
-      },
-      gutterSize: {
-        type: String
-      },
-      gutterSizes: {
-        type: Array
-      },
-      color: {
-        type: String
-      },
-      colors: {
-        type: Array
-      },
       row: {
         type: Number,
         required: true,
@@ -519,10 +499,10 @@
   /* style */
   var __vue_inject_styles__$2 = function (inject) {
     if (!inject) return;
-    inject("data-v-7a7a92d9_0", { source: "\n.pane[data-v-7a7a92d9] {\n  height: 100%;\n}\n.pane-v[data-v-7a7a92d9] {\n  float: left;\n}\n.gutter[data-v-7a7a92d9] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-7a7a92d9] {\n  z-index: 1;\n}\n.gutter-h[data-v-7a7a92d9] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
+    inject("data-v-7cac956c_0", { source: "\n.pane[data-v-7cac956c] {\n  height: 100%;\n}\n.pane-v[data-v-7cac956c] {\n  float: left;\n}\n.gutter[data-v-7cac956c] {\n  background: #ccc;\n  overflow: hidden;\n  position: relative;\n}\n.active[data-v-7cac956c] {\n  z-index: 1;\n}\n.gutter-h[data-v-7cac956c] {\n  width: 100%;\n  height: 2px;\n  cursor: ns-resize;\n}\n", map: undefined, media: undefined });
   };
   /* scoped */
-  var __vue_scope_id__$2 = "data-v-7a7a92d9";
+  var __vue_scope_id__$2 = "data-v-7cac956c";
   /* module identifier */
   var __vue_module_identifier__$2 = undefined;
   /* functional template */
