@@ -103,7 +103,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({7:[function(require,module,exports) {
+})({8:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -10010,7 +10010,7 @@ module.exports = function isBuffer(arg) {
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],43:[function(require,module,exports) {
+},{}],44:[function(require,module,exports) {
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -10035,7 +10035,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],42:[function(require,module,exports) {
+},{}],43:[function(require,module,exports) {
 
 // shim for using process in browser
 var process = module.exports = {};
@@ -10769,7 +10769,7 @@ exports._extend = function (origin, add) {
 function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
-},{"./support/isBuffer":41,"inherits":43,"process":42}],37:[function(require,module,exports) {
+},{"./support/isBuffer":41,"inherits":44,"process":43}],37:[function(require,module,exports) {
 var global = arguments[3];
 'use strict';
 
@@ -11262,7 +11262,7 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":39}],18:[function(require,module,exports) {
+},{"util/":39}],21:[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = (window.__VUE_HOT_MAP__ = Object.create(null))
@@ -18798,6 +18798,30 @@ var MAX_DRAG_RANGE = 100;
 var MIN_DRAG_RANGE = 0;
 
 exports.default = {
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array
+    }
+  },
   data: function data() {
     return {
       target: undefined,
@@ -18918,7 +18942,7 @@ exports.default = {
         
       }
     })();
-},{"assert":37,"vue-hot-reload-api":18,"vue":16}],26:[function(require,module,exports) {
+},{"assert":37,"vue-hot-reload-api":21,"vue":16}],26:[function(require,module,exports) {
 var bundleURL = null;
 function getBundleURLCached() {
   if (!bundleURL) {
@@ -18948,7 +18972,7 @@ function getBaseURL(url) {
 
 exports.getBundleURL = getBundleURLCached;
 exports.getBaseURL = getBaseURL;
-},{}],17:[function(require,module,exports) {
+},{}],20:[function(require,module,exports) {
 var bundle = require('./bundle-url');
 
 function updateLink(link) {
@@ -18996,28 +19020,6 @@ exports.default = {
   name: 'rowGutter',
   mixins: [_gutter2.default],
   props: {
-    width: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    height: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    gutterSize: {
-      type: String
-    },
-    gutterSizes: {
-      type: Array
-    },
-    color: {
-      type: String
-    },
-    colors: {
-      type: Array
-    },
     row: {
       type: Number,
       required: true,
@@ -19205,7 +19207,7 @@ render._withStripped = true
       
       }
     })();
-},{"../mixins/gutter.vue":34,"_css_loader":17,"vue-hot-reload-api":18,"vue":16}],15:[function(require,module,exports) {
+},{"../mixins/gutter.vue":34,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],15:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19222,28 +19224,6 @@ exports.default = {
   name: 'columnGutter',
   mixins: [_gutter2.default],
   props: {
-    width: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    height: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    gutterSize: {
-      type: String
-    },
-    gutterSizes: {
-      type: Array
-    },
-    color: {
-      type: String
-    },
-    colors: {
-      type: Array
-    },
     column: {
       type: Number,
       required: true,
@@ -19440,7 +19420,7 @@ render._withStripped = true
       
       }
     })();
-},{"../mixins/gutter.vue":34,"_css_loader":17,"vue-hot-reload-api":18,"vue":16}],6:[function(require,module,exports) {
+},{"../mixins/gutter.vue":34,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],6:[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -19818,7 +19798,7 @@ render._withStripped = true
       
       }
     })();
-},{"./components/row-gutter.vue":14,"./components/column-gutter.vue":15,"_css_loader":17,"vue-hot-reload-api":18,"vue":16}],4:[function(require,module,exports) {
+},{"./components/row-gutter.vue":14,"./components/column-gutter.vue":15,"_css_loader":20,"vue-hot-reload-api":21,"vue":16}],4:[function(require,module,exports) {
 'use strict';
 
 var _vueEsm = require('vue/dist/vue.esm.js');
@@ -19837,7 +19817,7 @@ new _vueEsm2.default({
         return h(_index2.default);
     }
 });
-},{"vue/dist/vue.esm.js":7,"./index.vue":6}],17:[function(require,module,exports) {
+},{"vue/dist/vue.esm.js":8,"./index.vue":6}],47:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -19866,7 +19846,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '51887' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '62708' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -20007,5 +19987,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[17,4], null)
+},{}]},{},[47,4], null)
 //# sourceMappingURL=/main.d558a4b1.map

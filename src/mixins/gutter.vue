@@ -4,6 +4,30 @@ const MAX_DRAG_RANGE = 100
 const MIN_DRAG_RANGE = 0
 
 export default {
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    height: {
+      type: String,
+      required: true,
+      default: '500px'
+    },
+    gutterSize: {
+      type: String
+    },
+    gutterSizes: {
+      type: Array,
+    },
+    color: {
+      type: String
+    },
+    colors: {
+      type: Array,
+    }
+  },
   data () {
     return {
       target: undefined,

@@ -34,28 +34,6 @@ export default {
   name: 'rowGutter',
   mixins: [ gutter ],
   props: {
-    width: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    height: {
-      type: String,
-      required: true,
-      default: '500px'
-    },
-    gutterSize: {
-      type: String
-    },
-    gutterSizes: {
-      type: Array,
-    },
-    color: {
-      type: String
-    },
-    colors: {
-      type: Array,
-    },
     row: {
       type: Number,
       required: true,
