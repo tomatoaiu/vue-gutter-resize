@@ -24,7 +24,7 @@ yarn add vue-gutter-resize
 # or
 npm i vue-gutter-resize
 ```
-### All import
+### Import all
 ```javascript
 import Vue from 'vue/dist/vue.esm.js'
 import VueGutterResize from 'vue-gutter-resize'
