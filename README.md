@@ -135,9 +135,11 @@ export default {
 - width: `String`
   - column-gutter width
   - `:width="'800px'"`
+  - Required
 - height : `String`
   - column-gutter height
   - `:height="'600px'"`
+  - Required
 - gutterSize : `String`
   - all gutter width
   - `:gutterSize="'4px'"`
@@ -155,6 +157,7 @@ export default {
 - column : `Number`
   - column number
   - `:column="3"`
+  - Required
 - columnSizes: `Array<Number>`
   - column size(total 100)
   - `:columnSizes="[1, 2, 3]"`
@@ -177,9 +180,11 @@ Specified by col-n
 - width: `String`
   - row-gutter width
   - `:width="'800px'"`
+  - Required
 - height : `String`
   - row-gutter height
   - `:height="'600px'"`
+  - Required
 - gutterSize : `String`
   - all gutter height
   - `:gutterSize="'4px'"`
@@ -197,6 +202,7 @@ Specified by col-n
 - row : `Number`
   - row number
   - `:row="3"`
+  - Required
 - rowSizes: `Array<Number>`
   - row size(total 100)
   - `:rowSizes="[1, 2, 3]"`

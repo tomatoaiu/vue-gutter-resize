@@ -135,9 +135,11 @@ export default {
 - width: `String`
   - column-gutterの横幅
   - `:width="'800px'"`
+  - 必須
 - height : `String`
   - column-gutterの縦幅
   - `:height="'600px'"`
+  - 必須
 - gutterSize : `String`
   - 全gutterの幅
   - `:gutterSize="'4px'"`
@@ -154,6 +156,7 @@ export default {
   - `:colors="['red', 'blue']"`
 - column : `Number`
   - column数
+  - 必須
   - `:column="3"`
 - columnSizes: `Array<Number>`
   - columnのサイズ(合計で100)
@@ -177,9 +180,11 @@ col-nで指定
 - width: `String`
   - row-gutterの横幅
   - `:width="'800px'"`
+  - 必須
 - height : `String`
   - row-gutterの縦幅
   - `:height="'600px'"`
+  - 必須
 - gutterSize : `String`
   - 全gutterの幅
   - `:gutterSize="'4px'"`
@@ -197,6 +202,7 @@ col-nで指定
 - row : `Number`
   - row数
   - `:row="3"`
+  - 必須
 - rowSizes: `Array<Number>`
   - rowのサイズ(合計で100)
   - `:rowSizes="[1, 2, 3]"`
