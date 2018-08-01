@@ -9,6 +9,7 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ad4d8157285645c5893c521e5130c51d)](https://www.codacy.com/app/tomatoaiu/vue-gutter-resize?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=tomatoaiu/vue-gutter-resize&amp;utm_campaign=Badge_Grade)
 [![Maintainability](https://api.codeclimate.com/v1/badges/56f0f345d51e956c5bca/maintainability)](https://codeclimate.com/github/tomatoaiu/vue-gutter-resize/maintainability)
 [![dependencies Status](https://david-dm.org/tomatoaiu/vue-gutter-resize/status.svg)](https://david-dm.org/tomatoaiu/vue-gutter-resize)
+[![devDependencies Status](https://david-dm.org/tomatoaiu/vue-gutter-resize/dev-status.svg)](https://david-dm.org/tomatoaiu/vue-gutter-resize?type=dev)
 [![install size](https://packagephobia.now.sh/badge?p=vue-gutter-resize)](https://packagephobia.now.sh/result?p=vue-gutter-resize)
 [![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/vue-gutter-resize.svg)](https://github.com/tomatoaiu/vue-gutter-resize)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
