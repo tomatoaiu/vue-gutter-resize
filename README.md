@@ -135,33 +135,33 @@ export default {
 #### props
 - width: `String`
   - column-gutter width
-  - `:width="'800px'"`
   - Required
+  - example: `:width="'800px'"`
 - height : `String`
   - column-gutter height
-  - `:height="'600px'"`
   - Required
+  - example: `:height="'600px'"`
 - gutterSize : `String`
   - all gutter width
-  - `:gutterSize="'4px'"`
+  - example: `:gutterSize="'4px'"`
 - gutterSizes : `Array<String>`
   - each gutter width
   - If gutterSize is specified, gutterSize takes precedence
-  - `:gutterSizes="['7px', '1rem']"`
+  - example: `:gutterSizes="['7px', '1rem']"`
 - color : `String`
   - all gutter color
-  - `:color="'green'"`
+  - example: `:color="'green'"`
 - colors : `Array<String>`
   - each gutter clolr
   - If color is specified, color takes precedence
-  - `:colors="['red', 'blue']"`
+  - example: `:colors="['red', 'blue']"`
 - column : `Number`
   - column number
-  - `:column="3"`
   - Required
+  - example: `:column="3"`
 - columnSizes: `Array<Number>`
   - column size(total 100)
-  - `:columnSizes="[1, 2, 3]"`
+  - example: `:columnSizes="[1, 2, 3]"`
 
 #### emit
 - resize({ col }): `Object`
@@ -180,33 +180,33 @@ Specified by col-n
 #### props
 - width: `String`
   - row-gutter width
-  - `:width="'800px'"`
   - Required
+  - example: `:width="'800px'"`
 - height : `String`
   - row-gutter height
-  - `:height="'600px'"`
   - Required
+  - example: `:height="'600px'"`
 - gutterSize : `String`
   - all gutter height
-  - `:gutterSize="'4px'"`
+  - example: `:gutterSize="'4px'"`
 - gutterSizes : `Array<String>`
   - each gutter height
   - If gutterSize is specified, gutterSize takes precedence
-  - `:gutterSizes="['7px', '1rem']"`
+  - example: `:gutterSizes="['7px', '1rem']"`
 - color : `String`
-  - all gutterの color
-  - `:color="'green'"`
+  - all gutter color
+  - example: `:color="'green'"`
 - colors : `Array<String>`
   - each gutter color
   - If color is specified, color takes precedence
-  - `:colors="['red', 'blue']"`
+  - example: `:colors="['red', 'blue']"`
 - row : `Number`
   - row number
-  - `:row="3"`
   - Required
+  - example: `:row="3"`
 - rowSizes: `Array<Number>`
   - row size(total 100)
-  - `:rowSizes="[1, 2, 3]"`
+  - example: `:rowSizes="[1, 2, 3]"`
 
 #### emit
 - resize({ row }): `Object`

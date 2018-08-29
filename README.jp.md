@@ -135,33 +135,33 @@ export default {
 #### props
 - width: `String`
   - column-gutterの横幅
-  - `:width="'800px'"`
   - 必須
+  - 例: `:width="'800px'"`
 - height : `String`
   - column-gutterの縦幅
-  - `:height="'600px'"`
   - 必須
+  - 例: `:height="'600px'"`
 - gutterSize : `String`
   - 全gutterの幅
-  - `:gutterSize="'4px'"`
+  - 例: `:gutterSize="'4px'"`
 - gutterSizes : `Array<String>`
   - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
-  - `:gutterSizes="['7px', '1rem']"`
+  - 例: `:gutterSizes="['7px', '1rem']"`
 - color : `String`
   - 全gutterの色
-  - `:color="'green'"`
+  - 例: `:color="'green'"`
 - colors : `Array<String>`
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される
-  - `:colors="['red', 'blue']"`
+  - 例: `:colors="['red', 'blue']"`
 - column : `Number`
   - column数
   - 必須
-  - `:column="3"`
+  - 例: `:column="3"`
 - columnSizes: `Array<Number>`
   - columnのサイズ(合計で100)
-  - `:columnSizes="[1, 2, 3]"`
+  - 例: `:columnSizes="[1, 2, 3]"`
 
 #### emit
 - resize({ col }): `Object`
@@ -180,33 +180,33 @@ col-nで指定
 #### props
 - width: `String`
   - row-gutterの横幅
-  - `:width="'800px'"`
   - 必須
+  - 例: `:width="'800px'"`
 - height : `String`
   - row-gutterの縦幅
-  - `:height="'600px'"`
   - 必須
+  - 例: `:height="'600px'"`
 - gutterSize : `String`
   - 全gutterの幅
-  - `:gutterSize="'4px'"`
+  - 例: `:gutterSize="'4px'"`
 - gutterSizes : `Array<String>`
   - それぞれのgutterの幅
   - gutterSizeが指定されている場合、gutterSizeが優先される
-  - `:gutterSizes="['7px', '1rem']"`
+  - 例: `:gutterSizes="['7px', '1rem']"`
 - color : `String`
   - 全gutterの色
-  - `:color="'green'"`
+  - 例: `:color="'green'"`
 - colors : `Array<String>`
   - それぞれのgutterの色
   - colorが指定されている場合、colorが優先される
-  - `:colors="['red', 'blue']"`
+  - 例: `:colors="['red', 'blue']"`
 - row : `Number`
   - row数
-  - `:row="3"`
   - 必須
+  - 例: `:row="3"`
 - rowSizes: `Array<Number>`
   - rowのサイズ(合計で100)
-  - `:rowSizes="[1, 2, 3]"`
+  - 例: `:rowSizes="[1, 2, 3]"`
 
 #### emit
 - resize({ row }): `Object`
