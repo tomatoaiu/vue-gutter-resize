@@ -58,7 +58,8 @@
 
 <script>
 // import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.js'
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.min.js'
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.esm.js'
 // import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
 import rowGutter from './components/row-gutter.vue'
 import columnGutter from './components/column-gutter.vue'
