@@ -57,12 +57,12 @@
 </template>
 
 <script>
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.js'
+import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.common.js'
 // import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.min.js'
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.esm.js'
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.js'
-import rowGutter from './components/row-gutter.vue'
-import columnGutter from './components/column-gutter.vue'
+// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.js'
+import '../dist/vue-gutter-resize.css'
+// import rowGutter from './components/row-gutter.vue'
+// import columnGutter from './components/column-gutter.vue'
 
 export default {
   name: 'app',

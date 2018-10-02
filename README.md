@@ -29,20 +29,22 @@ npm i vue-gutter-resize
 ```javascript
 import Vue from 'vue/dist/vue.esm.js'
 import VueGutterResize from 'vue-gutter-resize'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 Vue.use(VueGutterResize)
 ```
 ### Import as much as you need
 ```javascript
 import { columnGutter } from 'vue-gutter-resize'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 ### Import by module
 ```javascript
-// esm module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.esm.js'
 // umd module
 import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 // commonjs module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
+import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.common.js'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 
 ### Column Gutter
