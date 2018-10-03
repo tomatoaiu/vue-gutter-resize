@@ -69,6 +69,7 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 <script>
 import { columnGutter } from 'vue-gutter-resize'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
   data(){
@@ -112,6 +113,7 @@ export default {
 
 <script>
 import { rowGutter } from 'vue-gutter-resize'
+import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
   data(){
