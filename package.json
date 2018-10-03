@@ -1,6 +1,6 @@
 {
   "name": "vue-gutter-resize",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "description": "resize adjacent dom by dragging the gutter",
   "files": [
     "src",
