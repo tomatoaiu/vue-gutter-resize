@@ -50,21 +50,19 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ### Column Gutter
 ```html
 <template>
-  <div>
-    <column-gutter
-      :column="column"
-      :width="'100vw'"
-      :height="'600px'"
-      :gutterSizes="['4px', '1rem', '1em']"
-      :colors="colors"
-      :columnSizes="[4, 1, 4, 1]"
-      @resize="resize">
-      <div slot="col-0">0</div>
-      <div slot="col-1">1</div>
-      <div slot="col-2">2</div>
-      <div slot="col-3">3</div>
-    </column-gutter>
-  </div>
+  <column-gutter
+    :column="column"
+    :width="'100vw'"
+    :height="'600px'"
+    :gutterSizes="['4px', '1rem', '1em']"
+    :colors="colors"
+    :columnSizes="[4, 1, 4, 1]"
+    @resize="resize">
+    <div slot="col-0">0</div>
+    <div slot="col-1">1</div>
+    <div slot="col-2">2</div>
+    <div slot="col-3">3</div>
+  </column-gutter>
 </template>
 
 <script>
@@ -93,22 +91,20 @@ export default {
 ### Row Gutter
 ```html
 <template>
-  <div>
-    <row-gutter
-      style="border: 1px solid #ccc;"
-      :row="row"
-      :width="'800px'"
-      :height="'600px'"
-      :gutterSize="'4px'"
-      :colors="colors"
-      :rowSizes="[1, 2, 3, 4]"
-      @resize="resize">
-      <div slot="row-0">0</div>
-      <div slot="row-1">1</div>
-      <div slot="row-2">2</div>
-      <div slot="row-3">3</div>
-    </row-gutter>
-  </div>
+  <row-gutter
+    style="border: 1px solid #ccc;"
+    :row="row"
+    :width="'800px'"
+    :height="'600px'"
+    :gutterSize="'4px'"
+    :colors="colors"
+    :rowSizes="[1, 2, 3, 4]"
+    @resize="resize">
+    <div slot="row-0">0</div>
+    <div slot="row-1">1</div>
+    <div slot="row-2">2</div>
+    <div slot="row-3">3</div>
+  </row-gutter>
 </template>
 
 <script>
