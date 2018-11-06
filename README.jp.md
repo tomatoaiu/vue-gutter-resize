@@ -34,16 +34,16 @@ Vue.use(VueGutterResize)
 ```
 ### 必要な分だけimport
 ```javascript
-import { columnGutter } from 'vue-gutter-resize'
+import { ColumnGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 ### module別import
 ```javascript
 // umd module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
+import { ColumnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 // commonjs module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
+import { ColumnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.js'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 
@@ -54,9 +54,9 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
     :column="column"
     :width="'100vw'"
     :height="'600px'"
-    :gutterSizes="['4px', '1rem', '1em']"
+    :gutter-sizes="['4px', '1rem', '1em']"
     :colors="colors"
-    :columnSizes="[4, 1, 4, 1]"
+    :column-sizes="[4, 1, 4, 1]"
     @resize="resize">
     <div slot="col-0">0</div>
     <div slot="col-1">1</div>
@@ -66,11 +66,14 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 </template>
 
 <script>
-import { columnGutter } from 'vue-gutter-resize'
+import { ColumnGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
-  data(){
+  components: {
+    ColumnGutter
+  },
+  data () {
     return {
       column: 4,
       colors: ['red', 'blue', 'yellow']
@@ -80,9 +83,6 @@ export default {
     resize ({ col }) {
       console.log(col) // current col size (etc... [25, 25, 25, 25]
     }
-  },
-  components: {
-    'column-gutter': columnGutter
   }
 }
 </script>
@@ -96,9 +96,9 @@ export default {
     :row="row"
     :width="'800px'"
     :height="'600px'"
-    :gutterSize="'4px'"
+    :gutter-size="'4px'"
     :colors="colors"
-    :rowSizes="[1, 2, 3, 4]"
+    :row-sizes="[1, 2, 3, 4]"
     @resize="resize">
     <div slot="row-0">0</div>
     <div slot="row-1">1</div>
@@ -108,11 +108,14 @@ export default {
 </template>
 
 <script>
-import { rowGutter } from 'vue-gutter-resize'
+import { RowGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
-  data(){
+  components: {
+    RowGutter
+  },
+  data () {
     return {
       row: 4,
       colors: ['red', 'blue', 'yellow']
@@ -122,9 +125,6 @@ export default {
     resize ({ row }) {
       console.log(row) // current row size (etc... [25, 25, 25, 25]
     }
-  },
-  components: {
-    'row-gutter': rowGutter
   }
 }
 </script>
@@ -141,13 +141,13 @@ export default {
   - column-gutterの縦幅
   - 必須
   - 例: `:height="'600px'"`
-- gutterSize : `String`
+- gutter-size : `String`
   - 全gutterの幅
-  - 例: `:gutterSize="'4px'"`
-- gutterSizes : `Array<String>`
+  - 例: `:gutter-size="'4px'"`
+- gutter-sizes : `Array<String>`
   - それぞれのgutterの幅
-  - gutterSizeが指定されている場合、gutterSizeが優先される
-  - 例: `:gutterSizes="['7px', '1rem']"`
+  - gutter-sizeが指定されている場合、gutter-sizeが優先される
+  - 例: `:gutter-sizes="['7px', '1rem']"`
 - color : `String`
   - 全gutterの色
   - 例: `:color="'green'"`
@@ -159,9 +159,9 @@ export default {
   - column数
   - 必須
   - 例: `:column="3"`
-- columnSizes: `Array<Number>`
+- column-sizes: `Array<Number>`
   - columnのサイズ(合計で100)
-  - 例: `:columnSizes="[1, 2, 3]"`
+  - 例: `:column-sizes="[1, 2, 3]"`
 
 #### emit
 - resize({ col }): `Object`
@@ -186,13 +186,13 @@ col-nで指定
   - row-gutterの縦幅
   - 必須
   - 例: `:height="'600px'"`
-- gutterSize : `String`
+- gutter-size : `String`
   - 全gutterの幅
-  - 例: `:gutterSize="'4px'"`
-- gutterSizes : `Array<String>`
+  - 例: `:gutter-size="'4px'"`
+- gutter-sizes : `Array<String>`
   - それぞれのgutterの幅
-  - gutterSizeが指定されている場合、gutterSizeが優先される
-  - 例: `:gutterSizes="['7px', '1rem']"`
+  - gutter-sizeが指定されている場合、gutter-sizeが優先される
+  - 例: `:gutter-sizes="['7px', '1rem']"`
 - color : `String`
   - 全gutterの色
   - 例: `:color="'green'"`
@@ -204,9 +204,9 @@ col-nで指定
   - row数
   - 必須
   - 例: `:row="3"`
-- rowSizes: `Array<Number>`
+- row-sizes: `Array<Number>`
   - rowのサイズ(合計で100)
-  - 例: `:rowSizes="[1, 2, 3]"`
+  - 例: `:row-sizes="[1, 2, 3]"`
 
 #### emit
 - resize({ row }): `Object`

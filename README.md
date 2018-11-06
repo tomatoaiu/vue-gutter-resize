@@ -34,16 +34,16 @@ Vue.use(VueGutterResize)
 ```
 ### Import as much as you need
 ```javascript
-import { columnGutter } from 'vue-gutter-resize'
+import { ColumnGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 ### Import by module
 ```javascript
 // umd module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
+import { ColumnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.umd.js'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 // commonjs module
-import { columnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.common.js'
+import { ColumnGutter } from 'vue-gutter-resize/dist/vue-gutter-resize.common.js'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 ```
 
@@ -54,9 +54,9 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
     :column="column"
     :width="'100vw'"
     :height="'600px'"
-    :gutterSizes="['4px', '1rem', '1em']"
+    :gutter-sizes="['4px', '1rem', '1em']"
     :colors="colors"
-    :columnSizes="[4, 1, 4, 1]"
+    :column-sizes="[4, 1, 4, 1]"
     @resize="resize">
     <div slot="col-0">0</div>
     <div slot="col-1">1</div>
@@ -66,11 +66,14 @@ import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 </template>
 
 <script>
-import { columnGutter } from 'vue-gutter-resize'
+import { ColumnGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
-  data(){
+  components: {
+    ColumnGutter
+  },
+  data () {
     return {
       column: 4,
       colors: ['red', 'blue', 'yellow']
@@ -80,9 +83,6 @@ export default {
     resize ({ col }) {
       console.log(col) // current col size (etc... [25, 25, 25, 25]
     }
-  },
-  components: {
-    'column-gutter': columnGutter
   }
 }
 </script>
@@ -96,9 +96,9 @@ export default {
     :row="row"
     :width="'800px'"
     :height="'600px'"
-    :gutterSize="'4px'"
+    :gutter-size="'4px'"
     :colors="colors"
-    :rowSizes="[1, 2, 3, 4]"
+    :row-sizes="[1, 2, 3, 4]"
     @resize="resize">
     <div slot="row-0">0</div>
     <div slot="row-1">1</div>
@@ -108,11 +108,14 @@ export default {
 </template>
 
 <script>
-import { rowGutter } from 'vue-gutter-resize'
+import { RowGutter } from 'vue-gutter-resize'
 import 'vue-gutter-resize/dist/vue-gutter-resize.css'
 
 export default {
-  data(){
+  components: {
+    RowGutter
+  },
+  data () {
     return {
       row: 4,
       colors: ['red', 'blue', 'yellow']
@@ -122,9 +125,6 @@ export default {
     resize ({ row }) {
       console.log(row) // current row size (etc... [25, 25, 25, 25]
     }
-  },
-  components: {
-    'row-gutter': rowGutter
   }
 }
 </script>
@@ -141,13 +141,13 @@ export default {
   - column-gutter height
   - Required
   - example: `:height="'600px'"`
-- gutterSize : `String`
+- gutter-size : `String`
   - all gutter width
-  - example: `:gutterSize="'4px'"`
-- gutterSizes : `Array<String>`
+  - example: `:gutter-size="'4px'"`
+- gutter-sizes : `Array<String>`
   - each gutter width
-  - If gutterSize is specified, gutterSize takes precedence
-  - example: `:gutterSizes="['7px', '1rem']"`
+  - If gutter-size is specified, gutter-size takes precedence
+  - example: `:gutter-sizes="['7px', '1rem']"`
 - color : `String`
   - all gutter color
   - example: `:color="'green'"`
@@ -159,9 +159,9 @@ export default {
   - column number
   - Required
   - example: `:column="3"`
-- columnSizes: `Array<Number>`
+- column-sizes: `Array<Number>`
   - column size(total 100)
-  - example: `:columnSizes="[1, 2, 3]"`
+  - example: `:column-sizes="[1, 2, 3]"`
 
 #### emit
 - resize({ col }): `Object`
@@ -186,13 +186,13 @@ Specified by col-n
   - row-gutter height
   - Required
   - example: `:height="'600px'"`
-- gutterSize : `String`
+- gutter-size : `String`
   - all gutter height
-  - example: `:gutterSize="'4px'"`
-- gutterSizes : `Array<String>`
+  - example: `:gutter-size="'4px'"`
+- gutter-sizes : `Array<String>`
   - each gutter height
-  - If gutterSize is specified, gutterSize takes precedence
-  - example: `:gutterSizes="['7px', '1rem']"`
+  - If gutter-size is specified, gutter-size takes precedence
+  - example: `:gutter-sizes="['7px', '1rem']"`
 - color : `String`
   - all gutter color
   - example: `:color="'green'"`
@@ -204,9 +204,9 @@ Specified by col-n
   - row number
   - Required
   - example: `:row="3"`
-- rowSizes: `Array<Number>`
+- row-sizes: `Array<Number>`
   - row size(total 100)
-  - example: `:rowSizes="[1, 2, 3]"`
+  - example: `:row-sizes="[1, 2, 3]"`
 
 #### emit
 - resize({ row }): `Object`

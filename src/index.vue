@@ -3,7 +3,7 @@
     :row="row"
     :width="'100%'"
     :height="'100vh'"
-    :gutterSizes="['7px', '1rem']"
+    :gutter-sizes="['7px', '1rem']"
     :colors="colors"
     :rowSizes="[1, 1, 1]">
     <column-gutter
@@ -12,9 +12,9 @@
       :column="columnVue"
       :width="'100%'"
       :height="'100%'"
-      :gutterSize="'6px'"
+      :gutter-size="'6px'"
       :color="'green'"
-      :columnSizes="[1, 1, 5]">
+      :column-sizes="[1, 1, 5]">
       <div class="column" slot="col-0">V</div>
       <div class="column" slot="col-1">u</div>
       <div class="column" slot="col-2">e</div>
@@ -25,9 +25,9 @@
       :column="columnGutter"
       :width="'100%'"
       :height="'100%'"
-      :gutterSize="'10px'"
+      :gutter-size="'10px'"
       :color="'orange'"
-      :columnSizes="[1, 1, 1, 1, 1, 3]">
+      :column-sizes="[1, 1, 1, 1, 1, 3]">
       <div class="column" slot="col-0">G</div>
       <div class="column" slot="col-1">u</div>
       <div class="column" slot="col-2">t</div>
@@ -41,9 +41,9 @@
       :column="columnResize"
       :width="'100%'"
       :height="'100%'"
-      :gutterSize="'4px'"
+      :gutter-size="'4px'"
       :color="'cyan'"
-      :columnSizes="[1, 1, 1, 1, 1, 3]">
+      :column-sizes="[1, 1, 1, 1, 1, 3]">
       <div class="column" slot="col-0">R</div>
       <div class="column" slot="col-1">e</div>
       <div class="column" slot="col-2">s</div>
@@ -55,15 +55,19 @@
 </template>
 
 <script>
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.common.js'
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.min.js'
-// import { rowGutter, columnGutter } from '../dist/vue-gutter-resize.umd.js'
+// import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.common.js'
+// import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.min.js'
+// import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.js'
 // import '../dist/vue-gutter-resize.css'
-import rowGutter from './components/row-gutter.vue'
-import columnGutter from './components/column-gutter.vue'
+import RowGutter from './components/row-gutter.vue'
+import ColumnGutter from './components/column-gutter.vue'
 
 export default {
-  name: 'app',
+  name: 'App',
+  components: {
+    RowGutter,
+    ColumnGutter
+  },
   data () {
     return {
       row: 3,
@@ -73,10 +77,6 @@ export default {
       columnResize: 6,
     }
   },
-  components: {
-    'row-gutter': rowGutter,
-    'column-gutter': columnGutter
-  }
 }
 </script>
 
