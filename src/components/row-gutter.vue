@@ -31,7 +31,7 @@
 import gutter from '../mixins/gutter.vue'
 
 export default {
-  name: 'rowGutter',
+  name: 'RowGutter',
   mixins: [ gutter ],
   props: {
     row: {

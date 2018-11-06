@@ -1,9 +1,9 @@
-import columnGutter from './components/column-gutter.vue'
-import rowGutter from './components/row-gutter.vue'
+import ColumnGutter from './components/column-gutter.vue'
+import RowGutter from './components/row-gutter.vue'
 
 const Components = {
-  columnGutter, 
-  rowGutter 
+  ColumnGutter, 
+  RowGutter 
 }
 
 function install (Vue) {
@@ -22,8 +22,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 
 // Make it split and import
 export {
-  columnGutter, 
-  rowGutter
+  ColumnGutter, 
+  RowGutter
 }
 
 // Make it available as vue plugin

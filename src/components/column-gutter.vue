@@ -32,7 +32,7 @@
 import gutter from '../mixins/gutter.vue'
 
 export default {
-  name: 'columnGutter',
+  name: 'ColumnGutter',
   mixins: [ gutter ],
   props: {
     column: {
