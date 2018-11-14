@@ -10246,7 +10246,7 @@ exports.reload = tryWrap(function (id, options) {
 })
 
 },{}],"mixins/gutter.vue":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -10260,12 +10260,12 @@ exports.default = {
     width: {
       type: String,
       required: true,
-      default: '500px'
+      default: "500px"
     },
     height: {
       type: String,
       required: true,
-      default: '500px'
+      default: "500px"
     },
     gutterSize: {
       type: String
@@ -10326,7 +10326,7 @@ exports.default = {
       var sum = sizes.reduce(function (prev, current) {
         return prev + current;
       });
-      if (sum > 100) throw console.error('Please total area size is 100 or less.');
+      if (sum > 100) throw console.error("Please total area size is 100 or less.");
       sizes.forEach(function (size) {
         var raio = 100 / sum;
         _this.areaSize.push(size * raio);
@@ -10337,11 +10337,11 @@ exports.default = {
         this.areaSize.push(100 / this.row);
       }
     },
-    dragstart: function dragstart(e, index) {
+    dragstart: function dragstart(e) {
       if (this.target && this.target.classList) {
-        this.target.classList.remove('active');
+        this.target.classList.remove("active");
       }
-      e.target.classList.add('active');
+      e.target.classList.add("active");
       this.target = e.target;
     },
     setPlaygroundRect: function setPlaygroundRect() {
@@ -10358,9 +10358,12 @@ exports.default = {
       return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
     },
     getCurrentMousePosition: function getCurrentMousePosition(e) {
-      return { mouseX: e.clientX - this.gutterComponent.offsetX, mouseY: e.clientY - this.gutterComponent.offsetY };
+      return {
+        mouseX: e.clientX - this.gutterComponent.offsetX,
+        mouseY: e.clientY - this.gutterComponent.offsetY
+      };
     },
-    getGutterSum: function getGutterSum(index, gutterSize, gutterSizes) {
+    getGutterSum: function getGutterSum(index) {
       var gutterSum = 0;
       if (this.isArrayContains(this.gutterSizes)) {
         for (var i = 0; i < index; i++) {
@@ -10462,20 +10465,20 @@ function reloadCSS() {
 
 module.exports = reloadCSS;
 },{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/row-gutter.vue":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _gutter = require('../mixins/gutter.vue');
+var _gutter = require("../mixins/gutter.vue");
 
 var _gutter2 = _interopRequireDefault(_gutter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  name: 'RowGutter',
+  name: "RowGutter",
   mixins: [_gutter2.default],
   props: {
     row: {
@@ -10489,10 +10492,10 @@ exports.default = {
   },
   created: function created() {
     if (this.isArrayContains(this.rowSizes)) {
-      if (this.row !== this.rowSizes.length) throw console.error('Please row equal rowSizes.length\nrow: ' + this.row + ', rowSizes.length: ' + this.rowSizes.length);
+      if (this.row !== this.rowSizes.length) throw console.error("Please row equal rowSizes.length\nrow: " + this.row + ", rowSizes.length: " + this.rowSizes.length);
     }
     if (this.isArrayContains(this.colors)) {
-      if (this.row - 1 !== this.colors.length) throw console.error('Please (row - 1) equal colors.length\n(row - 1): ' + (this.row - 1) + ', colors.length: ' + this.colors.length);
+      if (this.row - 1 !== this.colors.length) throw console.error("Please (row - 1) equal colors.length\n(row - 1): " + (this.row - 1) + ", colors.length: " + this.colors.length);
     }
   },
 
@@ -10509,10 +10512,16 @@ exports.default = {
           mouseY = _getCurrentMousePosit.mouseY;
 
       this.draggingGutter(e, mouseY, index, this.gutterComponent.height);
-      this.$emit('resize', { row: this.areaSize });
+      this.$emit("resize", { row: this.areaSize });
     }
   }
 }; //
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10592,8 +10601,8 @@ exports.default = {
                 ";",
               attrs: { draggable: "true" },
               on: {
-                drag: function(e) {
-                  _vm.drag(e, n - 1)
+                drag: function($event) {
+                  _vm.drag($event, n - 1)
                 },
                 dragstart: function($event) {
                   _vm.dragstart($event, n - 1)
@@ -10666,20 +10675,20 @@ render._withStripped = true
       }
     })();
 },{"../mixins/gutter.vue":"mixins/gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"components/column-gutter.vue":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _gutter = require('../mixins/gutter.vue');
+var _gutter = require("../mixins/gutter.vue");
 
 var _gutter2 = _interopRequireDefault(_gutter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  name: 'ColumnGutter',
+  name: "ColumnGutter",
   mixins: [_gutter2.default],
   props: {
     column: {
@@ -10693,10 +10702,10 @@ exports.default = {
   },
   created: function created() {
     if (this.isArrayContains(this.columnSizes)) {
-      if (this.column !== this.columnSizes.length) throw console.error('Please column equal columnSizes.length\ncolumn: ' + this.column + ', columnSizes.length: ' + this.columnSizes.length);
+      if (this.column !== this.columnSizes.length) throw console.error("Please column equal columnSizes.length\ncolumn: " + this.column + ", columnSizes.length: " + this.columnSizes.length);
     }
     if (this.isArrayContains(this.colors)) {
-      if (this.column - 1 !== this.colors.length) throw console.error('Please (column - 1) equal colors.length\n(column - 1): ' + (this.column - 1) + ', colors.length: ' + this.colors.length);
+      if (this.column - 1 !== this.colors.length) throw console.error("Please (column - 1) equal colors.length\n(column - 1): " + (this.column - 1) + ", colors.length: " + this.colors.length);
     }
   },
 
@@ -10713,10 +10722,19 @@ exports.default = {
           mouseX = _getCurrentMousePosit.mouseX;
 
       this.draggingGutter(e, mouseX, index, this.gutterComponent.width);
-      this.$emit('resize', { col: this.areaSize });
+      this.$emit("resize", { col: this.areaSize });
     }
   }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10806,8 +10824,8 @@ exports.default = {
                 ";",
               attrs: { draggable: "true" },
               on: {
-                drag: function(e) {
-                  _vm.drag(e, n - 1)
+                drag: function($event) {
+                  _vm.drag($event, n - 1)
                 },
                 dragstart: function($event) {
                   _vm.dragstart($event, n - 1)
@@ -10879,22 +10897,26 @@ render._withStripped = true
       }
     })();
 },{"../mixins/gutter.vue":"mixins/gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"index.vue":[function(require,module,exports) {
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _rowGutter = require('./components/row-gutter.vue');
+var _rowGutter = require("./components/row-gutter.vue");
 
 var _rowGutter2 = _interopRequireDefault(_rowGutter);
 
-var _columnGutter = require('./components/column-gutter.vue');
+var _columnGutter = require("./components/column-gutter.vue");
 
 var _columnGutter2 = _interopRequireDefault(_columnGutter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -10957,7 +10979,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.js'
 // import '../dist/vue-gutter-resize.css'
 exports.default = {
-  name: 'App',
+  name: "App",
   components: {
     RowGutter: _rowGutter2.default,
     ColumnGutter: _columnGutter2.default
@@ -10965,7 +10987,7 @@ exports.default = {
   data: function data() {
     return {
       row: 3,
-      colors: ['red', 'blue'],
+      colors: ["red", "blue"],
       columnVue: 3,
       columnGutter: 6,
       columnResize: 6
@@ -11178,23 +11200,23 @@ render._withStripped = true
       }
     })();
 },{"./components/row-gutter.vue":"components/row-gutter.vue","./components/column-gutter.vue":"components/column-gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"main.js":[function(require,module,exports) {
-'use strict';
+"use strict";
 
-var _vue = require('vue');
+var _vue = require("vue");
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _index = require('./index.vue');
+var _index = require("./index.vue");
 
 var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 new _vue2.default({
-    el: '#app',
-    render: function render(h) {
-        return h(_index2.default);
-    }
+  el: "#app",
+  render: function render(h) {
+    return h(_index2.default);
+  }
 });
 },{"vue":"../node_modules/vue/dist/vue.common.js","./index.vue":"index.vue"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -11225,7 +11247,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59748' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58892' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
