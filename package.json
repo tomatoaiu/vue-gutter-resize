@@ -10,7 +10,7 @@
     "dev": "parcel ./src/index.html -d ./docs"
   },
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.1.0",
@@ -22,8 +22,8 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0-0",
     "parcel-bundler": "^1.9.7",
-    "vue-hot-reload-api": "^2.3.1",
-    "vue-template-compiler": "^2.5.17"
+    "vue-hot-reload-api": "^2.3.3",
+    "vue-template-compiler": "^2.6.10"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
