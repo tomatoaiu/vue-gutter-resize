@@ -5,8 +5,6 @@
 //
 // anything defined in a previous bundle is accessed via the
 // orig method which is the require for previous bundles
-
-// eslint-disable-next-line no-global-assign
 parcelRequire = (function (modules, cache, entry, globalName) {
   // Save the require from previous bundle to this closure if any
   var previousRequire = typeof parcelRequire === 'function' && parcelRequire;
@@ -42,6 +40,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
       }
 
       localRequire.resolve = resolve;
+      localRequire.cache = {};
 
       var module = cache[name] = new newRequire.Module(name);
 
@@ -76,8 +75,16 @@ parcelRequire = (function (modules, cache, entry, globalName) {
     }, {}];
   };
 
+  var error;
   for (var i = 0; i < entry.length; i++) {
-    newRequire(entry[i]);
+    try {
+      newRequire(entry[i]);
+    } catch (e) {
+      // Save first error but execute all entries
+      if (!error) {
+        error = e;
+      }
+    }
   }
 
   if (entry.length) {
@@ -102,6 +109,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   // Override the current require with this new one
+  parcelRequire = newRequire;
+
+  if (error) {
+    // throw error from earlier, _after updating parcelRequire_
+    throw error;
+  }
+
   return newRequire;
 })({"../node_modules/vue/dist/vue.common.dev.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -12045,12 +12059,1055 @@ Vue.compile = compileToFunctions;
 module.exports = Vue;
 
 },{}],"../node_modules/vue/dist/vue.common.js":[function(require,module,exports) {
-if ('development' === 'production') {
+if ("development" === 'production') {
   module.exports = require('./vue.common.prod.js');
 } else {
   module.exports = require('./vue.common.dev.js');
 }
-},{"./vue.common.dev.js":"../node_modules/vue/dist/vue.common.dev.js"}],"../node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
+},{"./vue.common.dev.js":"../node_modules/vue/dist/vue.common.dev.js"}],"../dist/vue-gutter-resize.umd.js":[function(require,module,exports) {
+var define;
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+(function webpackUniversalModuleDefinition(root, factory) {
+  if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && (typeof module === "undefined" ? "undefined" : _typeof(module)) === 'object') module.exports = factory();else if (typeof define === 'function' && define.amd) define([], factory);else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') exports["vue-gutter-resize"] = factory();else root["vue-gutter-resize"] = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  return (
+    /******/
+    function (modules) {
+      // webpackBootstrap
+
+      /******/
+      // The module cache
+
+      /******/
+      var installedModules = {};
+      /******/
+
+      /******/
+      // The require function
+
+      /******/
+
+      function __webpack_require__(moduleId) {
+        /******/
+
+        /******/
+        // Check if module is in cache
+
+        /******/
+        if (installedModules[moduleId]) {
+          /******/
+          return installedModules[moduleId].exports;
+          /******/
+        }
+        /******/
+        // Create a new module (and put it into the cache)
+
+        /******/
+
+
+        var module = installedModules[moduleId] = {
+          /******/
+          i: moduleId,
+
+          /******/
+          l: false,
+
+          /******/
+          exports: {}
+          /******/
+
+        };
+        /******/
+
+        /******/
+        // Execute the module function
+
+        /******/
+
+        modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+        /******/
+
+        /******/
+        // Flag the module as loaded
+
+        /******/
+
+        module.l = true;
+        /******/
+
+        /******/
+        // Return the exports of the module
+
+        /******/
+
+        return module.exports;
+        /******/
+      }
+      /******/
+
+      /******/
+
+      /******/
+      // expose the modules object (__webpack_modules__)
+
+      /******/
+
+
+      __webpack_require__.m = modules;
+      /******/
+
+      /******/
+      // expose the module cache
+
+      /******/
+
+      __webpack_require__.c = installedModules;
+      /******/
+
+      /******/
+      // define getter function for harmony exports
+
+      /******/
+
+      __webpack_require__.d = function (exports, name, getter) {
+        /******/
+        if (!__webpack_require__.o(exports, name)) {
+          /******/
+          Object.defineProperty(exports, name, {
+            enumerable: true,
+            get: getter
+          });
+          /******/
+        }
+        /******/
+
+      };
+      /******/
+
+      /******/
+      // define __esModule on exports
+
+      /******/
+
+
+      __webpack_require__.r = function (exports) {
+        /******/
+        if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+          /******/
+          Object.defineProperty(exports, Symbol.toStringTag, {
+            value: 'Module'
+          });
+          /******/
+        }
+        /******/
+
+
+        Object.defineProperty(exports, '__esModule', {
+          value: true
+        });
+        /******/
+      };
+      /******/
+
+      /******/
+      // create a fake namespace object
+
+      /******/
+      // mode & 1: value is a module id, require it
+
+      /******/
+      // mode & 2: merge all properties of value into the ns
+
+      /******/
+      // mode & 4: return value when already ns object
+
+      /******/
+      // mode & 8|1: behave like require
+
+      /******/
+
+
+      __webpack_require__.t = function (value, mode) {
+        /******/
+        if (mode & 1) value = __webpack_require__(value);
+        /******/
+
+        if (mode & 8) return value;
+        /******/
+
+        if (mode & 4 && _typeof(value) === 'object' && value && value.__esModule) return value;
+        /******/
+
+        var ns = Object.create(null);
+        /******/
+
+        __webpack_require__.r(ns);
+        /******/
+
+
+        Object.defineProperty(ns, 'default', {
+          enumerable: true,
+          value: value
+        });
+        /******/
+
+        if (mode & 2 && typeof value != 'string') for (var key in value) {
+          __webpack_require__.d(ns, key, function (key) {
+            return value[key];
+          }.bind(null, key));
+        }
+        /******/
+
+        return ns;
+        /******/
+      };
+      /******/
+
+      /******/
+      // getDefaultExport function for compatibility with non-harmony modules
+
+      /******/
+
+
+      __webpack_require__.n = function (module) {
+        /******/
+        var getter = module && module.__esModule ?
+        /******/
+        function getDefault() {
+          return module['default'];
+        } :
+        /******/
+        function getModuleExports() {
+          return module;
+        };
+        /******/
+
+        __webpack_require__.d(getter, 'a', getter);
+        /******/
+
+
+        return getter;
+        /******/
+      };
+      /******/
+
+      /******/
+      // Object.prototype.hasOwnProperty.call
+
+      /******/
+
+
+      __webpack_require__.o = function (object, property) {
+        return Object.prototype.hasOwnProperty.call(object, property);
+      };
+      /******/
+
+      /******/
+      // __webpack_public_path__
+
+      /******/
+
+
+      __webpack_require__.p = "";
+      /******/
+
+      /******/
+
+      /******/
+      // Load entry module and return exports
+
+      /******/
+
+      return __webpack_require__(__webpack_require__.s = "fb15");
+      /******/
+    }(
+    /************************************************************************/
+
+    /******/
+    {
+      /***/
+      "533b":
+      /***/
+      function b(module, exports, __webpack_require__) {// extracted by mini-css-extract-plugin
+
+        /***/
+      },
+
+      /***/
+      "8670":
+      /***/
+      function _(module, exports, __webpack_require__) {// extracted by mini-css-extract-plugin
+
+        /***/
+      },
+
+      /***/
+      "bcf8":
+      /***/
+      function bcf8(module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        /* harmony import */
+
+        var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_column_gutter_vue_vue_type_style_index_0_id_09736778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("533b");
+        /* harmony import */
+
+
+        var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_column_gutter_vue_vue_type_style_index_0_id_09736778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default =
+        /*#__PURE__*/
+        __webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_column_gutter_vue_vue_type_style_index_0_id_09736778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+        /* unused harmony reexport * */
+
+        /* unused harmony default export */
+
+
+        var _unused_webpack_default_export = _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_column_gutter_vue_vue_type_style_index_0_id_09736778_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a;
+        /***/
+      },
+
+      /***/
+      "d4ca":
+      /***/
+      function d4ca(module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+        /* harmony import */
+
+        var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_row_gutter_vue_vue_type_style_index_0_id_7f9fb64e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("8670");
+        /* harmony import */
+
+
+        var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_row_gutter_vue_vue_type_style_index_0_id_7f9fb64e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default =
+        /*#__PURE__*/
+        __webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_row_gutter_vue_vue_type_style_index_0_id_7f9fb64e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+        /* unused harmony reexport * */
+
+        /* unused harmony default export */
+
+
+        var _unused_webpack_default_export = _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_index_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_row_gutter_vue_vue_type_style_index_0_id_7f9fb64e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a;
+        /***/
+      },
+
+      /***/
+      "f6fd":
+      /***/
+      function f6fd(module, exports) {
+        // document.currentScript polyfill by Adam Miller
+        // MIT license
+        (function (document) {
+          var currentScript = "currentScript",
+              scripts = document.getElementsByTagName('script'); // Live NodeList collection
+          // If browser needs currentScript polyfill, add get currentScript() to the document object
+
+          if (!(currentScript in document)) {
+            Object.defineProperty(document, currentScript, {
+              get: function get() {
+                // IE 6-10 supports script readyState
+                // IE 10+ support stack trace
+                try {
+                  throw new Error();
+                } catch (err) {
+                  // Find the second match for the "at" string to get file src url from stack.
+                  // Specifically works with the format of stack traces in IE.
+                  var i,
+                      res = (/.*at [^\(]*\((.*):.+:.+\)$/ig.exec(err.stack) || [false])[1]; // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+
+                  for (i in scripts) {
+                    if (scripts[i].src == res || scripts[i].readyState == "interactive") {
+                      return scripts[i];
+                    }
+                  } // If no match, return null
+
+
+                  return null;
+                }
+              }
+            });
+          }
+        })(document);
+        /***/
+
+      },
+
+      /***/
+      "fb15":
+      /***/
+      function fb15(module, __webpack_exports__, __webpack_require__) {
+        "use strict";
+
+        __webpack_require__.r(__webpack_exports__); // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
+        // This file is imported into lib/wc client bundles.
+
+
+        if (typeof window !== 'undefined') {
+          if (true) {
+            __webpack_require__("f6fd");
+          }
+
+          var i;
+
+          if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
+            __webpack_require__.p = i[1]; // eslint-disable-line
+          }
+        } // Indicate to webpack that this file can be concatenated
+
+        /* harmony default export */
+
+
+        var setPublicPath = null; // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2219c620-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/column-gutter.vue?vue&type=template&id=09736778&scoped=true&
+
+        var render = function render() {
+          var _vm = this;
+
+          var _h = _vm.$createElement;
+
+          var _c = _vm._self._c || _h;
+
+          return _c('section', {
+            ref: "gutter",
+            style: "width: " + _vm.width + "; height: " + _vm.height + ";"
+          }, [_c('div', {
+            staticClass: "pane pane-v left",
+            style: "width: calc(" + _vm.areaSize[0] + "% - " + (_vm.gutterSize || _vm.gutterSizes[0]) + ");"
+          }, [_vm._t("col-" + 0)], 2), _vm._l(_vm.column - 1, function (n) {
+            return _c('div', {
+              key: n,
+              staticClass: "afterCol",
+              style: "width: calc(" + _vm.areaSize[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
+            }, [_c('div', {
+              staticClass: "gutter gutter-v",
+              style: "\n        width: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ";\n        height: " + _vm.height + ";\n        background-color: " + (_vm.color || _vm.colors[n - 1]) + ";\n      ",
+              attrs: {
+                "draggable": "true"
+              },
+              on: {
+                "drag": function drag($event) {
+                  return _vm.drag($event, n - 1);
+                },
+                "dragstart": function dragstart($event) {
+                  return _vm.dragstart($event, n - 1);
+                }
+              }
+            }), n !== _vm.column - 1 ? _c('div', {
+              staticClass: "pane pane-v",
+              style: "width: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1])
+            }, [_vm._t("col-" + n)], 2) : _c('div', {
+              staticClass: "pane pane-v",
+              style: "width: calc(" + 100 + "%}"
+            }, [_vm._t("col-" + n)], 2)]);
+          })], 2);
+        };
+
+        var staticRenderFns = []; // CONCATENATED MODULE: ./src/components/column-gutter.vue?vue&type=template&id=09736778&scoped=true&
+        // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/mixins/gutter.vue?vue&type=script&lang=js&
+
+        var MAX_DRAG_RANGE = 100;
+        var MIN_DRAG_RANGE = 0;
+        /* harmony default export */
+
+        var guttervue_type_script_lang_js_ = {
+          props: {
+            width: {
+              type: String,
+              required: true,
+              default: '500px'
+            },
+            height: {
+              type: String,
+              required: true,
+              default: '500px'
+            },
+            gutterSize: {
+              type: String
+            },
+            gutterSizes: {
+              type: Array
+            },
+            color: {
+              type: String
+            },
+            colors: {
+              type: Array
+            }
+          },
+          data: function data() {
+            return {
+              target: undefined,
+              areaSize: [],
+              gutterComponent: {
+                width: 0,
+                height: 0,
+                offsetX: 0,
+                offsetY: 0
+              }
+            };
+          },
+          created: function created() {
+            this.divideArea();
+          },
+          mounted: function mounted() {
+            this.setPlaygroundRect();
+          },
+          methods: {
+            isArrayContains: function isArrayContains(array) {
+              return array && array.length && array.length > 0;
+            },
+            draggingGutter: function draggingGutter(e, mousePosition, index, gutterSize) {
+              var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
+
+              if (this.isDraggingGutter(e)) {
+                var oneTopSize = (mousePosition + gutterSum) / gutterSize * 100;
+
+                if (this.isGutterInRange(oneTopSize)) {
+                  var before = 0;
+
+                  for (var _i = 0; _i < index; _i += 1) {
+                    before += this.areaSize[_i];
+                  }
+
+                  var sum = this.areaSize[index] + this.areaSize[index + 1];
+
+                  if (oneTopSize - before >= 0 && before + sum - oneTopSize >= 0) {
+                    this.areaSize.splice(index, 1, oneTopSize - before);
+                    this.areaSize.splice(index + 1, 1, before + sum - oneTopSize);
+                  }
+                }
+              }
+            },
+            specifyDivideArea: function specifyDivideArea(sizes) {
+              var _this = this;
+
+              var sum = sizes.reduce(function (prev, current) {
+                return prev + current;
+              });
+              if (sum > 100) throw console.error('Please total area size is 100 or less.');
+              sizes.forEach(function (size) {
+                var raio = 100 / sum;
+
+                _this.areaSize.push(size * raio);
+              });
+            },
+            generalDivideArea: function generalDivideArea() {
+              for (var _i2 = 0; _i2 < this.row; _i2 += 1) {
+                this.areaSize.push(100 / this.row);
+              }
+            },
+            dragstart: function dragstart(e) {
+              if (this.target && this.target.classList) {
+                this.target.classList.remove('active');
+              }
+
+              e.target.classList.add('active');
+              this.target = e.target;
+            },
+            setPlaygroundRect: function setPlaygroundRect() {
+              var clientRect = this.$refs.gutter.getBoundingClientRect();
+              this.gutterComponent.width = clientRect.width;
+              this.gutterComponent.height = clientRect.height;
+              this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
+              this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
+            },
+            isDraggingGutter: function isDraggingGutter(e) {
+              return e && e.clientX > 0 && e.clientY > 0;
+            },
+            isGutterInRange: function isGutterInRange(size) {
+              return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
+            },
+            getCurrentMousePosition: function getCurrentMousePosition(e) {
+              return {
+                mouseX: e.clientX - this.gutterComponent.offsetX,
+                mouseY: e.clientY - this.gutterComponent.offsetY
+              };
+            },
+            getGutterSum: function getGutterSum(index) {
+              var gutterSum = 0;
+
+              if (this.isArrayContains(this.gutterSizes)) {
+                for (var _i3 = 0; _i3 < index; _i3 += 1) {
+                  gutterSum += parseInt(this.gutterSizes[_i3].match(/-?[0-9]+\.?[0-9]*/g).pop(), 10);
+                }
+
+                gutterSum += parseInt(this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop(), 10) / 2;
+              } else {
+                for (var _i4 = 0; _i4 < index; _i4 += 1) {
+                  gutterSum += parseInt(this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop(), 10);
+                }
+
+                gutterSum += parseInt(this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop(), 10) / 2;
+              }
+
+              return gutterSum;
+            }
+          }
+        }; // CONCATENATED MODULE: ./src/mixins/gutter.vue?vue&type=script&lang=js&
+
+        /* harmony default export */
+
+        var mixins_guttervue_type_script_lang_js_ = guttervue_type_script_lang_js_; // CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+
+        /* globals __VUE_SSR_CONTEXT__ */
+        // IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+        // This module is a runtime utility for cleaner component module output and will
+        // be included in the final webpack user bundle.
+
+        function normalizeComponent(scriptExports, render, staticRenderFns, functionalTemplate, injectStyles, scopeId, moduleIdentifier,
+        /* server only */
+        shadowMode
+        /* vue-cli only */
+        ) {
+          // Vue.extend constructor export interop
+          var options = typeof scriptExports === 'function' ? scriptExports.options : scriptExports; // render functions
+
+          if (render) {
+            options.render = render;
+            options.staticRenderFns = staticRenderFns;
+            options._compiled = true;
+          } // functional template
+
+
+          if (functionalTemplate) {
+            options.functional = true;
+          } // scopedId
+
+
+          if (scopeId) {
+            options._scopeId = 'data-v-' + scopeId;
+          }
+
+          var hook;
+
+          if (moduleIdentifier) {
+            // server build
+            hook = function hook(context) {
+              // 2.3 injection
+              context = context || // cached call
+              this.$vnode && this.$vnode.ssrContext || // stateful
+              this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext; // functional
+              // 2.2 with runInNewContext: true
+
+              if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+                context = __VUE_SSR_CONTEXT__;
+              } // inject component styles
+
+
+              if (injectStyles) {
+                injectStyles.call(this, context);
+              } // register component module identifier for async chunk inferrence
+
+
+              if (context && context._registeredComponents) {
+                context._registeredComponents.add(moduleIdentifier);
+              }
+            }; // used by ssr in case component is cached and beforeCreate
+            // never gets called
+
+
+            options._ssrRegister = hook;
+          } else if (injectStyles) {
+            hook = shadowMode ? function () {
+              injectStyles.call(this, this.$root.$options.shadowRoot);
+            } : injectStyles;
+          }
+
+          if (hook) {
+            if (options.functional) {
+              // for template-only hot-reload because in that case the render fn doesn't
+              // go through the normalizer
+              options._injectStyles = hook; // register for functioal component in vue file
+
+              var originalRender = options.render;
+
+              options.render = function renderWithStyleInjection(h, context) {
+                hook.call(context);
+                return originalRender(h, context);
+              };
+            } else {
+              // inject component registration as beforeCreate hook
+              var existing = options.beforeCreate;
+              options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+            }
+          }
+
+          return {
+            exports: scriptExports,
+            options: options
+          };
+        } // CONCATENATED MODULE: ./src/mixins/gutter.vue
+
+
+        var gutter_render, gutter_staticRenderFns;
+        /* normalize component */
+
+        var component = normalizeComponent(mixins_guttervue_type_script_lang_js_, gutter_render, gutter_staticRenderFns, false, null, null, null);
+        /* harmony default export */
+
+        var gutter = component.exports; // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/column-gutter.vue?vue&type=script&lang=js&
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+
+        /* harmony default export */
+
+        var column_guttervue_type_script_lang_js_ = {
+          name: 'ColumnGutter',
+          mixins: [gutter],
+          props: {
+            column: {
+              type: Number,
+              required: true,
+              default: 2
+            },
+            columnSizes: {
+              type: Array
+            }
+          },
+          created: function created() {
+            if (this.isArrayContains(this.columnSizes)) {
+              if (this.column !== this.columnSizes.length) {
+                throw console.error("Please column equal columnSizes.length\ncolumn: ".concat(this.column, ", columnSizes.length: ").concat(this.columnSizes.length));
+              }
+            }
+
+            if (this.isArrayContains(this.colors)) {
+              if (this.column - 1 !== this.colors.length) {
+                throw console.error("Please (column - 1) equal colors.length\n(column - 1): ".concat(this.column - 1, ", colors.length: ").concat(this.colors.length));
+              }
+            }
+          },
+          methods: {
+            divideArea: function divideArea() {
+              if (this.isArrayContains(this.columnSizes)) {
+                this.specifyDivideArea(this.columnSizes);
+              } else {
+                this.generalDivideArea();
+              }
+            },
+            drag: function drag(e, index) {
+              var _this$getCurrentMouse = this.getCurrentMousePosition(e),
+                  mouseX = _this$getCurrentMouse.mouseX;
+
+              this.draggingGutter(e, mouseX, index, this.gutterComponent.width);
+              this.$emit('resize', {
+                col: this.areaSize
+              });
+            }
+          }
+        }; // CONCATENATED MODULE: ./src/components/column-gutter.vue?vue&type=script&lang=js&
+
+        /* harmony default export */
+
+        var components_column_guttervue_type_script_lang_js_ = column_guttervue_type_script_lang_js_; // EXTERNAL MODULE: ./src/components/column-gutter.vue?vue&type=style&index=0&id=09736778&scoped=true&lang=css&
+
+        var column_guttervue_type_style_index_0_id_09736778_scoped_true_lang_css_ = __webpack_require__("bcf8"); // CONCATENATED MODULE: ./src/components/column-gutter.vue
+
+        /* normalize component */
+
+
+        var column_gutter_component = normalizeComponent(components_column_guttervue_type_script_lang_js_, render, staticRenderFns, false, null, "09736778", null);
+        /* harmony default export */
+
+        var column_gutter = column_gutter_component.exports; // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2219c620-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/row-gutter.vue?vue&type=template&id=7f9fb64e&scoped=true&
+
+        var row_guttervue_type_template_id_7f9fb64e_scoped_true_render = function row_guttervue_type_template_id_7f9fb64e_scoped_true_render() {
+          var _vm = this;
+
+          var _h = _vm.$createElement;
+
+          var _c = _vm._self._c || _h;
+
+          return _c('section', {
+            ref: "gutter",
+            style: "width: " + _vm.width + "; height: " + _vm.height + ";"
+          }, [_c('div', {
+            style: "height: calc(" + _vm.areaSize[0] + "%);"
+          }, [_vm._t("row-0")], 2), _vm._l(_vm.row - 1, function (n) {
+            return _c('div', {
+              key: n,
+              style: "height: calc(" + _vm.areaSize[n] + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
+            }, [_c('div', {
+              staticClass: "gutter gutter-h",
+              style: "\n        height: " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ";\n        width: " + _vm.width + ";\n        background-color: " + (_vm.color || _vm.colors[n - 1]) + ";\n      ",
+              attrs: {
+                "draggable": "true"
+              },
+              on: {
+                "drag": function drag($event) {
+                  return _vm.drag($event, n - 1);
+                },
+                "dragstart": function dragstart($event) {
+                  return _vm.dragstart($event, n - 1);
+                }
+              }
+            }), n !== _vm.row - 1 ? _c('div', {
+              staticClass: "pane pane-h",
+              style: "height: calc(" + 100 + "% - " + (_vm.gutterSize || _vm.gutterSizes[n - 1]) + ");"
+            }, [_vm._t("row-" + n)], 2) : _c('div', {
+              staticClass: "pane pane-h",
+              style: "height: calc(" + 100 + "%});"
+            }, [_vm._t("row-" + n)], 2)]);
+          })], 2);
+        };
+
+        var row_guttervue_type_template_id_7f9fb64e_scoped_true_staticRenderFns = []; // CONCATENATED MODULE: ./src/components/row-gutter.vue?vue&type=template&id=7f9fb64e&scoped=true&
+        // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/row-gutter.vue?vue&type=script&lang=js&
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+        //
+
+        /* harmony default export */
+
+        var row_guttervue_type_script_lang_js_ = {
+          name: 'RowGutter',
+          mixins: [gutter],
+          props: {
+            row: {
+              type: Number,
+              required: true,
+              default: 2
+            },
+            rowSizes: {
+              type: Array
+            }
+          },
+          created: function created() {
+            if (this.isArrayContains(this.rowSizes)) {
+              if (this.row !== this.rowSizes.length) {
+                throw console.error("Please row equal rowSizes.length\nrow: ".concat(this.row, ", rowSizes.length: ").concat(this.rowSizes.length));
+              }
+            }
+
+            if (this.isArrayContains(this.colors)) {
+              if (this.row - 1 !== this.colors.length) {
+                throw console.error("Please (row - 1) equal colors.length\n(row - 1): ".concat(this.row - 1, ", colors.length: ").concat(this.colors.length));
+              }
+            }
+          },
+          methods: {
+            divideArea: function divideArea() {
+              if (this.isArrayContains(this.rowSizes)) {
+                this.specifyDivideArea(this.rowSizes);
+              } else {
+                this.generalDivideArea();
+              }
+            },
+            drag: function drag(e, index) {
+              var _this$getCurrentMouse2 = this.getCurrentMousePosition(e),
+                  mouseY = _this$getCurrentMouse2.mouseY;
+
+              this.draggingGutter(e, mouseY, index, this.gutterComponent.height);
+              this.$emit('resize', {
+                row: this.areaSize
+              });
+            }
+          }
+        }; // CONCATENATED MODULE: ./src/components/row-gutter.vue?vue&type=script&lang=js&
+
+        /* harmony default export */
+
+        var components_row_guttervue_type_script_lang_js_ = row_guttervue_type_script_lang_js_; // EXTERNAL MODULE: ./src/components/row-gutter.vue?vue&type=style&index=0&id=7f9fb64e&scoped=true&lang=css&
+
+        var row_guttervue_type_style_index_0_id_7f9fb64e_scoped_true_lang_css_ = __webpack_require__("d4ca"); // CONCATENATED MODULE: ./src/components/row-gutter.vue
+
+        /* normalize component */
+
+
+        var row_gutter_component = normalizeComponent(components_row_guttervue_type_script_lang_js_, row_guttervue_type_template_id_7f9fb64e_scoped_true_render, row_guttervue_type_template_id_7f9fb64e_scoped_true_staticRenderFns, false, null, "7f9fb64e", null);
+        /* harmony default export */
+
+        var row_gutter = row_gutter_component.exports; // CONCATENATED MODULE: ./src/index.js
+
+        var Components = {
+          ColumnGutter: column_gutter,
+          RowGutter: row_gutter
+        };
+
+        function install(Vue) {
+          Object.keys(Components).forEach(function (name) {
+            Vue.component(name, Components[name]);
+          });
+        }
+
+        var src_plugin = {
+          install: install
+        };
+
+        if (typeof window !== 'undefined' && window.Vue) {
+          window.Vue.use(src_plugin);
+        } // Make it split and import
+        // Make it available as vue plugin
+
+        /* harmony default export */
+
+
+        var src = src_plugin; // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/entry-lib.js
+
+        /* concated harmony reexport ColumnGutter */
+
+        __webpack_require__.d(__webpack_exports__, "ColumnGutter", function () {
+          return column_gutter;
+        });
+        /* concated harmony reexport RowGutter */
+
+
+        __webpack_require__.d(__webpack_exports__, "RowGutter", function () {
+          return row_gutter;
+        });
+        /* harmony default export */
+
+
+        var entry_lib = __webpack_exports__["default"] = src;
+        /***/
+      }
+      /******/
+
+    })
+  );
+});
+},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../dist/vue-gutter-resize.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/vue-hot-reload-api/dist/index.js":[function(require,module,exports) {
 var Vue // late bind
 var version
 var map = Object.create(null)
@@ -12323,673 +13380,17 @@ function patchScopedSlots (instance) {
   }
 }
 
-},{}],"mixins/gutter.vue":[function(require,module,exports) {
+},{}],"index.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.default = void 0;
 
-var MAX_DRAG_RANGE = 100;
-var MIN_DRAG_RANGE = 0;
+var _vueGutterResizeUmd = require("../dist/vue-gutter-resize.umd.js");
 
-exports.default = {
-  props: {
-    width: {
-      type: String,
-      required: true,
-      default: "500px"
-    },
-    height: {
-      type: String,
-      required: true,
-      default: "500px"
-    },
-    gutterSize: {
-      type: String
-    },
-    gutterSizes: {
-      type: Array
-    },
-    color: {
-      type: String
-    },
-    colors: {
-      type: Array
-    }
-  },
-  data: function data() {
-    return {
-      target: undefined,
-      areaSize: [],
-      gutterComponent: {
-        width: 0,
-        height: 0,
-        offsetX: 0,
-        offsetY: 0
-      }
-    };
-  },
-  created: function created() {
-    this.divideArea();
-  },
-  mounted: function mounted() {
-    this.setPlaygroundRect();
-  },
-
-  methods: {
-    isArrayContains: function isArrayContains(array) {
-      return array && array.length && array.length > 0;
-    },
-    draggingGutter: function draggingGutter(e, mousePosition, index, gutterSize) {
-      var gutterSum = this.getGutterSum(index, this.gutterSize, this.gutterSizes);
-      if (this.isDraggingGutter(e)) {
-        var oneTopSize = (mousePosition + gutterSum) / gutterSize * 100;
-        if (this.isGutterInRange(oneTopSize)) {
-          var before = 0;
-          for (var i = 0; i < index; i++) {
-            before += this.areaSize[i];
-          }
-          var sum = this.areaSize[index] + this.areaSize[index + 1];
-          if (oneTopSize - before >= 0 && before + sum - oneTopSize >= 0) {
-            this.areaSize.splice(index, 1, oneTopSize - before);
-            this.areaSize.splice(index + 1, 1, before + sum - oneTopSize);
-          }
-        }
-      }
-    },
-    specifyDivideArea: function specifyDivideArea(sizes) {
-      var _this = this;
-
-      var sum = sizes.reduce(function (prev, current) {
-        return prev + current;
-      });
-      if (sum > 100) throw console.error("Please total area size is 100 or less.");
-      sizes.forEach(function (size) {
-        var raio = 100 / sum;
-        _this.areaSize.push(size * raio);
-      });
-    },
-    generalDivideArea: function generalDivideArea() {
-      for (var i = 0; i < this.row; i++) {
-        this.areaSize.push(100 / this.row);
-      }
-    },
-    dragstart: function dragstart(e) {
-      if (this.target && this.target.classList) {
-        this.target.classList.remove("active");
-      }
-      e.target.classList.add("active");
-      this.target = e.target;
-    },
-    setPlaygroundRect: function setPlaygroundRect() {
-      var clientRect = this.$refs.gutter.getBoundingClientRect();
-      this.gutterComponent.width = clientRect.width;
-      this.gutterComponent.height = clientRect.height;
-      this.gutterComponent.offsetX = window.pageXOffset + clientRect.left;
-      this.gutterComponent.offsetY = window.pageYOffset + clientRect.top;
-    },
-    isDraggingGutter: function isDraggingGutter(e) {
-      return e && e.clientX > 0 && e.clientY > 0;
-    },
-    isGutterInRange: function isGutterInRange(size) {
-      return size < MAX_DRAG_RANGE && size > MIN_DRAG_RANGE;
-    },
-    getCurrentMousePosition: function getCurrentMousePosition(e) {
-      return {
-        mouseX: e.clientX - this.gutterComponent.offsetX,
-        mouseY: e.clientY - this.gutterComponent.offsetY
-      };
-    },
-    getGutterSum: function getGutterSum(index) {
-      var gutterSum = 0;
-      if (this.isArrayContains(this.gutterSizes)) {
-        for (var i = 0; i < index; i++) {
-          gutterSum += this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
-        }
-        gutterSum += (this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
-      } else {
-        for (var _i = 0; _i < index; _i++) {
-          gutterSum += this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
-        }
-        gutterSum += (this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
-      }
-      return gutterSum;
-    }
-  }
-};
-        var $7b5295 = exports.default || module.exports;
-      
-      if (typeof $7b5295 === 'function') {
-        $7b5295 = $7b5295.options;
-      }
-    
-    /* hot reload */
-    (function () {
-      if (module.hot) {
-        var api = require('vue-hot-reload-api');
-        api.install(require('vue'));
-        if (api.compatible) {
-          module.hot.accept();
-          if (!module.hot.data) {
-            api.createRecord('$7b5295', $7b5295);
-          } else {
-            api.reload('$7b5295', $7b5295);
-          }
-        }
-
-        
-      }
-    })();
-},{"vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp):\/\/[^)\n]+/g);
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-  newLink.onload = function () {
-    link.remove();
-  };
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"components/row-gutter.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _gutter = require("../mixins/gutter.vue");
-
-var _gutter2 = _interopRequireDefault(_gutter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  name: "RowGutter",
-  mixins: [_gutter2.default],
-  props: {
-    row: {
-      type: Number,
-      required: true,
-      default: 2
-    },
-    rowSizes: {
-      type: Array
-    }
-  },
-  created: function created() {
-    if (this.isArrayContains(this.rowSizes)) {
-      if (this.row !== this.rowSizes.length) throw console.error("Please row equal rowSizes.length\nrow: " + this.row + ", rowSizes.length: " + this.rowSizes.length);
-    }
-    if (this.isArrayContains(this.colors)) {
-      if (this.row - 1 !== this.colors.length) throw console.error("Please (row - 1) equal colors.length\n(row - 1): " + (this.row - 1) + ", colors.length: " + this.colors.length);
-    }
-  },
-
-  methods: {
-    divideArea: function divideArea() {
-      if (this.isArrayContains(this.rowSizes)) {
-        this.specifyDivideArea(this.rowSizes);
-      } else {
-        this.generalDivideArea();
-      }
-    },
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseY = _getCurrentMousePosit.mouseY;
-
-      this.draggingGutter(e, mouseY, index, this.gutterComponent.height);
-      this.$emit("resize", { row: this.areaSize });
-    }
-  }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-        var $a38399 = exports.default || module.exports;
-      
-      if (typeof $a38399 === 'function') {
-        $a38399 = $a38399.options;
-      }
-    
-        /* template */
-        Object.assign($a38399, (function () {
-          var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {
-      ref: "gutter",
-      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-    },
-    [
-      _c(
-        "div",
-        { style: "height: calc(" + _vm.areaSize[0] + "%);" },
-        [_vm._t("row-0")],
-        2
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.row - 1, function(n) {
-        return _c(
-          "div",
-          {
-            key: n,
-            style:
-              "height: calc(" +
-              _vm.areaSize[n] +
-              "% - " +
-              (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
-              ");"
-          },
-          [
-            _c("div", {
-              staticClass: "gutter gutter-h",
-              style:
-                "height: " +
-                (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
-                "; width: " +
-                _vm.width +
-                "; background-color: " +
-                (_vm.color || _vm.colors[n - 1]) +
-                ";",
-              attrs: { draggable: "true" },
-              on: {
-                drag: function($event) {
-                  return _vm.drag($event, n - 1)
-                },
-                dragstart: function($event) {
-                  return _vm.dragstart($event, n - 1)
-                }
-              }
-            }),
-            _vm._v(" "),
-            n !== _vm.row - 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "pane pane-h",
-                    style:
-                      "height: calc(" +
-                      100 +
-                      "% - " +
-                      (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
-                      ");"
-                  },
-                  [_vm._t("row-" + n)],
-                  2
-                )
-              : _c(
-                  "div",
-                  {
-                    staticClass: "pane pane-h",
-                    style: "height: calc(" + 100 + "%});"
-                  },
-                  [_vm._t("row-" + n)],
-                  2
-                )
-          ]
-        )
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-          return {
-            render: render,
-            staticRenderFns: staticRenderFns,
-            _compiled: true,
-            _scopeId: "data-v-a38399",
-            functional: undefined
-          };
-        })());
-      
-    /* hot reload */
-    (function () {
-      if (module.hot) {
-        var api = require('vue-hot-reload-api');
-        api.install(require('vue'));
-        if (api.compatible) {
-          module.hot.accept();
-          if (!module.hot.data) {
-            api.createRecord('$a38399', $a38399);
-          } else {
-            api.reload('$a38399', $a38399);
-          }
-        }
-
-        
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-      }
-    })();
-},{"../mixins/gutter.vue":"mixins/gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"components/column-gutter.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _gutter = require("../mixins/gutter.vue");
-
-var _gutter2 = _interopRequireDefault(_gutter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
-  name: "ColumnGutter",
-  mixins: [_gutter2.default],
-  props: {
-    column: {
-      type: Number,
-      required: true,
-      default: 2
-    },
-    columnSizes: {
-      type: Array
-    }
-  },
-  created: function created() {
-    if (this.isArrayContains(this.columnSizes)) {
-      if (this.column !== this.columnSizes.length) throw console.error("Please column equal columnSizes.length\ncolumn: " + this.column + ", columnSizes.length: " + this.columnSizes.length);
-    }
-    if (this.isArrayContains(this.colors)) {
-      if (this.column - 1 !== this.colors.length) throw console.error("Please (column - 1) equal colors.length\n(column - 1): " + (this.column - 1) + ", colors.length: " + this.colors.length);
-    }
-  },
-
-  methods: {
-    divideArea: function divideArea() {
-      if (this.isArrayContains(this.columnSizes)) {
-        this.specifyDivideArea(this.columnSizes);
-      } else {
-        this.generalDivideArea();
-      }
-    },
-    drag: function drag(e, index) {
-      var _getCurrentMousePosit = this.getCurrentMousePosition(e),
-          mouseX = _getCurrentMousePosit.mouseX;
-
-      this.draggingGutter(e, mouseX, index, this.gutterComponent.width);
-      this.$emit("resize", { col: this.areaSize });
-    }
-  }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-        var $bf9d58 = exports.default || module.exports;
-      
-      if (typeof $bf9d58 === 'function') {
-        $bf9d58 = $bf9d58.options;
-      }
-    
-        /* template */
-        Object.assign($bf9d58, (function () {
-          var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    {
-      ref: "gutter",
-      style: "width: " + _vm.width + "; height: " + _vm.height + ";"
-    },
-    [
-      _c(
-        "div",
-        {
-          staticClass: "pane pane-v left",
-          style:
-            "width: calc(" +
-            _vm.areaSize[0] +
-            "% - " +
-            (_vm.gutterSize || _vm.gutterSizes[0]) +
-            ");"
-        },
-        [_vm._t("col-" + 0)],
-        2
-      ),
-      _vm._v(" "),
-      _vm._l(_vm.column - 1, function(n) {
-        return _c(
-          "div",
-          {
-            key: n,
-            staticClass: "afterCol",
-            style:
-              "width: calc(" +
-              _vm.areaSize[n] +
-              "% - " +
-              (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
-              ");"
-          },
-          [
-            _c("div", {
-              staticClass: "gutter gutter-v",
-              style:
-                "width: " +
-                (_vm.gutterSize || _vm.gutterSizes[n - 1]) +
-                "; height: " +
-                _vm.height +
-                "; background-color: " +
-                (_vm.color || _vm.colors[n - 1]) +
-                ";",
-              attrs: { draggable: "true" },
-              on: {
-                drag: function($event) {
-                  return _vm.drag($event, n - 1)
-                },
-                dragstart: function($event) {
-                  return _vm.dragstart($event, n - 1)
-                }
-              }
-            }),
-            _vm._v(" "),
-            n !== _vm.column - 1
-              ? _c(
-                  "div",
-                  {
-                    staticClass: "pane pane-v",
-                    style:
-                      "width: calc(" +
-                      100 +
-                      "% - " +
-                      (_vm.gutterSize || _vm.gutterSizes[n - 1])
-                  },
-                  [_vm._t("col-" + n)],
-                  2
-                )
-              : _c(
-                  "div",
-                  {
-                    staticClass: "pane pane-v",
-                    style: "width: calc(" + 100 + "%}"
-                  },
-                  [_vm._t("col-" + n)],
-                  2
-                )
-          ]
-        )
-      })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-          return {
-            render: render,
-            staticRenderFns: staticRenderFns,
-            _compiled: true,
-            _scopeId: "data-v-bf9d58",
-            functional: undefined
-          };
-        })());
-      
-    /* hot reload */
-    (function () {
-      if (module.hot) {
-        var api = require('vue-hot-reload-api');
-        api.install(require('vue'));
-        if (api.compatible) {
-          module.hot.accept();
-          if (!module.hot.data) {
-            api.createRecord('$bf9d58', $bf9d58);
-          } else {
-            api.reload('$bf9d58', $bf9d58);
-          }
-        }
-
-        
-        var reloadCSS = require('_css_loader');
-        module.hot.dispose(reloadCSS);
-        module.hot.accept(reloadCSS);
-      
-      }
-    })();
-},{"../mixins/gutter.vue":"mixins/gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"index.vue":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _rowGutter = require("./components/row-gutter.vue");
-
-var _rowGutter2 = _interopRequireDefault(_rowGutter);
-
-var _columnGutter = require("./components/column-gutter.vue");
-
-var _columnGutter2 = _interopRequireDefault(_columnGutter);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+require("../dist/vue-gutter-resize.css");
 
 //
 //
@@ -13051,27 +13452,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-
 // import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.common.js'
 // import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.min.js'
-// import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.js'
-// import '../dist/vue-gutter-resize.css'
-exports.default = {
-  name: "App",
+// import RowGutter from './components/row-gutter.vue';
+// import ColumnGutter from './components/column-gutter.vue';
+var _default = {
+  name: 'App',
   components: {
-    RowGutter: _rowGutter2.default,
-    ColumnGutter: _columnGutter2.default
+    RowGutter: _vueGutterResizeUmd.RowGutter,
+    ColumnGutter: _vueGutterResizeUmd.ColumnGutter
   },
   data: function data() {
     return {
       row: 3,
-      colors: ["red", "blue"],
+      colors: ['red', 'blue'],
       columnVue: 3,
       columnGutter: 6,
       columnResize: 6
     };
   }
 };
+exports.default = _default;
         var $b2549f = exports.default || module.exports;
       
       if (typeof $b2549f === 'function') {
@@ -13277,29 +13678,24 @@ render._withStripped = true
       
       }
     })();
-},{"./components/row-gutter.vue":"components/row-gutter.vue","./components/column-gutter.vue":"components/column-gutter.vue","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"main.js":[function(require,module,exports) {
+},{"../dist/vue-gutter-resize.umd.js":"../dist/vue-gutter-resize.umd.js","../dist/vue-gutter-resize.css":"../dist/vue-gutter-resize.css","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"../node_modules/vue-hot-reload-api/dist/index.js","vue":"../node_modules/vue/dist/vue.common.js"}],"main.js":[function(require,module,exports) {
 "use strict";
 
-var _vue = require("vue");
+var _vue = _interopRequireDefault(require("vue"));
 
-var _vue2 = _interopRequireDefault(_vue);
-
-var _index = require("./index.vue");
-
-var _index2 = _interopRequireDefault(_index);
+var _index = _interopRequireDefault(require("./index.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-new _vue2.default({
-  el: "#app",
+var vm = new _vue.default({
   render: function render(h) {
-    return h(_index2.default);
+    return h(_index.default);
   }
 });
+vm.$mount('#app');
 },{"vue":"../node_modules/vue/dist/vue.common.js","./index.vue":"index.vue"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
-
 var OldModule = module.bundle.Module;
 
 function Module(moduleName) {
@@ -13315,36 +13711,55 @@ function Module(moduleName) {
       this._disposeCallbacks.push(fn);
     }
   };
-
   module.bundle.hotData = null;
 }
 
 module.bundle.Module = Module;
-
+var checkedAssets, assetsToAccept;
 var parent = module.bundle.parent;
+
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
-  var hostname = '' || location.hostname;
+  var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '49490' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50583" + '/');
+
   ws.onmessage = function (event) {
+    checkedAssets = {};
+    assetsToAccept = [];
     var data = JSON.parse(event.data);
 
     if (data.type === 'update') {
-      console.clear();
-
-      data.assets.forEach(function (asset) {
-        hmrApply(global.parcelRequire, asset);
-      });
-
+      var handled = false;
       data.assets.forEach(function (asset) {
         if (!asset.isNew) {
-          hmrAccept(global.parcelRequire, asset.id);
+          var didAccept = hmrAcceptCheck(global.parcelRequire, asset.id);
+
+          if (didAccept) {
+            handled = true;
+          }
         }
+      }); // Enable HMR for CSS by default.
+
+      handled = handled || data.assets.every(function (asset) {
+        return asset.type === 'css' && asset.generated.js;
       });
+
+      if (handled) {
+        console.clear();
+        data.assets.forEach(function (asset) {
+          hmrApply(global.parcelRequire, asset);
+        });
+        assetsToAccept.forEach(function (v) {
+          hmrAcceptRun(v[0], v[1]);
+        });
+      } else {
+        window.location.reload();
+      }
     }
 
     if (data.type === 'reload') {
       ws.close();
+
       ws.onclose = function () {
         location.reload();
       };
@@ -13352,15 +13767,12 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
 
     if (data.type === 'error-resolved') {
       console.log('[parcel] ✨ Error resolved');
-
       removeErrorOverlay();
     }
 
     if (data.type === 'error') {
       console.error('[parcel] 🚨  ' + data.error.message + '\n' + data.error.stack);
-
       removeErrorOverlay();
-
       var overlay = createErrorOverlay(data);
       document.body.appendChild(overlay);
     }
@@ -13369,6 +13781,7 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
 
 function removeErrorOverlay() {
   var overlay = document.getElementById(OVERLAY_ID);
+
   if (overlay) {
     overlay.remove();
   }
@@ -13376,21 +13789,19 @@ function removeErrorOverlay() {
 
 function createErrorOverlay(data) {
   var overlay = document.createElement('div');
-  overlay.id = OVERLAY_ID;
+  overlay.id = OVERLAY_ID; // html encode message and stack trace
 
-  // html encode message and stack trace
   var message = document.createElement('div');
   var stackTrace = document.createElement('pre');
   message.innerText = data.error.message;
   stackTrace.innerText = data.error.stack;
-
   overlay.innerHTML = '<div style="background: black; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; opacity: 0.85; font-family: Menlo, Consolas, monospace; z-index: 9999;">' + '<span style="background: red; padding: 2px 4px; border-radius: 2px;">ERROR</span>' + '<span style="top: 2px; margin-left: 5px; position: relative;">🚨</span>' + '<div style="font-size: 18px; font-weight: bold; margin-top: 20px;">' + message.innerHTML + '</div>' + '<pre>' + stackTrace.innerHTML + '</pre>' + '</div>';
-
   return overlay;
 }
 
 function getParents(bundle, id) {
   var modules = bundle.modules;
+
   if (!modules) {
     return [];
   }
@@ -13401,6 +13812,7 @@ function getParents(bundle, id) {
   for (k in modules) {
     for (d in modules[k][1]) {
       dep = modules[k][1][d];
+
       if (dep === id || Array.isArray(dep) && dep[dep.length - 1] === id) {
         parents.push(k);
       }
@@ -13416,6 +13828,7 @@ function getParents(bundle, id) {
 
 function hmrApply(bundle, asset) {
   var modules = bundle.modules;
+
   if (!modules) {
     return;
   }
@@ -13429,18 +13842,38 @@ function hmrApply(bundle, asset) {
   }
 }
 
-function hmrAccept(bundle, id) {
+function hmrAcceptCheck(bundle, id) {
   var modules = bundle.modules;
+
   if (!modules) {
     return;
   }
 
   if (!modules[id] && bundle.parent) {
-    return hmrAccept(bundle.parent, id);
+    return hmrAcceptCheck(bundle.parent, id);
   }
 
+  if (checkedAssets[id]) {
+    return;
+  }
+
+  checkedAssets[id] = true;
+  var cached = bundle.cache[id];
+  assetsToAccept.push([bundle, id]);
+
+  if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+    return true;
+  }
+
+  return getParents(global.parcelRequire, id).some(function (id) {
+    return hmrAcceptCheck(global.parcelRequire, id);
+  });
+}
+
+function hmrAcceptRun(bundle, id) {
   var cached = bundle.cache[id];
   bundle.hotData = {};
+
   if (cached) {
     cached.hot.data = bundle.hotData;
   }
@@ -13453,18 +13886,15 @@ function hmrAccept(bundle, id) {
 
   delete bundle.cache[id];
   bundle(id);
-
   cached = bundle.cache[id];
+
   if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
     cached.hot._acceptCallbacks.forEach(function (cb) {
       cb();
     });
+
     return true;
   }
-
-  return getParents(global.parcelRequire, id).some(function (id) {
-    return hmrAccept(global.parcelRequire, id);
-  });
 }
 },{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","main.js"], null)
-//# sourceMappingURL=/main.d558a4b1.map
+//# sourceMappingURL=/main.1f19ae8e.js.map

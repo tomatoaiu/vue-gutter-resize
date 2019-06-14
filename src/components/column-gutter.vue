@@ -17,9 +17,11 @@
       <div
         class="gutter gutter-v"
         draggable="true"
-        :style="
-          `width: ${gutterSize || gutterSizes[n - 1]}; height: ${height}; background-color: ${color || colors[n - 1]};`
-        "
+        :style="`
+          width: ${gutterSize || gutterSizes[n - 1]};
+          height: ${height};
+          background-color: ${color || colors[n - 1]};
+        `"
         @drag="drag($event, n - 1);"
         @dragstart="dragstart($event, n - 1);"
       ></div>
@@ -38,33 +40,35 @@
 </template>
 
 <script>
-import gutter from "../mixins/gutter.vue";
+import gutter from '../mixins/gutter.vue';
 
 export default {
-  name: "ColumnGutter",
+  name: 'ColumnGutter',
   mixins: [gutter],
   props: {
     column: {
       type: Number,
       required: true,
-      default: 2
+      default: 2,
     },
     columnSizes: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   created() {
     if (this.isArrayContains(this.columnSizes)) {
-      if (this.column !== this.columnSizes.length)
+      if (this.column !== this.columnSizes.length) {
         throw console.error(
-          `Please column equal columnSizes.length\ncolumn: ${this.column}, columnSizes.length: ${this.columnSizes.length}`
+          `Please column equal columnSizes.length\ncolumn: ${this.column}, columnSizes.length: ${this.columnSizes.length}`,
         );
+      }
     }
     if (this.isArrayContains(this.colors)) {
-      if (this.column - 1 !== this.colors.length)
+      if (this.column - 1 !== this.colors.length) {
         throw console.error(
-          `Please (column - 1) equal colors.length\n(column - 1): ${this.column - 1}, colors.length: ${this.colors.length}`
+          `Please (column - 1) equal colors.length\n(column - 1): ${this.column - 1}, colors.length: ${this.colors.length}`,
         );
+      }
     }
   },
   methods: {
@@ -78,9 +82,9 @@ export default {
     drag(e, index) {
       const { mouseX } = this.getCurrentMousePosition(e);
       this.draggingGutter(e, mouseX, index, this.gutterComponent.width);
-      this.$emit("resize", { col: this.areaSize });
-    }
-  }
+      this.$emit('resize', { col: this.areaSize });
+    },
+  },
 };
 </script>
 

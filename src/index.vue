@@ -63,24 +63,24 @@
 // import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.min.js'
 // import { RowGutter, ColumnGutter } from '../dist/vue-gutter-resize.umd.js'
 // import '../dist/vue-gutter-resize.css'
-import RowGutter from "./components/row-gutter.vue";
-import ColumnGutter from "./components/column-gutter.vue";
+import RowGutter from './components/row-gutter.vue';
+import ColumnGutter from './components/column-gutter.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     RowGutter,
-    ColumnGutter
+    ColumnGutter,
   },
   data() {
     return {
       row: 3,
-      colors: ["red", "blue"],
+      colors: ['red', 'blue'],
       columnVue: 3,
       columnGutter: 6,
-      columnResize: 6
+      columnResize: 6,
     };
-  }
+  },
 };
 </script>
 

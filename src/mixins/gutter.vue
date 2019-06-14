@@ -7,25 +7,25 @@ export default {
     width: {
       type: String,
       required: true,
-      default: "500px"
+      default: '500px',
     },
     height: {
       type: String,
       required: true,
-      default: "500px"
+      default: '500px',
     },
     gutterSize: {
-      type: String
+      type: String,
     },
     gutterSizes: {
-      type: Array
+      type: Array,
     },
     color: {
-      type: String
+      type: String,
     },
     colors: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   data() {
     return {
@@ -35,8 +35,8 @@ export default {
         width: 0,
         height: 0,
         offsetX: 0,
-        offsetY: 0
-      }
+        offsetY: 0,
+      },
     };
   },
   created() {
@@ -53,13 +53,13 @@ export default {
       const gutterSum = this.getGutterSum(
         index,
         this.gutterSize,
-        this.gutterSizes
+        this.gutterSizes,
       );
       if (this.isDraggingGutter(e)) {
         const oneTopSize = ((mousePosition + gutterSum) / gutterSize) * 100;
         if (this.isGutterInRange(oneTopSize)) {
           let before = 0;
-          for (let i = 0; i < index; i++) {
+          for (let i = 0; i < index; i += 1) {
             before += this.areaSize[i];
           }
           const sum = this.areaSize[index] + this.areaSize[index + 1];
@@ -71,26 +71,23 @@ export default {
       }
     },
     specifyDivideArea(sizes) {
-      const sum = sizes.reduce((prev, current) => {
-        return prev + current;
-      });
-      if (sum > 100)
-        throw console.error("Please total area size is 100 or less.");
-      sizes.forEach(size => {
+      const sum = sizes.reduce((prev, current) => prev + current);
+      if (sum > 100) throw console.error('Please total area size is 100 or less.');
+      sizes.forEach((size) => {
         const raio = 100 / sum;
         this.areaSize.push(size * raio);
       });
     },
     generalDivideArea() {
-      for (let i = 0; i < this.row; i++) {
+      for (let i = 0; i < this.row; i += 1) {
         this.areaSize.push(100 / this.row);
       }
     },
     dragstart(e) {
       if (this.target && this.target.classList) {
-        this.target.classList.remove("active");
+        this.target.classList.remove('active');
       }
-      e.target.classList.add("active");
+      e.target.classList.add('active');
       this.target = e.target;
     },
     setPlaygroundRect() {
@@ -109,27 +106,27 @@ export default {
     getCurrentMousePosition(e) {
       return {
         mouseX: e.clientX - this.gutterComponent.offsetX,
-        mouseY: e.clientY - this.gutterComponent.offsetY
+        mouseY: e.clientY - this.gutterComponent.offsetY,
       };
     },
     getGutterSum(index) {
       let gutterSum = 0;
       if (this.isArrayContains(this.gutterSizes)) {
-        for (let i = 0; i < index; i++) {
-          gutterSum +=
-            this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
+        for (let i = 0; i < index; i += 1) {
+          gutterSum
+            += parseInt(this.gutterSizes[i].match(/-?[0-9]+\.?[0-9]*/g).pop(), 10);
         }
-        gutterSum +=
-          (this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
+        gutterSum
+          += parseInt(this.gutterSizes[index].match(/-?[0-9]+\.?[0-9]*/g).pop(), 10) / 2;
       } else {
-        for (let i = 0; i < index; i++) {
-          gutterSum += this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0;
+        for (let i = 0; i < index; i += 1) {
+          gutterSum += parseInt(this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop(), 10);
         }
-        gutterSum +=
-          (this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop() | 0) / 2;
+        gutterSum
+          += parseInt(this.gutterSize.match(/-?[0-9]+\.?[0-9]*/g).pop(), 10) / 2;
       }
       return gutterSum;
-    }
-  }
+    },
+  },
 };
 </script>

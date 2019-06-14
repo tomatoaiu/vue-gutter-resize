@@ -13,9 +13,11 @@
       <div
         class="gutter gutter-h"
         draggable="true"
-        :style="
-          `height: ${gutterSize || gutterSizes[n - 1]}; width: ${width}; background-color: ${color || colors[n - 1]};`
-        "
+        :style="`
+          height: ${gutterSize || gutterSizes[n - 1]};
+          width: ${width};
+          background-color: ${color || colors[n - 1]};
+        `"
         @drag="drag($event, n - 1);"
         @dragstart="dragstart($event, n - 1);"
       ></div>
@@ -34,33 +36,35 @@
 </template>
 
 <script>
-import gutter from "../mixins/gutter.vue";
+import gutter from '../mixins/gutter.vue';
 
 export default {
-  name: "RowGutter",
+  name: 'RowGutter',
   mixins: [gutter],
   props: {
     row: {
       type: Number,
       required: true,
-      default: 2
+      default: 2,
     },
     rowSizes: {
-      type: Array
-    }
+      type: Array,
+    },
   },
   created() {
     if (this.isArrayContains(this.rowSizes)) {
-      if (this.row !== this.rowSizes.length)
+      if (this.row !== this.rowSizes.length) {
         throw console.error(
-          `Please row equal rowSizes.length\nrow: ${this.row}, rowSizes.length: ${this.rowSizes.length}`
+          `Please row equal rowSizes.length\nrow: ${this.row}, rowSizes.length: ${this.rowSizes.length}`,
         );
+      }
     }
     if (this.isArrayContains(this.colors)) {
-      if (this.row - 1 !== this.colors.length)
+      if (this.row - 1 !== this.colors.length) {
         throw console.error(
-          `Please (row - 1) equal colors.length\n(row - 1): ${this.row -1}, colors.length: ${this.colors.length}`
+          `Please (row - 1) equal colors.length\n(row - 1): ${this.row - 1}, colors.length: ${this.colors.length}`,
         );
+      }
     }
   },
   methods: {
@@ -74,9 +78,9 @@ export default {
     drag(e, index) {
       const { mouseY } = this.getCurrentMousePosition(e);
       this.draggingGutter(e, mouseY, index, this.gutterComponent.height);
-      this.$emit("resize", { row: this.areaSize });
-    }
-  }
+      this.$emit('resize', { row: this.areaSize });
+    },
+  },
 };
 </script>
 

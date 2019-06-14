@@ -1,22 +1,22 @@
-import ColumnGutter from "./components/column-gutter.vue";
-import RowGutter from "./components/row-gutter.vue";
+import ColumnGutter from './components/column-gutter.vue';
+import RowGutter from './components/row-gutter.vue';
 
 const Components = {
   ColumnGutter,
-  RowGutter
+  RowGutter,
 };
 
 function install(Vue) {
-  Object.keys(Components).forEach(name => {
+  Object.keys(Components).forEach((name) => {
     Vue.component(name, Components[name]);
   });
 }
 
 const plugin = {
-  install
+  install,
 };
 
-if (typeof window !== "undefined" && window.Vue) {
+if (typeof window !== 'undefined' && window.Vue) {
   window.Vue.use(plugin);
 }
 
